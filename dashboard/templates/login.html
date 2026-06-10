@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión | Anthonela Farms</title>
+    <link rel="stylesheet" href="/static/public/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/public/vendors/bootstrap-icons/bootstrap-icons.css">
+</head>
+<body class="bg-light">
+<div class="container-fluid min-vh-100">
+    <div class="row min-vh-100">
+
+
+    <!-- Panel Izquierdo -->
+    <div class="col-lg-6 d-none d-lg-flex align-items-center justify-content-center bg-success bg-gradient text-white">
+
+        <div class="text-center px-5">
+
+            <i class="bi bi-flower1 display-1 mb-4"></i>
+
+            <h1 class="fw-bold">
+                Anthonela Farms
+            </h1>
+
+            <p class="lead">
+                Sistema Integral de Gestión Florícola
+            </p>
+
+            <hr class="w-50 mx-auto">
+
+            <p class="opacity-75">
+                Administra cosechas, inventario, calidad, personal y reportes desde una sola plataforma.
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- Formulario -->
+    <div class="col-lg-6 d-flex align-items-center justify-content-center bg-light">
+
+        <div class="card border-0 shadow-lg" style="width: 100%; max-width: 450px;">
+
+            <div class="card-body p-5">
+
+                <div class="text-center mb-4">
+
+                    <div class="mb-3">
+                        <i class="bi bi-person-circle text-success display-4"></i>
+                    </div>
+
+                    <h2 class="fw-bold">
+                        Bienvenido
+                    </h2>
+
+                    <p class="text-muted">
+                        Inicia sesión para continuar
+                    </p>
+
+                </div>
+
+                {% if mensaje %}
+                <div class="alert alert-warning">
+                    <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                    {{ mensaje }}
+                </div>
+                {% endif %}
+
+                <form method="post">
+
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Usuario
+                        </label>
+
+                        <div class="input-group">
+
+                            <span class="input-group-text">
+                                <i class="bi bi-person"></i>
+                            </span>
+
+                            <input
+                                type="text"
+                                name="username"
+                                class="form-control"
+                                placeholder="Ingrese su usuario"
+                                required>
+
+                        </div>
+
+                    </div>
+
+                    <div class="mb-4">
+
+                        <label class="form-label">
+                            Contraseña
+                        </label>
+
+                        <div class="input-group">
+
+                            <span class="input-group-text">
+                                <i class="bi bi-lock"></i>
+                            </span>
+
+                            <input
+                                type="password"
+                                name="password"
+                                class="form-control"
+                                placeholder="Ingrese su contraseña"
+                                required>
+
+                        </div>
+
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="btn btn-success w-100 py-2">
+
+                        <i class="bi bi-box-arrow-in-right me-2"></i>
+                        Ingresar al Sistema
+
+                    </button>
+
+                </form>
+
+                <div class="d-grid gap-2 mt-4">
+                    <a href="/" class="btn btn-outline-secondary w-100">Volver a la página principal</a>
+                    <a href="{% url 'register' %}" class="btn btn-outline-success w-100">Registrar usuario</a>
+                </div>
+
+                <div class="text-center mt-4">
+
+                    <small class="text-muted">
+                        © 2026 Anthonela Farms
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</div>
+</body>
+</html>

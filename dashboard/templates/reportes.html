@@ -1,0 +1,261 @@
+{% extends 'base.html' %}
+{% block title %}Reportes | Anthonela Farms{% endblock %}
+
+{% block content %}
+
+<div class="page-heading mb-4">
+    <div class="page-heading-copy d-flex align-items-center gap-3">
+        <span class="page-icon">
+            <i class="bi bi-file-earmark-bar-graph-fill fs-2 text-primary"></i>
+        </span>
+        <div>
+            <p class="eyebrow text-uppercase text-muted mb-1">
+                Reportes y Análisis
+            </p>
+            <h1 class="h3 mb-1">
+                Centro de Reportes
+            </h1>
+            <p class="text-muted mb-0">
+                Consulta indicadores clave, genera informes y analiza el desempeño de la producción florícola.
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- Indicadores -->
+
+<div class="row g-3 mb-4">
+
+
+<div class="col-md-3">
+    <div class="card border-0 shadow-sm h-100">
+        <div class="card-body">
+            <i class="bi bi-flower1 text-success fs-3"></i>
+            <h6 class="mt-3">Producción Total</h6>
+            <h3 class="fw-bold">24,580</h3>
+            <small class="text-muted">Flores cosechadas</small>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="card border-0 shadow-sm h-100">
+        <div class="card-body">
+            <i class="bi bi-award-fill text-warning fs-3"></i>
+            <h6 class="mt-3">Calidad Premium</h6>
+            <h3 class="fw-bold">87%</h3>
+            <small class="text-muted">Promedio mensual</small>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="card border-0 shadow-sm h-100">
+        <div class="card-body">
+            <i class="bi bi-people-fill text-primary fs-3"></i>
+            <h6 class="mt-3">Productividad</h6>
+            <h3 class="fw-bold">94%</h3>
+            <small class="text-muted">Rendimiento del personal</small>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="card border-0 shadow-sm h-100">
+        <div class="card-body">
+            <i class="bi bi-truck text-danger fs-3"></i>
+            <h6 class="mt-3">Despachos</h6>
+            <h3 class="fw-bold">1,248</h3>
+            <small class="text-muted">Pedidos enviados</small>
+        </div>
+    </div>
+</div>
+
+
+</div>
+
+<!-- Filtros -->
+
+<div class="card border-0 shadow-sm mb-4">
+
+
+<div class="card-header bg-white">
+    <h5 class="mb-0">
+        <i class="bi bi-funnel me-2"></i>
+        Generar Reporte
+    </h5>
+</div>
+
+<div class="card-body">
+
+    <div class="row">
+
+        <div class="col-md-3">
+            <label class="form-label">Tipo de Reporte</label>
+            <select class="form-select">
+                <option>Producción</option>
+                <option>Inventario</option>
+                <option>Calidad</option>
+                <option>Personal</option>
+                <option>Despachos</option>
+            </select>
+        </div>
+
+        <div class="col-md-3">
+            <label class="form-label">Fecha Inicial</label>
+            <input type="date" class="form-control">
+        </div>
+
+        <div class="col-md-3">
+            <label class="form-label">Fecha Final</label>
+            <input type="date" class="form-control">
+        </div>
+
+        <div class="col-md-3">
+            <label class="form-label">Formato</label>
+            <select class="form-select">
+                <option>PDF</option>
+                <option>Excel</option>
+                <option>CSV</option>
+            </select>
+        </div>
+
+    </div>
+
+    <div class="mt-3">
+
+        <button class="btn btn-primary">
+            <i class="bi bi-file-earmark-text me-1"></i>
+            Generar Reporte
+        </button>
+
+        <button class="btn btn-success">
+            <i class="bi bi-download me-1"></i>
+            Exportar
+        </button>
+
+    </div>
+
+</div>
+
+
+</div>
+
+<!-- Reportes Disponibles -->
+
+<div class="row g-4 mb-4">
+
+
+<div class="col-md-4">
+    <div class="card border-0 shadow-sm h-100">
+        <div class="card-body">
+            <i class="bi bi-bar-chart-line-fill text-success fs-2"></i>
+            <h5 class="mt-3">Producción</h5>
+            <p class="text-muted">
+                Resumen de cosechas, rendimiento por lote y productividad diaria.
+            </p>
+            <button class="btn btn-outline-success btn-sm">
+                Ver Reporte
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-4">
+    <div class="card border-0 shadow-sm h-100">
+        <div class="card-body">
+            <i class="bi bi-award-fill text-warning fs-2"></i>
+            <h5 class="mt-3">Calidad</h5>
+            <p class="text-muted">
+                Clasificación de flores, niveles de calidad y tendencias.
+            </p>
+            <button class="btn btn-outline-warning btn-sm">
+                Ver Reporte
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-4">
+    <div class="card border-0 shadow-sm h-100">
+        <div class="card-body">
+            <i class="bi bi-box-seam-fill text-primary fs-2"></i>
+            <h5 class="mt-3">Inventario</h5>
+            <p class="text-muted">
+                Existencias disponibles, movimientos y control de stock.
+            </p>
+            <button class="btn btn-outline-primary btn-sm">
+                Ver Reporte
+            </button>
+        </div>
+    </div>
+</div>
+
+
+</div>
+
+<!-- Historial -->
+
+<div class="card border-0 shadow-sm">
+
+
+<div class="card-header bg-white">
+    <h5 class="mb-0">
+        <i class="bi bi-clock-history me-2"></i>
+        Reportes Generados Recientemente
+    </h5>
+</div>
+
+<div class="table-responsive">
+
+    <table class="table table-hover align-middle mb-0">
+
+        <thead class="table-light">
+            <tr>
+                <th>Fecha</th>
+                <th>Reporte</th>
+                <th>Período</th>
+                <th>Formato</th>
+                <th>Usuario</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            <tr>
+                <td>02/06/2026</td>
+                <td>Producción Mensual</td>
+                <td>Mayo 2026</td>
+                <td>PDF</td>
+                <td>Administrador</td>
+                <td>
+                    <button class="btn btn-sm btn-outline-primary">
+                        Descargar
+                    </button>
+                </td>
+            </tr>
+
+            <tr>
+                <td>01/06/2026</td>
+                <td>Inventario General</td>
+                <td>Mayo 2026</td>
+                <td>Excel</td>
+                <td>Administrador</td>
+                <td>
+                    <button class="btn btn-sm btn-outline-success">
+                        Descargar
+                    </button>
+                </td>
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+
+</div>
+
+{% endblock %}

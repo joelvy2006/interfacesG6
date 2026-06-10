@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard | Anthonela Farms{% endblock %}
+
+{% block content %}
+<div class="page-heading">
+    <div class="page-heading-copy">
+        <span class="page-icon"><i class="bi bi-speedometer2" aria-hidden="true"></i></span>
+        <div>
+            <p class="eyebrow mb-1">Resumen</p>
+            <h1 class="h3 mb-1">Panel de Control</h1>
+            <p class="text-muted mb-0">Monitorea rendimiento, embonches, productividad y calidad desde un solo espacio.</p>
+        </div>
+    </div>
+    <div class="heading-actions">
+        <a href="/registro-productividad/" class="btn btn-primary">Registrar embonches</a>
+        <a href="/reportes/" class="btn btn-light">Ver reportes</a>
+        <a href="/configuracion/" class="btn btn-light">Objetivos</a>
+    </div>
+</div>
+
+<section class="row g-3 mt-1" aria-label="Métricas principales">
+    <div class="col-12 col-sm-6 col-xl-3">
+        <article class="metric-card metric-primary">
+            <div class="metric-top"><span class="metric-label">Embonches</span><span class="metric-icon"><i class="bi bi-calendar-check"></i></span></div>
+            <div class="metric-value">1,284</div>
+            <div class="metric-meta"><span class="text-success">+8.2%</span><span>vs semana previa</span></div>
+        </article>
+    </div>
+    <div class="col-12 col-sm-6 col-xl-3">
+        <article class="metric-card metric-success">
+            <div class="metric-top"><span class="metric-label">Productividad</span><span class="metric-icon"><i class="bi bi-graph-up"></i></span></div>
+            <div class="metric-value">95%</div>
+            <div class="metric-meta"><span class="text-success">Meta casi alcanzada</span></div>
+        </article>
+    </div>
+    <div class="col-12 col-sm-6 col-xl-3">
+        <article class="metric-card metric-warning">
+            <div class="metric-top"><span class="metric-label">Empleados</span><span class="metric-icon"><i class="bi bi-people"></i></span></div>
+            <div class="metric-value">125</div>
+            <div class="metric-meta"><span>Personal activo</span></div>
+        </article>
+    </div>
+    <div class="col-12 col-sm-6 col-xl-3">
+        <article class="metric-card metric-danger">
+            <div class="metric-top"><span class="metric-label">Rendimiento</span><span class="metric-icon"><i class="bi bi-speedometer2"></i></span></div>
+            <div class="metric-value">82%</div>
+            <div class="metric-meta"><span class="text-danger">Falta 18%</span><span>para objetivo</span></div>
+        </article>
+    </div>
+</section>
+
+<section class="row g-3 mt-1">
+    <div class="col-12 col-xl-8">
+        <article class="panel h-100">
+            <div class="panel-header">
+                <div>
+                    <p class="eyebrow mb-1">Desempeño</p>
+                    <h2 class="h5 mb-1">Progreso mensual</h2>
+                    <p class="text-muted mb-0">Comparación de embonches y productividad del año en curso.</p>
+                </div>
+                <a class="btn btn-light btn-sm" href="/reportes/">Ver detalles</a>
+            </div>
+            <div class="chart-bars" aria-label="Gráfico de desempeño mensual">
+                <div class="chart-column"><span class="bar-58"></span><small>Enero</small><strong>58</strong></div>
+                <div class="chart-column"><span class="bar-72"></span><small>Febrero</small><strong>72</strong></div>
+                <div class="chart-column"><span class="bar-42"></span><small>Marzo</small><strong>42</strong></div>
+                <div class="chart-column"><span class="bar-83"></span><small>Abril</small><strong>83</strong></div>
+                <div class="chart-column"><span class="bar-66"></span><small>Mayo</small><strong>66</strong></div>
+                <div class="chart-column"><span class="bar-51"></span><small>Junio</small><strong>51</strong></div>
+            </div>
+        </article>
+    </div>
+    <div class="col-12 col-xl-4">
+        <article class="panel h-100">
+            <div class="panel-header">
+                <div>
+                    <p class="eyebrow mb-1">Actividad</p>
+                    <h2 class="h5 mb-1">Actividad reciente</h2>
+                    <p class="text-muted mb-0">Estado actual del equipo y el cultivo.</p>
+                </div>
+            </div>
+            <div class="activity-list">
+                <div class="activity-item"><span class="activity-dot bg-primary"></span><div><p class="mb-1 fw-semibold">Nuevo registro cargado</p><p class="text-muted small mb-0">Se actualizaron 18 registros de productividad.</p></div></div>
+                <div class="activity-item"><span class="activity-dot bg-success"></span><div><p class="mb-1 fw-semibold">Meta de calidad alcanzada</p><p class="text-muted small mb-0">La calidad promedio llegó al 95%.</p></div></div>
+                <div class="activity-item"><span class="activity-dot bg-warning"></span><div><p class="mb-1 fw-semibold">Personal activo</p><p class="text-muted small mb-0">Hay 125 empleados registrados y operando.</p></div></div>
+            </div>
+        </article>
+    </div>
+</section>
+
+<section class="panel mt-3">
+    <div class="panel-header">
+        <div>
+            <p class="eyebrow mb-1">Operación</p>
+            <h2 class="h5 mb-1">Resumen de la semana</h2>
+            <p class="text-muted mb-0">Objetivos, embonches y calidad del ciclo actual.</p>
+        </div>
+        <a class="btn btn-outline-secondary btn-sm" href="/configuracion/">Objetivos</a>
+    </div>
+    <div class="row g-3 mt-1">
+        <div class="col-12 col-md-6 col-xl-3">
+            <article class="metric-card metric-info">
+                <div class="metric-top"><span class="metric-label">Stock</span><span class="metric-icon"><i class="bi bi-box-seam"></i></span></div>
+                <div class="metric-value">1,820</div>
+                <div class="metric-meta"><span>Ramos disponibles</span></div>
+            </article>
+        </div>
+        <div class="col-12 col-md-6 col-xl-3">
+            <article class="metric-card metric-secondary">
+                <div class="metric-top"><span class="metric-label">Calidad</span><span class="metric-icon"><i class="bi bi-award"></i></span></div>
+                <div class="metric-value">95%</div>
+                <div class="metric-meta"><span>Calificación promedio</span></div>
+            </article>
+        </div>
+        <div class="col-12 col-md-6 col-xl-3">
+            <article class="metric-card metric-light">
+                <div class="metric-top"><span class="metric-label">Objetivo</span><span class="metric-icon"><i class="bi bi-flag"></i></span></div>
+                <div class="metric-value">1,500</div>
+                <div class="metric-meta"><span>Embonches semanales</span></div>
+            </article>
+        </div>
+        <div class="col-12 col-md-6 col-xl-3">
+            <article class="metric-card metric-dark">
+                <div class="metric-top"><span class="metric-label">Cosecha</span><span class="metric-icon"><i class="bi bi-flower1"></i></span></div>
+                <div class="metric-value">12,500</div>
+                <div class="metric-meta"><span>Ramos cosechados</span></div>
+            </article>
+        </div>
+    </div>
+</section>
+{% endblock %}

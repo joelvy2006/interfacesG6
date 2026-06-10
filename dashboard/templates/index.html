@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="VaultEdge - Plantación y dashboard financiero">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>VaultEdge - Plantación</title>
+    <link rel="icon" href="https://themewagon.github.io/vaultedge/img/core-img/favicon.ico">
+    <link rel="stylesheet" href="https://themewagon.github.io/vaultedge/style.css">
+    <link rel="stylesheet" href="https://themewagon.github.io/vaultedge/css/custom-override.css">
+</head>
+<body>
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+    </div>
+
+    <header class="ve-header" id="ve-sticky">
+        <div class="container-fluid ve-nav-wrap">
+            <div class="ve-logo">
+                <a href="/">
+                    <span class="ve-logo-icon">V</span>
+                    <span class="ve-logo-text">Vault<strong>Edge</strong></span>
+                </a>
+            </div>
+            <nav class="ve-nav">
+                <ul>
+                    <li><a href="/" class="active">Inicio</a></li>
+                    <li><a href="#about">Acerca de</a></li>
+                    <li><a href="#services">Servicios</a></li>
+                    <li><a href="#contact">Contactos</a></li>
+                    <li><a href="#insights">Perspectivas</a></li>
+                </ul>
+            </nav>
+            <div class="ve-nav-cta">
+                {% if request.user.is_authenticated %}
+                <a href="/dashboard/" class="ve-cta-btn">Dashboard <i class="fa fa-arrow-right"></i></a>
+                <a href="{% url 'logout' %}" class="ve-cta-btn">Cerrar sesión <i class="fa fa-arrow-right"></i></a>
+                {% else %}
+                <a href="{% url 'login' %}" class="ve-cta-btn">Iniciar sesión <i class="fa fa-arrow-right"></i></a>
+                {% endif %}
+            </div>
+            <button class="ve-toggler" id="ve-toggle"><span></span><span></span><span></span></button>
+        </div>
+        <div class="ve-mobile-menu" id="ve-mobile-menu">
+            <ul>
+                <li><a href="/">Inicio</a></li>
+                <li><a href="#about">Acerca de</a></li>
+                <li><a href="#services">Servicios</a></li>
+                <li><a href="#contact">Contactos</a></li>
+                <li><a href="#insights">Perspectivas</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <section class="ve-hero">
+        <div class="ve-hero-left">
+            <span class="ve-hero-badge">Plantación · Producción · Calidad</span>
+            <h1>Administra tu <span class="ve-highlight">cultivo</span><br>con visión y control</h1>
+            <p>Centraliza registros de cosecha, productividad y personal para supervisar cada etapa de la plantación con métricas claras y accionables.</p>
+            <div class="ve-hero-btns">
+                {% if request.user.is_authenticated %}
+                <a href="/dashboard/" class="ve-btn-primary">Ir al dashboard</a>
+                <a href="/dashboard/" class="ve-btn-ghost">Panel privado</a>
+                {% else %}
+                <a href="{% url 'login' %}" class="ve-btn-primary">Iniciar sesión</a>
+                <a href="{% url 'register' %}" class="ve-btn-ghost">Registrar usuario</a>
+                {% endif %}
+                <a href="/reportes/" class="ve-btn-ghost">Ver reportes</a>
+            </div>
+            <div class="ve-hero-stats">
+                <div class="ve-stat"><strong>1,284</strong><span>Embonches</span></div>
+                <div class="ve-stat-divider"></div>
+                <div class="ve-stat"><strong>95%</strong><span>Productividad</span></div>
+                <div class="ve-stat-divider"></div>
+                <div class="ve-stat"><strong>125</strong><span>Empleados</span></div>
+            </div>
+        </div>
+        <div class="ve-hero-right">
+            <div class="ve-hero-img-main bg-img" style="background-image:url(https://themewagon.github.io/vaultedge/img/bg-img/1.jpg);"></div>
+            <div class="ve-hero-img-accent bg-img" style="background-image:url(https://themewagon.github.io/vaultedge/img/bg-img/3.jpg);"></div>
+            <div class="ve-float-card">
+                <i class="fa fa-line-chart"></i>
+                <div>
+                    <strong>+18.4%</strong>
+                    <span>Rendimiento mensual</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="ve-section ve-services-section">
+        <div class="container">
+            <div class="ve-section-header text-center">
+                <span class="ve-section-tag">Resumen del sistema</span>
+                <h2>Tu panel de <span>plantación</span></h2>
+                <p>Monitorea cosecha, embonches, calidad y personal desde un solo espacio.</p>
+            </div>
+            <div class="ve-services-grid">
+                <div class="ve-service-card">
+                    <div class="ve-service-icon"><i class="icon-profits"></i></div>
+                    <h4>Registro de cosecha</h4>
+                    <p>Gestiona lotes, variedades, cantidades y observaciones en tiempo real.</p>
+                    <a href="/registro-cosecha/" class="ve-card-link">Abrir módulo <i class="fa fa-long-arrow-right"></i></a>
+                </div>
+                <div class="ve-service-card">
+                    <div class="ve-service-icon"><i class="icon-money-1"></i></div>
+                    <h4>Productividad</h4>
+                    <p>Controla embonches, responsables y avance semanal de la producción.</p>
+                    <a href="/registro-productividad/" class="ve-card-link">Ver productividad <i class="fa fa-long-arrow-right"></i></a>
+                </div>
+                <div class="ve-service-card">
+                    <div class="ve-service-icon"><i class="icon-coin"></i></div>
+                    <h4>Reportes</h4>
+                    <p>Consulta indicadores clave para analizar rendimiento del cultivo y equipo.</p>
+                    <a href="/reportes/" class="ve-card-link">Ir a reportes <i class="fa fa-long-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="ve-section ve-services-section">
+        <div class="container">
+            <div class="ve-section-header text-center">
+                <span class="ve-section-tag">Servicios</span>
+                <h2>Flores que <span>vendemos</span></h2>
+                <p>Ofrecemos calidad, variedad y control para cada etapa del cultivo.</p>
+            </div>
+            <div class="row g-4 align-items-stretch">
+                <div class="col-12 col-lg-6">
+                    <div class="ve-service-card h-100">
+                        <div class="ve-service-icon"><i class="icon-user"></i></div>
+                        <h4>Acceso privado</h4>
+                        <p>El perfil y los datos del usuario se muestran dentro del panel privado del sistema.</p>
+                        <a href="{% url 'login' %}" class="ve-card-link">Iniciar sesión <i class="fa fa-long-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <div class="ve-service-card h-100">
+                        <div class="ve-service-icon"><i class="icon-diamond"></i></div>
+                        <h4>Datos públicos de la empresa</h4>
+                        <p><strong>Empresa:</strong> Anthonela Farms</p>
+                        <p><strong>Actividad:</strong> Producción, calidad y control de plantación.</p>
+                        <p><strong>Ubicación:</strong> Sede principal de la plantación.</p>
+                        <p><strong>Contacto:</strong> contacto@plantacion.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="insights" class="ve-section ve-services-section">
+        <div class="container">
+            <div class="ve-section-header text-center">
+                <span class="ve-section-tag">Perspectivas</span>
+                <h2>Información pública de <span>la empresa</span></h2>
+                <p>Datos generales y visión de la empresa para clientes y visitantes.</p>
+            </div>
+            <div class="row g-4 align-items-stretch">
+                <div class="col-12 col-lg-6">
+                    <div class="ve-service-card h-100">
+                        <div class="ve-service-icon"><i class="icon-diamond"></i></div>
+                        <h4>Sobre la empresa</h4>
+                        <p>Somos una empresa dedicada a la producción, control y comercialización de flores de alta calidad.</p>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <div class="ve-service-card h-100">
+                        <div class="ve-service-icon"><i class="icon-user"></i></div>
+                        <h4>Acceso privado</h4>
+                        <p>El perfil y datos personales de usuarios se gestionan dentro del panel privado del sistema.</p>
+                        <a href="{% url 'login' %}" class="ve-card-link">Ingresar al sistema <i class="fa fa-long-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="ve-counter-section">
+        <div class="container">
+            <div class="ve-counter-grid">
+                <div class="ve-counter-item"><i class="fa fa-users"></i><strong class="counter" data-count="125">0</strong><span>+</span><p>Empleados activos</p></div>
+                <div class="ve-counter-item"><i class="fa fa-briefcase"></i><strong class="counter" data-count="1284">0</strong><span></span><p>Embonches cargados</p></div>
+                <div class="ve-counter-item"><i class="fa fa-globe"></i><strong class="counter" data-count="95">0</strong><span>%</span><p>Productividad</p></div>
+                <div class="ve-counter-item"><i class="fa fa-trophy"></i><strong class="counter" data-count="82">0</strong><span>%</span><p>Calidad promedio</p></div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="ve-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-sm-6 col-lg-4 mb-50">
+                    <div class="ve-footer-brand">
+                        <a href="/" class="ve-footer-logo"><span class="ve-logo-icon">V</span><span class="ve-logo-text">Vault<strong>Edge</strong></span></a>
+                        <p>Panel moderno para gestionar la producción y operación de tu plantación.</p>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-2 mb-50">
+                    <h5 class="ve-footer-title">Navegación</h5>
+                    <ul class="ve-footer-links">
+                        <li><a href="/">Inicio</a></li>
+                        <li><a href="/registro-cosecha/">Cosecha</a></li>
+                        <li><a href="/registro-productividad/">Productividad</a></li>
+                        <li><a href="/reportes/">Reportes</a></li>
+                    </ul>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-3 mb-50">
+                    <h5 class="ve-footer-title">Operación</h5>
+                    <ul class="ve-footer-links">
+                        <li><a href="/personal/">Personal</a></li>
+                        <li><a href="/configuracion/">Configuración</a></li>
+                        <li><a href="/historial/">Historial</a></li>
+                    </ul>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-3 mb-50">
+                    <h5 class="ve-footer-title">Contacto</h5>
+                    <ul class="ve-footer-contact">
+                        <li><i class="fa fa-map-marker"></i> Plantación Anthonela</li>
+                        <li><i class="fa fa-phone"></i> +52 000 000 0000</li>
+                        <li><i class="fa fa-envelope"></i> contacto@plantacion.com</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://themewagon.github.io/vaultedge/js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="https://themewagon.github.io/vaultedge/js/bootstrap/popper.min.js"></script>
+    <script src="https://themewagon.github.io/vaultedge/js/bootstrap/bootstrap.min.js"></script>
+    <script src="https://themewagon.github.io/vaultedge/js/plugins/plugins.js"></script>
+    <script src="https://themewagon.github.io/vaultedge/js/active.js"></script>
+    <script src="https://themewagon.github.io/vaultedge/js/vaultedge.js"></script>
+</body>
+</html>
+

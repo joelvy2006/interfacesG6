@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Usuario | Anthonela Farms</title>
+    <link rel="stylesheet" href="/static/public/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/public/vendors/bootstrap-icons/bootstrap-icons.css">
+</head>
+<body class="bg-light">
+<div class="container-fluid min-vh-100">
+  <div class="row min-vh-100">
+    <div class="col-lg-6 d-none d-lg-flex align-items-center justify-content-center bg-success bg-gradient text-white">
+      <div class="text-center px-5">
+        <i class="bi bi-person-plus display-1 mb-4"></i>
+        <h1 class="fw-bold">Crear cuenta</h1>
+        <p class="lead">Registra un nuevo usuario para acceder al sistema.</p>
+      </div>
+    </div>
+
+    <div class="col-lg-6 d-flex align-items-center justify-content-center bg-light">
+      <div class="card border-0 shadow-lg" style="width: 100%; max-width: 450px;">
+        <div class="card-body p-5">
+          <div class="text-center mb-4">
+            <div class="mb-3"><i class="bi bi-person-circle text-success display-4"></i></div>
+            <h2 class="fw-bold">Registrar usuario</h2>
+            <p class="text-muted">Completa los datos para crear tu acceso.</p>
+          </div>
+
+          {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+
+          <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label class="form-label">Usuario</label>
+              <input type="text" name="username" class="form-control" placeholder="Ingrese un usuario" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Correo electrónico</label>
+              <input type="email" name="email" class="form-control" placeholder="usuario@correo.com">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Contraseña</label>
+              <input type="password" name="password1" class="form-control" placeholder="Ingrese una contraseña" required>
+            </div>
+            <div class="mb-4">
+              <label class="form-label">Confirmar contraseña</label>
+              <input type="password" name="password2" class="form-control" placeholder="Repita la contraseña" required>
+            </div>
+            <button type="submit" class="btn btn-success w-100 py-2">Crear usuario</button>
+          </form>
+
+          <div class="d-grid gap-2 mt-4">
+            <a href="/" class="btn btn-outline-secondary w-100">Volver a la página principal</a>
+            <a href="{% url 'login' %}" class="btn btn-outline-success w-100">Ya tengo cuenta</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

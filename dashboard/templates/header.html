@@ -1,0 +1,220 @@
+{% load static %}
+<aside class="admin-sidebar" id="adminSidebar" aria-label="Main navigation">
+    <div class="sidebar-header">
+        <a class="brand-mark" href="#" aria-label="Anthonela Farms dashboard">
+            <span class="brand-icon"><i class="bi bi-grid-1x2-fill" aria-hidden="true"></i></span>
+            <span class="brand-copy">
+                <span class="brand-title">Anthonela Farms</span>
+                <span class="brand-subtitle">Administración de Granjas</span>
+            </span>
+        </a>
+    </div>
+    <nav class="sidebar-nav">
+        <a class="nav-link active" href="/" aria-current="page">
+            <span class="nav-icon"><i class="bi bi-speedometer2" aria-hidden="true"></i></span>
+            <span class="nav-text">Panel Principal</span>
+        </a>
+        <a class="nav-link" href="/personal/">
+            <span class="nav-icon"><i class="bi bi-people" aria-hidden="true"></i></span>
+            <span class="nav-text">Personal</span>
+        </a>
+        <a class="nav-link" href="/registro-cosecha/">
+            <span class="nav-icon"><i class="bi bi-bar-chart-line" aria-hidden="true"></i></span>
+            <span class="nav-text">Registro de Cosecha</span>
+        </a>
+        <a class="nav-link" href="/registro-productividad/">
+            <span class="nav-icon"><i class="bi bi-graph-up"></i></span>
+            <span class="nav-text">Registro de Productividad</span>
+        </a>
+        <a class="nav-link" href="/clasificacion-calidad/">
+            <span class="nav-icon"><i class="bi bi-award" aria-hidden="true"></i></span>
+            <span class="nav-text">Clasificación de Calidad</span>
+        </a>
+        <a class="nav-link" href="/inventario/">
+            <span class="nav-icon"><i class="bi bi-box-seam" aria-hidden="true"></i></span>
+            <span class="nav-text">Inventario</span>
+        </a>
+        <a class="nav-link" href="/reportes/">
+            <span class="nav-icon"><i class="bi bi-file-earmark-text" aria-hidden="true"></i></span>
+            <span class="nav-text">Reportes</span>
+        </a>
+        <a class="nav-link" href="/configuracion/">
+            <span class="nav-icon"><i class="bi bi-gear" aria-hidden="true"></i></span>
+            <span class="nav-text">Configuración</span>
+        </a>
+        <a class="nav-link" href="/historial/">
+            <span class="nav-icon"><i class="bi bi-clock-history" aria-hidden="true"></i></span>
+            <span class="nav-text">Historial de Movimientos</span>
+        </a>
+        <a class="nav-link" href="/metricas-empleado/">
+            <span class="nav-icon"><i class="bi bi-graph-up" aria-hidden="true"></i></span>
+            <span class="nav-text">Métricas por Empleado</span>
+        </a>
+        <a class="nav-link" href="/login/">
+            <span class="nav-icon"><i class="bi bi-box-arrow-in-right" aria-hidden="true"></i></span>
+            <span class="nav-text">Inicio de Sesión</span>
+        </a>
+    </nav>
+    <div class="sidebar-user">
+        <img class="avatar-img avatar-md sidebar-user-avatar" src="{% static 'public/images/avatar/avatar-1.jpg' %}" width="56" height="56" alt="Anthonela Farms">
+        <strong>{% if request.user.is_authenticated %}{{ request.user.get_full_name|default:request.user.username }}{% else %}Anthonela Farms{% endif %}</strong>
+        <small>
+            {% if request.user.is_authenticated %}
+                Usuario
+            {% else %}
+                Farms Manager
+            {% endif %}
+        </small>
+    </div>
+    <div class="sidebar-footer">
+        <span class="status-dot"></span>
+        <span class="sidebar-footer-text">Sistema funcionando correctamente</span>
+    </div>
+</aside>
+<nav class="navbar admin-navbar navbar-expand bg-white border-bottom sticky-top">
+
+    <div class="container-fluid px-3 px-lg-4">
+
+        <!-- Sidebar toggle -->
+        <button class="sidebar-toggle me-2"
+                type="button"
+                data-sidebar-toggle
+                aria-controls="adminSidebar"
+                aria-expanded="true"
+                aria-label="Abrir menú">
+
+            <i class="bi bi-list fs-4"></i>
+
+        </button>
+
+        <!-- Search -->
+        <form class="d-flex flex-grow-1 me-3 search-form" role="search">
+
+            <div class="input-group search-box">
+
+                <span class="input-group-text bg-white border-end-0">
+                    <i class="bi bi-search text-muted"></i>
+                </span>
+
+                <input class="form-control border-start-0 search-input"
+                       type="search"
+                       placeholder="Buscar empleados, cosechas, reportes..."
+                       aria-label="Buscar">
+
+            </div>
+
+        </form>
+
+        <!-- Actions -->
+        <div class="navbar-actions ms-auto d-flex align-items-center gap-2">
+
+            <!-- Theme -->
+            <button class="btn btn-light rounded-circle icon-btn"
+                    type="button"
+                    data-theme-toggle
+                    aria-label="Cambiar tema">
+
+                <i class="bi bi-moon-stars"></i>
+
+            </button>
+
+            <!-- Notifications -->
+            <div class="dropdown">
+
+                <button class="btn btn-light rounded-circle position-relative icon-btn"
+                        type="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+
+                    <i class="bi bi-bell"></i>
+
+                    <span class="notification-dot"></span>
+
+                </button>
+
+                <div class="dropdown-menu dropdown-menu-end shadow border-0 notification-menu">
+
+                    <div class="dropdown-header fw-semibold">
+                        Notificaciones
+                    </div>
+
+                    <div class="dropdown-divider"></div>
+
+                    <a class="dropdown-item d-flex flex-column" href="#">
+                        <span class="fw-semibold">Nuevo usuario registrado</span>
+                        <small class="text-muted">Hace 4 minutos</small>
+                    </a>
+
+                    <a class="dropdown-item d-flex flex-column" href="#">
+                        <span class="fw-semibold">Cosecha completada</span>
+                        <small class="text-muted">Hace 20 minutos</small>
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- Profile -->
+            <div class="dropdown">
+
+                <button class="btn btn-light d-flex align-items-center gap-2 rounded-pill px-2"
+                        type="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+
+                    <img src="{% static 'public/images/avatar/avatar-1.jpg' %}"
+                         class="rounded-circle"
+                         width="36"
+                         height="36"
+                         alt="Usuario">
+
+                    <div class="d-none d-sm-block text-start lh-sm">
+
+                        <div class="fw-semibold small">
+                            Anthonela Farms
+                        </div>
+
+                        <small class="text-muted">
+                            Farms Manager
+                        </small>
+
+                    </div>
+
+                    <i class="bi bi-chevron-down small"></i>
+
+                </button>
+
+                <ul class="dropdown-menu dropdown-menu-end shadow border-0">
+
+                    <li>
+                        <a class="dropdown-item" href="#">
+                            <i class="bi bi-person me-2"></i>
+                            Perfil
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item" href="{% url 'configuracion' %}">
+                            <i class="bi bi-gear me-2"></i>
+                            Configuración
+                        </a>
+                    </li>
+
+                    <li><hr class="dropdown-divider"></li>
+
+                    <li>
+                        <a class="dropdown-item text-danger" href="{% url 'logout' %}">
+                            <i class="bi bi-box-arrow-right me-2"></i>
+                            Cerrar sesión
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</nav>

@@ -1,0 +1,8 @@
+{
+  "python.defaultInterpreterPath": "c:/Users/pc/OneDrive/Escritorio/PlantacionProyecto/.venv/Scripts/python.exe",
+  "python.analysis.extraPaths": [
+    "c:/Users/pc/OneDrive/Escritorio/PlantacionProyecto",
+    "c:/Users/pc/OneDrive/Escritorio/PlantacionProyecto/.venv/Lib/site-packages"
+  ],
+  "python.analysis.autoSearchPaths": true
+}

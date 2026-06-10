@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block title %}Editar Cosecha | Anthonela Farms{% endblock %}
+{% block content %}
+<div class="page-heading">
+    <div class="page-heading-copy">
+        <span class="page-icon"><i class="bi bi-pencil-square" aria-hidden="true"></i></span>
+        <div>
+            <p class="eyebrow mb-1">Editar Cosecha</p>
+            <h1 class="h3 mb-1">Actualizar registro</h1>
+            <p class="text-muted mb-0">Modifica los datos del registro de cosecha.</p>
+        </div>
+    </div>
+</div>
+
+<section class="card mb-4">
+    <div class="card-body">
+        <h6 class="mb-3">Editar Registro de Cosecha #{{ registro.id }}</h6>
+        
+        <form method="post" class="mt-4">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="fecha" class="form-label">Fecha de Cosecha</label>
+                    <input type="date" class="form-control" id="fecha" name="fecha" value="{{ registro.fecha }}" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="responsable" class="form-label">Responsable</label>
+                    <input type="text" class="form-control" id="responsable" name="responsable" value="{{ registro.responsable }}" required>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="variedad" class="form-label">Variedad</label>
+                    <select class="form-control" id="variedad" name="variedad" required>
+                        <option value="">Selecciona una variedad</option>
+                        <option value="clavel-rojo" {% if registro.variedad == 'clavel-rojo' %}selected{% endif %}>Clavel Rojo</option>
+                        <option value="clavel-rosa" {% if registro.variedad == 'clavel-rosa' %}selected{% endif %}>Clavel Rosa</option>
+                        <option value="clavel-blanco" {% if registro.variedad == 'clavel-blanco' %}selected{% endif %}>Clavel Blanco</option>
+                        <option value="clavel-morado" {% if registro.variedad == 'clavel-morado' %}selected{% endif %}>Clavel Morado</option>
+                        <option value="clavel-naranja" {% if registro.variedad == 'clavel-naranja' %}selected{% endif %}>Clavel Naranja</option>
+                        <option value="clavel-bicolor" {% if registro.variedad == 'clavel-bicolor' %}selected{% endif %}>Clavel Bicolor</option>
+                    </select>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="cantidad" class="form-label">Cantidad (Número de Claveles)</label>
+                    <input type="number" class="form-control" id="cantidad" name="cantidad" value="{{ registro.cantidad }}" placeholder="0" step="1" required>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="lote" class="form-label">Bloque</label>
+                    <input type="text" class="form-control" id="lote" name="lote" value="{{ registro.bloque }}" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="condicion" class="form-label">Condición</label>
+                    <select class="form-control" id="condicion" name="condicion" required>
+                        <option value="">Selecciona una condición</option>
+                        <option value="exportacion" {% if registro.condicion == 'exportacion' %}selected{% endif %}>Exportación</option>
+                        <option value="fanci" {% if registro.condicion == 'fanci' %}selected{% endif %}>Fanci</option>
+                        <option value="nacional" {% if registro.condicion == 'nacional' %}selected{% endif %}>Nacional</option>
+                        <option value="basura" {% if registro.condicion == 'basura' %}selected{% endif %}>Basura</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="mb-3">
+                <label for="observaciones" class="form-label">Observaciones</label>
+                <textarea class="form-control" id="observaciones" name="observaciones" rows="3">{{ registro.observaciones }}</textarea>
+            </div>
+            
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-success">
+                    <i class="bi bi-check-circle me-2"></i>Guardar Cambios
+                </button>
+                <a href="{% url 'registro_cosecha' %}" class="btn btn-secondary">
+                    <i class="bi bi-x-circle me-2"></i>Cancelar
+                </a>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+{% block title %}Configuración | Anthonela Farms{% endblock %}
+
+{% block content %}
+
+<div class="page-heading mb-4">
+    <div class="page-heading-copy d-flex align-items-center gap-3">
+        <span class="page-icon">
+            <i class="bi bi-gear-fill fs-2 text-primary"></i>
+        </span>
+        <div>
+            <p class="eyebrow text-uppercase text-muted mb-1">Configuración</p>
+            <h1 class="h3 mb-1">Ajustes del sistema</h1>
+            <p class="text-muted mb-0">
+                Administra parámetros operativos, usuarios, seguridad y preferencias generales.
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- Resumen -->
+
+<div class="row g-3 mb-4">
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body">
+                <i class="bi bi-people-fill text-primary fs-3"></i>
+                <h6 class="mt-3">Usuarios</h6>
+                <p class="text-muted small mb-0">
+                    Gestiona cuentas y permisos.
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+<div class="col-md-3">
+    <div class="card border-0 shadow-sm h-100">
+        <div class="card-body">
+            <i class="bi bi-shield-lock-fill text-success fs-3"></i>
+            <h6 class="mt-3">Seguridad</h6>
+            <p class="text-muted small mb-0">
+                Contraseñas y accesos.
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="card border-0 shadow-sm h-100">
+        <div class="card-body">
+            <i class="bi bi-bell-fill text-warning fs-3"></i>
+            <h6 class="mt-3">Notificaciones</h6>
+            <p class="text-muted small mb-0">
+                Alertas y recordatorios.
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="card border-0 shadow-sm h-100">
+        <div class="card-body">
+            <i class="bi bi-database-fill text-danger fs-3"></i>
+            <h6 class="mt-3">Respaldos</h6>
+            <p class="text-muted small mb-0">
+                Copias de seguridad.
+            </p>
+        </div>
+    </div>
+</div>
+
+
+</div>
+
+<!-- Configuración General -->
+
+<div class="card shadow-sm border-0 mb-4">
+    <div class="card-header bg-white">
+        <h5 class="mb-0">
+            <i class="bi bi-sliders me-2"></i>
+            Preferencias Generales
+        </h5>
+    </div>
+    <div class="card-body">
+
+
+    <div class="form-check form-switch mb-3">
+        <input class="form-check-input" type="checkbox" id="emailNotifications" checked>
+        <label class="form-check-label" for="emailNotifications">
+            Recibir notificaciones por correo electrónico
+        </label>
+    </div>
+
+    <div class="form-check form-switch mb-3">
+        <input class="form-check-input" type="checkbox" id="systemAlerts" checked>
+        <label class="form-check-label" for="systemAlerts">
+            Activar alertas del sistema
+        </label>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Idioma</label>
+        <select class="form-select">
+            <option selected>Español</option>
+            <option>English</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Zona Horaria</label>
+        <select class="form-select">
+            <option selected>América/Guayaquil</option>
+        </select>
+    </div>
+
+    <button class="btn btn-primary">
+        <i class="bi bi-check-circle me-1"></i>
+        Guardar cambios
+    </button>
+
+</div>
+
+
+</div>
+
+<!-- Seguridad -->
+
+<div class="card shadow-sm border-0">
+    <div class="card-header bg-white">
+        <h5 class="mb-0">
+            <i class="bi bi-shield-lock me-2"></i>
+            Seguridad
+        </h5>
+    </div>
+    <div class="card-body">
+
+
+    <p class="text-muted">
+        Mantén tu cuenta protegida actualizando periódicamente tu contraseña.
+    </p>
+
+    <button class="btn btn-outline-secondary">
+        <i class="bi bi-key me-1"></i>
+        Cambiar contraseña
+    </button>
+
+</div>
+
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,195 @@
+{% extends 'base.html' %}
+{% block title %}Personal | Anthonela Farms{% endblock %}
+{% block content %}
+<div class="page-heading">
+    <div class="page-heading-copy">
+        <span class="page-icon"><i class="bi bi-people" aria-hidden="true"></i></span>
+        <div>
+            <p class="eyebrow mb-1">Personal</p>
+            <h1 class="h3 mb-1">Gestión de personal</h1>
+            <p class="text-muted mb-0">Registra la asistencia y turnos de tu equipo agrícola.</p>
+        </div>
+    </div>
+</div>
+
+<section class="row g-3 mt-3">
+    <div class="col-12 col-lg-5">
+        <section class="card mb-4">
+            <div class="card-body">
+                <h6 class="mb-3">Agregar empleado</h6>
+                <form method="post" class="row g-3">
+                    {% csrf_token %}
+                    <input type="hidden" name="form_type" value="empleado">
+                    <div class="col-12">
+                        <label class="form-label">Nombre</label>
+                        <input type="text" name="empleado_nombre" class="form-control" placeholder="Nombre completo" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Puesto</label>
+                        <input type="text" name="empleado_puesto" class="form-control" placeholder="Ej: Cosechador">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Correo</label>
+                        <input type="email" name="empleado_correo" class="form-control" placeholder="correo@dominio.com">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">Teléfono</label>
+                        <input type="text" name="empleado_telefono" class="form-control" placeholder="Teléfono o contacto">
+                    </div>
+                    <div class="col-12 d-flex flex-wrap gap-2 align-items-center">
+                        <button type="submit" class="btn btn-success">Agregar empleado</button>
+                        <a href="{% url 'export_empleados_excel' %}" class="btn btn-outline-primary">Exportar Excel</a>
+                        <a href="{% url 'export_empleados_pdf' %}" class="btn btn-outline-secondary">Exportar PDF</a>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <div class="col-12 col-lg-7">
+        <section class="card mb-4">
+            <div class="card-body">
+                <h6 class="mb-3">Registrar asistencia / turno</h6>
+                <form method="post" class="row g-3">
+                    {% csrf_token %}
+                    <div class="col-12">
+                        <label class="form-label">Empleado</label>
+                        {% if empleados %}
+                            <select name="empleado" class="form-select" required>
+                                <option value="" disabled selected>Selecciona un empleado</option>
+                                {% for empleado in empleados %}
+                                    <option value="{{ empleado.nombre }}">{{ empleado.nombre }}{% if empleado.puesto %} - {{ empleado.puesto }}{% endif %}</option>
+                                {% endfor %}
+                            </select>
+                        {% else %}
+                            <input type="text" name="empleado" class="form-control" placeholder="Nombre del empleado" required>
+                            <div class="form-text">No hay empleados registrados. Agrega primero un empleado.</div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Fecha</label>
+                        <input type="date" name="fecha" class="form-control" value="{{ today|default:'' }}" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Turno</label>
+                        <select name="turno" class="form-select" required>
+                            <option value="mañana">Mañana</option>
+                            <option value="tarde">Tarde</option>
+                            <option value="noche">Noche</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Estado</label>
+                        <select name="estado" class="form-select" required>
+                            <option value="presente">Presente</option>
+                            <option value="faltó">Faltó</option>
+                            <option value="retardo">Retardo</option>
+                        </select>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">Notas</label>
+                        <textarea name="notas" rows="3" class="form-control" placeholder="Observaciones, incidencia o detalle del turno."></textarea>
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary">Guardar asistencia</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+</section>
+
+<section class="row g-3 mt-3">
+    <div class="col-12 col-lg-5">
+        <section class="card mb-4">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-start mb-3">
+                    <div>
+                        <h6 class="mb-1">Historial de empleados</h6>
+                        <p class="text-muted mb-0">Todos los empleados registrados en el sistema.</p>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Puesto</th>
+                                <th>Correo</th>
+                                <th>Teléfono</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for empleado in empleados %}
+                                <tr>
+                                    <td>{{ empleado.nombre }}</td>
+                                    <td>{{ empleado.puesto|default:'-' }}</td>
+                                    <td>{{ empleado.correo|default:'-' }}</td>
+                                    <td>{{ empleado.telefono|default:'-' }}</td>
+                                    <td>
+                                        <a href="{% url 'eliminar_empleado' empleado.id %}" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                                    </td>
+                                </tr>
+                            {% empty %}
+                                <tr>
+                                    <td colspan="5" class="text-center text-muted">No hay empleados registrados aún.</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="col-12 col-lg-7">
+        <section class="card mb-4">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <h6 class="mb-1">Historial de asistencias</h6>
+                        <p class="text-muted mb-0">Registros recientes de asistencia y turnos.</p>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Empleado</th>
+                                <th>Turno</th>
+                                <th>Estado</th>
+                                <th>Notas</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in asistencias %}
+                                <tr>
+                                    <td>{{ item.fecha }}</td>
+                                    <td>{{ item.empleado }}</td>
+                                    <td><span class="badge bg-secondary text-uppercase">{{ item.turno }}</span></td>
+                                    <td>
+                                        {% if item.estado == 'presente' %}
+                                            <span class="badge bg-success">Presente</span>
+                                        {% elif item.estado == 'retardo' %}
+                                            <span class="badge bg-warning text-dark">Retardo</span>
+                                        {% else %}
+                                            <span class="badge bg-danger">Faltó</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ item.notas|default:'-' }}</td>
+                                </tr>
+                            {% empty %}
+                                <tr>
+                                    <td colspan="5" class="text-center text-muted">Aún no hay registros de asistencia.</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% load static %}
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Anthonela Farms admin dashboard">
+    <title>{% block title %}Anthonela Farms{% endblock %}</title>
+    <link rel="icon" href="{% static 'public/images/favicon/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'public/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'public/vendors/bootstrap-icons/bootstrap-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'public/css/style.css' %}">
+    <style>
+        body { background: #eef9ef; }
+        .admin-shell { min-height: 100vh; }
+    </style>
+</head>
+<body>
+    <div class="admin-shell">
+        <div class="sidebar-backdrop" data-sidebar-close></div>
+        {% include 'header.html' %}
+        <div class="admin-main">
+            <main class="dashboard-content">
+                <div class="container-fluid px-3 px-lg-4 py-4">
+                    {% block content %}{% endblock %}
+                </div>
+            </main>
+            {% include 'footer.html' %}
+        </div>
+    </div>
+    <script src="{% static 'public/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'public/js/main.js' %}"></script>
+</body>
+</html>

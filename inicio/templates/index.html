@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard | Plantación{% endblock %}
+
+{% block content %}
+{% include 'dashboard/header.html' %}
+
+<main class="container-fluid py-4">
+  <section class="row g-4 align-items-stretch">
+    <article class="col-12 col-xl-8">
+      <div class="card shadow-sm border-0 h-100">
+        <div class="card-body">
+          <p class="text-uppercase small text-success mb-1">Resumen</p>
+          <h1 class="h3 mb-2">Panel principal de la plantación</h1>
+          <p class="text-muted mb-4">Monitorea producción, calidad y rendimiento del personal desde un solo espacio.</p>
+          <div class="row g-3">
+            <div class="col-12 col-md-6 col-lg-3">
+              <div class="border rounded-4 p-3 bg-light h-100">
+                <small class="text-uppercase text-muted">Embonches</small>
+                <h2 class="h4 mt-2 mb-1">1,284</h2>
+                <span class="text-success">+8.2% vs semana pasada</span>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3">
+              <div class="border rounded-4 p-3 bg-light h-100">
+                <small class="text-uppercase text-muted">Productividad</small>
+                <h2 class="h4 mt-2 mb-1">95%</h2>
+                <span class="text-success">Meta casi alcanzada</span>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3">
+              <div class="border rounded-4 p-3 bg-light h-100">
+                <small class="text-uppercase text-muted">Personal</small>
+                <h2 class="h4 mt-2 mb-1">125</h2>
+                <span class="text-muted">Empleados activos</span>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3">
+              <div class="border rounded-4 p-3 bg-light h-100">
+                <small class="text-uppercase text-muted">Calidad</small>
+                <h2 class="h4 mt-2 mb-1">82%</h2>
+                <span class="text-danger">Falta 18% para objetivo</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="col-12 col-xl-4">
+      <div class="card shadow-sm border-0 h-100">
+        <div class="card-body">
+          <p class="text-uppercase small text-primary mb-1">Actividad</p>
+          <h2 class="h5 mb-3">Últimos cambios</h2>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item px-0">18 registros de productividad actualizados.</li>
+            <li class="list-group-item px-0">Meta de calidad alcanzada en el ciclo actual.</li>
+            <li class="list-group-item px-0">120 empleados registrados y operando.</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <section class="row g-4 mt-1">
+    <article class="col-12 col-lg-6">
+      <div class="card shadow-sm border-0 h-100">
+        <div class="card-body">
+          <h2 class="h5">Progreso del mes</h2>
+          <p class="text-muted small">Comparación de embonches y productividad en el año actual.</p>
+          <div class="d-flex align-items-end gap-2 mt-4" style="min-height: 180px;">
+            <div class="bg-success-subtle rounded-top w-100" style="height: 58px;"></div>
+            <div class="bg-success rounded-top w-100" style="height: 72px;"></div>
+            <div class="bg-warning-subtle rounded-top w-100" style="height: 42px;"></div>
+            <div class="bg-primary rounded-top w-100" style="height: 83px;"></div>
+            <div class="bg-success-subtle rounded-top w-100" style="height: 66px;"></div>
+            <div class="bg-secondary-subtle rounded-top w-100" style="height: 51px;"></div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="col-12 col-lg-6">
+      <div class="card shadow-sm border-0 h-100">
+        <div class="card-body">
+          <h2 class="h5">Accesos rápidos</h2>
+          <div class="d-grid gap-2 mt-3">
+            <a class="btn btn-outline-primary" href="/registro-productividad/">Registrar embonches</a>
+            <a class="btn btn-outline-secondary" href="/reportes/">Ver reportes</a>
+            <a class="btn btn-outline-success" href="/configuracion/">Objetivos</a>
+          </div>
+        </div>
+      </div>
+    </article>
+  </section>
+</main>
+
+{% include 'dashboard/footer.html' %}
+{% endblock %}
