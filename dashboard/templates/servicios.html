@@ -14,6 +14,8 @@
         .shop-card { background: var(--admin-surface); border: 1px solid var(--admin-border); border-radius: 1.1rem; box-shadow: var(--admin-shadow-sm); }
         .product-img { width: 100%; height: 180px; object-fit: cover; border-radius: 0.9rem; }
         .price-tag { color: var(--admin-primary-dark); font-weight: 700; }
+        .cart-panel { position: sticky; top: 90px; }
+        .cart-item { border-bottom: 1px solid var(--admin-border); padding-bottom: .6rem; margin-bottom: .6rem; }
 
         html[data-theme="dark"] header.sticky-top,
         html[data-theme="dark"] footer.border-top {
@@ -43,34 +45,39 @@
             <p class="text-muted mb-0">Descubre nuestras variedades de claveles, ideales para decoración, exportación y venta especial.</p>
         </section>
 
-        <section class="mb-5">
+        <div class="row g-4 align-items-start">
+            <div class="col-12 col-xl-8">
+                <section class="mb-5">
             <div class="d-flex align-items-center justify-content-between mb-3">
                 <h2 class="h4 fw-bold mb-0">Clavel premium</h2>
                 <span class="badge bg-success-subtle text-success">Especial</span>
             </div>
             <div class="row g-4">
                 <article class="col-12 col-md-6 col-xl-4">
-                    <div class="shop-card p-3 h-100">
+                    <div class="shop-card p-3 h-100 d-flex flex-column">
                         <img class="product-img" src="{% static 'public/images/png/dasher-ai.png' %}" alt="Clavel rojo premium">
                         <h3 class="h5 mt-3 mb-2">Clavel rojo premium</h3>
                         <p class="text-muted small mb-2">Ramos y cajas de alta calidad para eventos, floristerías y exportación.</p>
-                        <span class="price-tag">$180 / caja</span>
+                        <span class="price-tag mb-3">$180 / caja</span>
+                        <button class="btn btn-success btn-sm mt-auto add-to-cart" data-name="Clavel rojo premium" data-price="180">Agregar al carrito</button>
                     </div>
                 </article>
                 <article class="col-12 col-md-6 col-xl-4">
-                    <div class="shop-card p-3 h-100">
+                    <div class="shop-card p-3 h-100 d-flex flex-column">
                         <img class="product-img" src="{% static 'public/images/png/dasher-ui-bootstrap-5.jpg' %}" alt="Clavel blanco premium">
                         <h3 class="h5 mt-3 mb-2">Clavel blanco elegante</h3>
                         <p class="text-muted small mb-2">Variedad sofisticada ideal para bodas, arreglos y decoración premium.</p>
-                        <span class="price-tag">$240 / caja</span>
+                        <span class="price-tag mb-3">$240 / caja</span>
+                        <button class="btn btn-success btn-sm mt-auto add-to-cart" data-name="Clavel blanco elegante" data-price="240">Agregar al carrito</button>
                     </div>
                 </article>
                 <article class="col-12 col-md-6 col-xl-4">
-                    <div class="shop-card p-3 h-100">
+                    <div class="shop-card p-3 h-100 d-flex flex-column">
                         <img class="product-img" src="{% static 'public/images/png/dasher-ai.png' %}" alt="Clavel rosa premium">
                         <h3 class="h5 mt-3 mb-2">Clavel rosa artesanal</h3>
                         <p class="text-muted small mb-2">Tonos suaves y frescos para centros de mesa y presentaciones especiales.</p>
-                        <span class="price-tag">$150 / caja</span>
+                        <span class="price-tag mb-3">$150 / caja</span>
+                        <button class="btn btn-success btn-sm mt-auto add-to-cart" data-name="Clavel rosa artesanal" data-price="150">Agregar al carrito</button>
                     </div>
                 </article>
             </div>
@@ -83,27 +90,30 @@
             </div>
             <div class="row g-4">
                 <article class="col-12 col-md-6 col-xl-4">
-                    <div class="shop-card p-3 h-100">
+                    <div class="shop-card p-3 h-100 d-flex flex-column">
                         <img class="product-img" src="{% static 'public/images/png/dasher-ui-bootstrap-5.jpg' %}" alt="Clavel nacional rojo">
                         <h3 class="h5 mt-3 mb-2">Clavel nacional rojo</h3>
                         <p class="text-muted small mb-2">Producción local de excelente resistencia y color vibrante para venta directa.</p>
-                        <span class="price-tag">$130 / caja</span>
+                        <span class="price-tag mb-3">$130 / caja</span>
+                        <button class="btn btn-success btn-sm mt-auto add-to-cart" data-name="Clavel nacional rojo" data-price="130">Agregar al carrito</button>
                     </div>
                 </article>
                 <article class="col-12 col-md-6 col-xl-4">
-                    <div class="shop-card p-3 h-100">
+                    <div class="shop-card p-3 h-100 d-flex flex-column">
                         <img class="product-img" src="{% static 'public/images/png/dasher-ai.png' %}" alt="Clavel nacional amarillo">
                         <h3 class="h5 mt-3 mb-2">Clavel nacional amarillo</h3>
                         <p class="text-muted small mb-2">Opción brillante y alegre para mercados, ferias y decoración cotidiana.</p>
-                        <span class="price-tag">$110 / caja</span>
+                        <span class="price-tag mb-3">$110 / caja</span>
+                        <button class="btn btn-success btn-sm mt-auto add-to-cart" data-name="Clavel nacional amarillo" data-price="110">Agregar al carrito</button>
                     </div>
                 </article>
                 <article class="col-12 col-md-6 col-xl-4">
-                    <div class="shop-card p-3 h-100">
+                    <div class="shop-card p-3 h-100 d-flex flex-column">
                         <img class="product-img" src="{% static 'public/images/png/dasher-ui-bootstrap-5.jpg' %}" alt="Clavel nacional mixto">
                         <h3 class="h5 mt-3 mb-2">Clavel nacional mixto</h3>
                         <p class="text-muted small mb-2">Mezcla de tonos para promociones, bouquets y ventas por volumen.</p>
-                        <span class="price-tag">$95 / caja</span>
+                        <span class="price-tag mb-3">$95 / caja</span>
+                        <button class="btn btn-success btn-sm mt-auto add-to-cart" data-name="Clavel nacional mixto" data-price="95">Agregar al carrito</button>
                     </div>
                 </article>
             </div>
@@ -116,31 +126,49 @@
             </div>
             <div class="row g-4">
                 <article class="col-12 col-md-6 col-xl-4">
-                    <div class="shop-card p-3 h-100">
+                    <div class="shop-card p-3 h-100 d-flex flex-column">
                         <img class="product-img" src="{% static 'public/images/png/dasher-ai.png' %}" alt="Clavel payaso clásico">
                         <h3 class="h5 mt-3 mb-2">Clavel payaso clásico</h3>
                         <p class="text-muted small mb-2">Colorido y llamativo, perfecto para fiestas, decoración juvenil y ventas impulsivas.</p>
-                        <span class="price-tag">$140 / caja</span>
+                        <span class="price-tag mb-3">$140 / caja</span>
+                        <button class="btn btn-success btn-sm mt-auto add-to-cart" data-name="Clavel payaso clásico" data-price="140">Agregar al carrito</button>
                     </div>
                 </article>
                 <article class="col-12 col-md-6 col-xl-4">
-                    <div class="shop-card p-3 h-100">
+                    <div class="shop-card p-3 h-100 d-flex flex-column">
                         <img class="product-img" src="{% static 'public/images/png/dasher-ui-bootstrap-5.jpg' %}" alt="Clavel payaso mixto">
                         <h3 class="h5 mt-3 mb-2">Clavel payaso mixto</h3>
                         <p class="text-muted small mb-2">Combinación alegre de colores con gran impacto visual en centros y arreglos.</p>
-                        <span class="price-tag">$125 / caja</span>
+                        <span class="price-tag mb-3">$125 / caja</span>
+                        <button class="btn btn-success btn-sm mt-auto add-to-cart" data-name="Clavel payaso mixto" data-price="125">Agregar al carrito</button>
                     </div>
                 </article>
                 <article class="col-12 col-md-6 col-xl-4">
-                    <div class="shop-card p-3 h-100">
+                    <div class="shop-card p-3 h-100 d-flex flex-column">
                         <img class="product-img" src="{% static 'public/images/png/dasher-ai.png' %}" alt="Clavel payaso jumbo">
                         <h3 class="h5 mt-3 mb-2">Clavel payaso jumbo</h3>
                         <p class="text-muted small mb-2">Flores grandes y vistosas, recomendadas para exhibición y ventas promocionales.</p>
-                        <span class="price-tag">$165 / caja</span>
+                        <span class="price-tag mb-3">$165 / caja</span>
+                        <button class="btn btn-success btn-sm mt-auto add-to-cart" data-name="Clavel payaso jumbo" data-price="165">Agregar al carrito</button>
                     </div>
                 </article>
             </div>
-        </section>
+                </section>
+            </div>
+
+            <aside class="col-12 col-xl-4">
+                <div class="shop-card p-3 cart-panel">
+                    <h2 class="h4 fw-bold mb-2">Carrito</h2>
+                    <p class="text-muted small mb-3">Agrega productos y revisa tu selección.</p>
+                    <div id="cart-items" class="mb-3"></div>
+                    <div class="d-flex justify-content-between fw-semibold mb-2">
+                        <span>Total</span>
+                        <span id="cart-total">$0</span>
+                    </div>
+                    <button class="btn btn-outline-success w-100" type="button" id="clear-cart">Vaciar carrito</button>
+                </div>
+            </aside>
+        </div>
     </main>
 
     <footer class="border-top bg-white py-4 mt-5">
@@ -149,5 +177,38 @@
 
     <script src="{% static 'public/js/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'public/js/main.js' %}"></script>
+    <script>
+        const cartItems = document.getElementById('cart-items');
+        const cartTotal = document.getElementById('cart-total');
+        const cart = {};
+
+        function renderCart() {
+            let items = '';
+            let total = 0;
+
+            Object.keys(cart).forEach(function (itemName) {
+                const qty = cart[itemName];
+                const price = Number(document.querySelector('[data-name="' + itemName + '"]').getAttribute('data-price'));
+                total += qty * price;
+                items += '<div class="cart-item"><div class="d-flex justify-content-between align-items-center"><strong>' + itemName + '</strong><span>$' + (qty * price) + '</span></div><small class="text-muted">Cantidad: ' + qty + '</small></div>';
+            });
+
+            cartItems.innerHTML = items || '<p class="text-muted small mb-0">Tu carrito está vacío.</p>';
+            cartTotal.textContent = '$' + total;
+        }
+
+        document.querySelectorAll('.add-to-cart').forEach(function (button) {
+            button.addEventListener('click', function () {
+                const name = button.getAttribute('data-name');
+                cart[name] = (cart[name] || 0) + 1;
+                renderCart();
+            });
+        });
+
+        document.getElementById('clear-cart').addEventListener('click', function () {
+            Object.keys(cart).forEach(function (key) { delete cart[key]; });
+            renderCart();
+        });
+    </script>
 </body>
 </html>
