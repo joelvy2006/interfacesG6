@@ -1,0 +1,24 @@
+<svg width="640" height="420" viewBox="0 0 640 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="640" height="420" rx="32" fill="url(#bg)"/>
+  <path d="M0 308C96 254 168 246 256 276C344 306 424 318 520 276C572 252 612 244 640 246V420H0V308Z" fill="#B9E7C5"/>
+  <path d="M86 300C140 226 208 190 274 194C338 198 406 234 470 300H86Z" fill="#6ABF7F"/>
+  <path d="M140 152H228V300H140V152Z" fill="#8E6A3F"/>
+  <path d="M228 112H326V300H228V112Z" fill="#A27B4E"/>
+  <path d="M326 188H418V300H326V188Z" fill="#7FAE69"/>
+  <path d="M418 136H508V300H418V136Z" fill="#9E7A54"/>
+  <rect x="176" y="176" width="32" height="124" rx="8" fill="#F4D8B3"/>
+  <rect x="278" y="136" width="32" height="164" rx="8" fill="#F4D8B3"/>
+  <rect x="392" y="168" width="30" height="132" rx="8" fill="#F4D8B3"/>
+  <path d="M110 308H540" stroke="#2E7D32" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="490" cy="100" r="38" fill="#F5C451" fill-opacity="0.92"/>
+  <path d="M156 94C182 64 220 50 260 54" stroke="#2E7D32" stroke-width="8" stroke-linecap="round"/>
+  <path d="M366 94C392 70 422 58 458 62" stroke="#2E7D32" stroke-width="8" stroke-linecap="round"/>
+  <rect x="76" y="64" width="150" height="44" rx="18" fill="rgba(255,255,255,0.72)"/>
+  <text x="100" y="92" fill="#1F5A30" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700">Finca Anthonela</text>
+  <defs>
+    <linearGradient id="bg" x1="82" y1="0" x2="640" y2="420" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E7FBEC"/>
+      <stop offset="1" stop-color="#D8F0FF"/>
+    </linearGradient>
+  </defs>
+</svg>
