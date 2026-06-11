@@ -19,6 +19,10 @@ def inicio(request):
     return render(request, 'index.html')
 
 
+def servicios(request):
+    return render(request, 'servicios.html')
+
+
 def login_view(request):
     mensaje = ''
     if request.user.is_authenticated:

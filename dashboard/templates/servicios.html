@@ -1,0 +1,71 @@
+{% load static %}
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicios | Anthonela Farms</title>
+    <link rel="icon" href="{% static 'public/images/favicon/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'public/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'public/vendors/bootstrap-icons/bootstrap-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'public/css/style.css' %}">
+    <style>
+        body { background: linear-gradient(180deg, var(--admin-bg) 0%, #edf5ef 45%, #eef4fb 100%); color: var(--admin-text); }
+        .shop-card { background: var(--admin-surface); border: 1px solid var(--admin-border); border-radius: 1.1rem; box-shadow: var(--admin-shadow-sm); }
+        .product-img { width: 100%; height: 180px; object-fit: cover; border-radius: 0.9rem; }
+        .price-tag { color: var(--admin-primary-dark); font-weight: 700; }
+    </style>
+</head>
+<body>
+    <header class="sticky-top border-bottom bg-white/90 backdrop-blur">
+        <nav class="container navbar navbar-expand-lg py-3">
+            <a class="navbar-brand fw-bold text-success" href="/">Anthonela Farms</a>
+            <div class="ms-auto d-flex gap-2">
+                <a class="btn btn-outline-success" href="/">Volver al inicio</a>
+                <a class="btn btn-success" href="{% url 'login' %}">Iniciar sesión</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container py-5">
+        <section class="shop-card p-4 p-lg-5 mb-4">
+            <p class="text-uppercase small text-success fw-semibold mb-2">Servicios</p>
+            <h1 class="h2 fw-bold mb-2">Productos y servicios de Anthonela Farms</h1>
+            <p class="text-muted mb-0">Explora nuestras soluciones para producción, calidad y comercialización de flores.</p>
+        </section>
+
+        <section class="row g-4">
+            <article class="col-12 col-md-6 col-xl-4">
+                <div class="shop-card p-3 h-100">
+                    <img class="product-img" src="{% static 'public/images/png/dasher-ai.png' %}" alt="Producto 1">
+                    <h2 class="h5 mt-3 mb-2">Pack de producción</h2>
+                    <p class="text-muted small mb-2">Control de cosechas, lotes y productividad para el equipo de campo.</p>
+                    <span class="price-tag">$180</span>
+                </div>
+            </article>
+            <article class="col-12 col-md-6 col-xl-4">
+                <div class="shop-card p-3 h-100">
+                    <img class="product-img" src="{% static 'public/images/png/dasher-ui-bootstrap-5.jpg' %}" alt="Producto 2">
+                    <h2 class="h5 mt-3 mb-2">Sistema de calidad</h2>
+                    <p class="text-muted small mb-2">Clasificación, control y seguimiento del estado de tus flores.</p>
+                    <span class="price-tag">$240</span>
+                </div>
+            </article>
+            <article class="col-12 col-md-6 col-xl-4">
+                <div class="shop-card p-3 h-100">
+                    <img class="product-img" src="{% static 'public/images/png/dasher-ai.png' %}" alt="Producto 3">
+                    <h2 class="h5 mt-3 mb-2">Gestión de personal</h2>
+                    <p class="text-muted small mb-2">Asistencia, reportes y métricas para mejorar el trabajo del equipo.</p>
+                    <span class="price-tag">$150</span>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <footer class="border-top bg-white py-4 mt-5">
+        <div class="container text-center text-muted small">© 2026 Anthonela Farms. Todos los derechos reservados.</div>
+    </footer>
+
+    <script src="{% static 'public/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>
