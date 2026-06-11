@@ -49,20 +49,21 @@
             <p class="text-muted mb-0">Revisa tu carrito aquí arriba y agrega los productos que quieras comprar.</p>
         </section>
 
-        <section id="carrito-panel" class="shop-card p-3 mb-4" hidden>
+        <section id="carrito-panel" class="shop-card p-3 mb-4">
             <div class="d-flex justify-content-between align-items-center mb-2">
                 <h2 class="h4 fw-bold mb-0">Carrito</h2>
                 <button class="btn btn-outline-success btn-sm" type="button" id="clear-cart">Vaciar</button>
             </div>
             <p class="text-muted small mb-3">Aquí puedes ver lo que llevas para comprar.</p>
             <div id="cart-items" class="mb-3"></div>
-            <div class="d-flex justify-content-between fw-semibold mb-0">
+            <div class="d-flex justify-content-between fw-semibold mb-3">
                 <span>Total</span>
                 <span id="cart-total">$0</span>
             </div>
+            <button class="btn btn-outline-success btn-sm" type="button" id="show-products-btn">Ver productos</button>
         </section>
 
-        <div class="row g-4 align-items-start">
+        <div class="row g-4 align-items-start" id="products-section" hidden>
             <div class="col-12 col-xl-8">
                 <section class="mb-5">
             <div class="d-flex align-items-center justify-content-between mb-3">
@@ -212,7 +213,16 @@
 
         document.getElementById('toggle-cart-btn').addEventListener('click', function () {
             const panel = document.getElementById('carrito-panel');
-            panel.hidden = !panel.hidden;
+            const products = document.getElementById('products-section');
+            panel.hidden = false;
+            products.hidden = true;
+        });
+
+        document.getElementById('show-products-btn').addEventListener('click', function () {
+            const panel = document.getElementById('carrito-panel');
+            const products = document.getElementById('products-section');
+            panel.hidden = true;
+            products.hidden = false;
         });
 
         document.getElementById('clear-cart').addEventListener('click', function () {
