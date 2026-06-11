@@ -11,70 +11,58 @@
     <link rel="stylesheet" href="{% static 'public/vendors/bootstrap-icons/bootstrap-icons.css' %}">
     <link rel="stylesheet" href="{% static 'public/css/style.css' %}">
     <style>
-        :root {
-            --landing-bg: linear-gradient(135deg, #edf8ef 0%, #d9efe1 45%, #edf4ff 100%);
-            --landing-surface: rgba(255, 255, 255, 0.94);
-            --landing-surface-soft: rgba(242, 250, 243, 0.96);
-            --landing-border: rgba(18, 107, 57, 0.12);
-            --landing-text: #163b28;
-            --landing-muted: #4f6b59;
-        }
-
-        html[data-theme="dark"] {
-            --landing-bg: linear-gradient(180deg, #07130c 0%, #0d2117 45%, #12281f 100%);
-            --landing-surface: rgba(15, 23, 18, 0.92);
-            --landing-surface-soft: rgba(19, 32, 25, 0.96);
-            --landing-border: rgba(134, 239, 172, 0.12);
-            --landing-text: #edf7f0;
-            --landing-muted: #bfd7c7;
-        }
-
         body {
-            background: var(--landing-bg);
-            color: var(--landing-text);
+            background: linear-gradient(180deg, var(--admin-bg) 0%, #edf5ef 45%, #eef4fb 100%);
+            color: var(--admin-text);
+        }
+
+        html[data-theme="dark"] body {
+            background: linear-gradient(180deg, #07100b 0%, #0b1811 45%, #0f2319 100%);
         }
 
         .hero-card {
-            background: var(--landing-surface);
-            border: 1px solid var(--landing-border);
+            background: var(--admin-surface);
+            border: 1px solid var(--admin-border);
             border-radius: 1.25rem;
-            box-shadow: 0 14px 40px rgba(15, 23, 42, 0.12);
-            color: var(--landing-text);
+            box-shadow: var(--admin-shadow);
+            color: var(--admin-text);
         }
 
         .hero-card h1,
-        .hero-card .lead,
         .hero-card h2,
-        .hero-card p {
-            color: var(--landing-text);
-        }
-
+        .hero-card p,
+        .hero-card .lead,
         .hero-card .text-muted,
-        .hero-card .text-muted small,
-        .hero-card .lead {
-            color: var(--landing-muted) !important;
+        .hero-card small {
+            color: var(--admin-text);
         }
 
         .metric-pill {
             border-radius: 1rem;
-            background: var(--landing-surface-soft);
-            border: 1px solid var(--landing-border);
-            box-shadow: 0 8px 20px rgba(24, 76, 39, 0.08);
-            color: var(--landing-text);
+            background: var(--admin-surface-soft);
+            border: 1px solid var(--admin-border);
+            box-shadow: var(--admin-shadow-sm);
+            color: var(--admin-text);
         }
 
         .nav-link {
-            color: var(--landing-text);
+            color: var(--admin-text);
         }
 
         .nav-link:hover {
-            color: #10b981;
+            color: var(--admin-primary);
         }
 
         header.sticky-top,
         footer.border-top {
-            background: var(--landing-surface) !important;
-            border-color: var(--landing-border) !important;
+            background: rgba(255, 255, 255, 0.94) !important;
+            border-color: var(--admin-border) !important;
+            backdrop-filter: blur(14px);
+        }
+
+        html[data-theme="dark"] header.sticky-top,
+        html[data-theme="dark"] footer.border-top {
+            background: rgba(10, 18, 14, 0.92) !important;
         }
     </style>
 </head>
@@ -120,27 +108,27 @@
             <article class="col-12 col-xl-5">
                 <div class="hero-card p-4 p-lg-5">
                     <div class="row g-3 text-center">
-                        <div class="col-6 metric-pill p-3" style="background: rgba(242, 250, 243, 0.95); border-color: rgba(18, 107, 57, 0.15); color: #163b28;">
+                        <div class="col-6 metric-pill p-3">
                             <div class="display-6 fw-bold">1,284</div>
                             <small class="text-muted">Embonches</small>
                         </div>
-                        <div class="col-6 metric-pill p-3" style="background: rgba(242, 250, 243, 0.95); border-color: rgba(18, 107, 57, 0.15); color: #163b28;">
+                        <div class="col-6 metric-pill p-3">
                             <div class="display-6 fw-bold">95%</div>
                             <small class="text-muted">Productividad</small>
                         </div>
-                        <div class="col-6 metric-pill p-3" style="background: rgba(242, 250, 243, 0.95); border-color: rgba(18, 107, 57, 0.15); color: #163b28;">
+                        <div class="col-6 metric-pill p-3">
                             <div class="display-6 fw-bold">125</div>
                             <small class="text-muted">Empleados</small>
                         </div>
-                        <div class="col-6 metric-pill p-3" style="background: rgba(242, 250, 243, 0.95); border-color: rgba(18, 107, 57, 0.15); color: #163b28;">
+                        <div class="col-6 metric-pill p-3">
                             <div class="display-6 fw-bold">82%</div>
                             <small class="text-muted">Calidad</small>
                         </div>
-                        <div class="col-6 metric-pill p-3" style="background: rgba(242, 250, 243, 0.95); border-color: rgba(18, 107, 57, 0.15); color: #163b28;">
+                        <div class="col-6 metric-pill p-3">
                             <div class="display-6 fw-bold">48h</div>
                             <small class="text-muted">Horas trabajadas</small>
                         </div>
-                        <div class="col-6 metric-pill p-3" style="background: rgba(242, 250, 243, 0.95); border-color: rgba(18, 107, 57, 0.15); color: #163b28;">
+                        <div class="col-6 metric-pill p-3">
                             <div class="display-6 fw-bold">7</div>
                             <small class="text-muted">Tareas pendientes</small>
                         </div>
@@ -151,43 +139,43 @@
 
         <section id="servicios" class="row g-4 mb-5">
             <article class="col-12 col-md-4">
-                <div class="hero-card p-4 h-100" style="background: rgba(242, 250, 243, 0.96); border-color: rgba(18, 107, 57, 0.15); color: #163b28;">
-                    <i class="bi bi-bar-chart-line fs-2" style="color: #163b28;"></i>
+                <div class="hero-card p-4 h-100">
+                    <i class="bi bi-bar-chart-line fs-2"></i>
                     <h2 class="h5 mt-3">Registro de cosecha</h2>
                     <p class="mb-0">Gestiona lotes, variedades, cantidades y observaciones en tiempo real.</p>
                 </div>
             </article>
             <article class="col-12 col-md-4">
-                <div class="hero-card p-4 h-100" style="background: rgba(242, 250, 243, 0.96); border-color: rgba(18, 107, 57, 0.15); color: #163b28;">
-                    <i class="bi bi-graph-up fs-2" style="color: #163b28;"></i>
+                <div class="hero-card p-4 h-100">
+                    <i class="bi bi-graph-up fs-2"></i>
                     <h2 class="h5 mt-3">Productividad</h2>
                     <p class="mb-0">Controla embonches, responsables y avance semanal del cultivo.</p>
                 </div>
             </article>
             <article class="col-12 col-md-4">
-                <div class="hero-card p-4 h-100" style="background: rgba(242, 250, 243, 0.96); border-color: rgba(18, 107, 57, 0.15); color: #163b28;">
-                    <i class="bi bi-file-earmark-text fs-2" style="color: #163b28;"></i>
+                <div class="hero-card p-4 h-100">
+                    <i class="bi bi-file-earmark-text fs-2"></i>
                     <h2 class="h5 mt-3">Reportes</h2>
                     <p class="mb-0">Consulta indicadores clave para analizar rendimiento y calidad.</p>
                 </div>
             </article>
             <article class="col-12 col-md-4">
-                <div class="hero-card p-4 h-100" style="background: rgba(242, 250, 243, 0.96); border-color: rgba(18, 107, 57, 0.15); color: #163b28;">
-                    <i class="bi bi-headset fs-2" style="color: #163b28;"></i>
+                <div class="hero-card p-4 h-100">
+                    <i class="bi bi-headset fs-2"></i>
                     <h2 class="h5 mt-3">Soporte</h2>
                     <p class="mb-0">Obtén ayuda rápida para tus dudas y problemas de uso.</p>
                 </div>
             </article>
             <article class="col-12 col-md-4">
-                <div class="hero-card p-4 h-100" style="background: rgba(242, 250, 243, 0.96); border-color: rgba(18, 107, 57, 0.15); color: #163b28;">
-                    <i class="bi bi-bullseye fs-2" style="color: #163b28;"></i>
+                <div class="hero-card p-4 h-100">
+                    <i class="bi bi-bullseye fs-2"></i>
                     <h2 class="h5 mt-3">Objetivos</h2>
                     <p class="mb-0">Define metas claras y sigue el progreso de tus ciclos de producción.</p>
                 </div>
             </article>
             <article class="col-12 col-md-4">
-                <div class="hero-card p-4 h-100" style="background: rgba(242, 250, 243, 0.96); border-color: rgba(18, 107, 57, 0.15); color: #163b28;">
-                    <i class="bi bi-people fs-2" style="color: #163b28;"></i>
+                <div class="hero-card p-4 h-100">
+                    <i class="bi bi-people fs-2"></i>
                     <h2 class="h5 mt-3">Equipo</h2>
                     <p class="mb-0">Gestiona roles, tareas y comunicación del personal en campo.</p>
                 </div>
