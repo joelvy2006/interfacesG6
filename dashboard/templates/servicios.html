@@ -28,9 +28,9 @@
         <nav class="container navbar navbar-expand-lg py-3">
             <a class="navbar-brand fw-bold text-success" href="/">Anthonela Farms</a>
             <div class="ms-auto d-flex gap-2 align-items-center">
-                <button class="btn btn-outline-success btn-sm d-flex align-items-center gap-2" id="toggle-cart-btn" type="button" aria-label="Mostrar carrito" title="Mostrar carrito">
-                    <i class="bi bi-cart3" aria-hidden="true"></i>
-                    <span class="d-none d-sm-inline">Carrito</span>
+                <button class="btn btn-outline-success btn-sm d-flex align-items-center gap-2" id="toggle-view-btn" type="button" aria-label="Cambiar entre carrito y tienda" title="Cambiar entre carrito y tienda">
+                    <i class="bi bi-basket3" aria-hidden="true"></i>
+                    <span class="d-none d-sm-inline" id="toggle-view-label">Tienda</span>
                 </button>
                 <button class="btn btn-outline-success btn-sm d-flex align-items-center gap-2" type="button" data-theme-toggle aria-label="Cambiar tema">
                     <i class="bi bi-moon-stars" data-theme-icon aria-hidden="true"></i>
@@ -60,7 +60,6 @@
                 <span>Total</span>
                 <span id="cart-total">$0</span>
             </div>
-            <button class="btn btn-outline-success btn-sm" type="button" id="show-products-btn">Ver productos</button>
         </section>
 
         <div class="row g-4 align-items-start" id="products-section" hidden>
@@ -187,6 +186,10 @@
         const cartItems = document.getElementById('cart-items');
         const cartTotal = document.getElementById('cart-total');
         const cart = {};
+        const cartPanel = document.getElementById('carrito-panel');
+        const productsSection = document.getElementById('products-section');
+        const toggleViewBtn = document.getElementById('toggle-view-btn');
+        const toggleViewLabel = document.getElementById('toggle-view-label');
 
         function renderCart() {
             let items = '';
@@ -211,19 +214,19 @@
             });
         });
 
-        document.getElementById('toggle-cart-btn').addEventListener('click', function () {
-            const panel = document.getElementById('carrito-panel');
-            const products = document.getElementById('products-section');
-            panel.hidden = false;
-            products.hidden = true;
+        function updateView(showProducts) {
+            cartPanel.hidden = showProducts;
+            productsSection.hidden = !showProducts;
+            toggleViewLabel.textContent = showProducts ? 'Carrito' : 'Tienda';
+            toggleViewBtn.setAttribute('aria-label', showProducts ? 'Mostrar carrito' : 'Mostrar tienda');
+            toggleViewBtn.setAttribute('title', showProducts ? 'Mostrar carrito' : 'Mostrar tienda');
+        }
+
+        toggleViewBtn.addEventListener('click', function () {
+            updateView(productsSection.hidden);
         });
 
-        document.getElementById('show-products-btn').addEventListener('click', function () {
-            const panel = document.getElementById('carrito-panel');
-            const products = document.getElementById('products-section');
-            panel.hidden = true;
-            products.hidden = false;
-        });
+        updateView(false);
 
         document.getElementById('clear-cart').addEventListener('click', function () {
             Object.keys(cart).forEach(function (key) { delete cart[key]; });
