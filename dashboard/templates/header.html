@@ -1,7 +1,7 @@
 {% load static %}
 <aside class="admin-sidebar" id="adminSidebar" aria-label="Main navigation">
     <div class="sidebar-header">
-        <a class="brand-mark" href="#" aria-label="Anthonela Farms dashboard">
+        <a class="brand-mark" href="{% url 'dashboard' %}" aria-label="Anthonela Farms dashboard">
             <span class="brand-icon"><i class="bi bi-grid-1x2-fill" aria-hidden="true"></i></span>
             <span class="brand-copy">
                 <span class="brand-title">Anthonela Farms</span>
@@ -10,7 +10,7 @@
         </a>
     </div>
     <nav class="sidebar-nav">
-        <a class="nav-link active" href="/" aria-current="page">
+        <a class="nav-link active" href="{% url 'dashboard' %}" aria-current="page">
             <span class="nav-icon"><i class="bi bi-speedometer2" aria-hidden="true"></i></span>
             <span class="nav-text">Panel Principal</span>
         </a>
@@ -111,6 +111,13 @@
 
         <!-- Actions -->
         <div class="navbar-actions ms-auto d-flex align-items-center gap-2">
+
+            <!-- Home page -->
+            <a class="btn btn-light rounded-circle icon-btn"
+               href="{% url 'inicio' %}"
+               aria-label="Ver página de inicio">
+                <i class="bi bi-house-door"></i>
+            </a>
 
             <!-- Theme -->
             <button class="btn btn-light rounded-circle icon-btn"

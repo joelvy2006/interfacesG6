@@ -60,6 +60,8 @@ def register_view(request):
     if request.method == 'POST':
         username = request.POST.get('username', '').strip()
         email = request.POST.get('email', '').strip()
+        first_name = request.POST.get('first_name', '').strip()
+        last_name = request.POST.get('last_name', '').strip()
         password1 = request.POST.get('password1', '')
         password2 = request.POST.get('password2', '')
 
@@ -79,7 +81,13 @@ def register_view(request):
             messages.error(request, 'Ese usuario ya existe.')
             return render(request, 'register.html')
 
-        user = User.objects.create_user(username=username, email=email, password=password1)
+        user = User.objects.create_user(
+            username=username,
+            email=email,
+            password=password1,
+            first_name=first_name,
+            last_name=last_name,
+        )
         login(request, user)
         messages.success(request, 'Usuario registrado correctamente.')
         return redirect('dashboard')
@@ -142,10 +150,65 @@ def personal(request):
     })
 
 
+@login_required(login_url='login')
 def eliminar_empleado(request, id):
     empleado = get_object_or_404(Empleado, id=id)
     empleado.delete()
     return redirect('personal')
+
+@login_required(login_url='login')
+def editar_empleado(request, id):
+    empleado = get_object_or_404(Empleado, id=id)
+    if request.method == 'POST':
+        nombre = request.POST.get('empleado_nombre')
+        puesto = request.POST.get('empleado_puesto')
+        correo = request.POST.get('empleado_correo')
+        telefono = request.POST.get('empleado_telefono')
+
+        if nombre:
+            empleado.nombre = nombre
+            empleado.puesto = puesto or ''
+            empleado.correo = correo or ''
+            empleado.telefono = telefono or ''
+            empleado.save()
+            return redirect('personal')
+
+    return render(request, 'editar-empleado.html', {'empleado': empleado})
+
+@login_required(login_url='login')
+def eliminar_asistencia(request, id):
+    asistencia = get_object_or_404(Asistencia, id=id)
+    asistencia.delete()
+    return redirect('personal')
+
+@login_required(login_url='login')
+def editar_asistencia(request, id):
+    asistencia = get_object_or_404(Asistencia, id=id)
+    empleados = Empleado.objects.filter(activo=True).order_by('nombre')
+
+    if request.method == 'POST':
+        fecha_str = request.POST.get('fecha')
+        empleado_nombre = request.POST.get('empleado')
+        turno = request.POST.get('turno')
+        estado = request.POST.get('estado')
+        notas = request.POST.get('notas')
+
+        if fecha_str and empleado_nombre and turno and estado:
+            try:
+                asistencia.fecha = datetime.strptime(fecha_str, '%Y-%m-%d').date()
+                asistencia.empleado = empleado_nombre
+                asistencia.turno = turno
+                asistencia.estado = estado
+                asistencia.notas = notas
+                asistencia.save()
+                return redirect('personal')
+            except Exception as e:
+                print(f"Error al actualizar asistencia: {e}")
+
+    return render(request, 'editar-asistencia.html', {
+        'asistencia': asistencia,
+        'empleados': empleados,
+    })
 
 
 def export_empleados_excel(request):
@@ -479,6 +542,86 @@ def listar_usuarios(request):
 
 
 @login_required(login_url='login')
+def editar_usuario(request, id):
+    usuario = get_object_or_404(User, pk=id)
+
+    if request.method == 'POST':
+        username = request.POST.get('username', '').strip()
+        email = request.POST.get('email', '').strip()
+        first_name = request.POST.get('first_name', '').strip()
+        last_name = request.POST.get('last_name', '').strip()
+
+        if not username or not email:
+            messages.error(request, 'Usuario y correo son obligatorios.')
+        elif User.objects.exclude(pk=usuario.pk).filter(username=username).exists():
+            messages.error(request, 'Ese usuario ya está en uso.')
+        else:
+            usuario.username = username
+            usuario.email = email
+            usuario.first_name = first_name
+            usuario.last_name = last_name
+            usuario.save()
+            messages.success(request, 'Usuario actualizado correctamente.')
+            return redirect('listar_usuarios')
+
+    return render(request, 'editar-usuario.html', {'usuario': usuario})
+
+
+@login_required(login_url='login')
+def cambiar_estado_usuario(request, id):
+    usuario = get_object_or_404(User, pk=id)
+
+    if request.method == 'POST':
+        usuario.is_active = not usuario.is_active
+        usuario.save()
+        estado = 'activado' if usuario.is_active else 'desactivado'
+        messages.success(request, f'Usuario {estado} correctamente.')
+
+    return redirect('listar_usuarios')
+
+
+@login_required(login_url='login')
+def eliminar_usuario(request, id):
+    usuario = get_object_or_404(User, pk=id)
+
+    if request.method == 'POST':
+        nombre = usuario.get_full_name() or usuario.username
+        usuario.delete()
+        messages.success(request, f'Usuario "{nombre}" eliminado correctamente.')
+
+    return redirect('listar_usuarios')
+
+
+@login_required(login_url='login')
+def crear_usuario(request):
+    if request.method == 'POST':
+        username = request.POST.get('username', '').strip()
+        email = request.POST.get('email', '').strip()
+        first_name = request.POST.get('first_name', '').strip()
+        last_name = request.POST.get('last_name', '').strip()
+        password1 = request.POST.get('password1', '')
+        password2 = request.POST.get('password2', '')
+
+        if not username or not email or not password1 or not password2:
+            messages.error(request, 'Todos los campos son obligatorios.')
+        elif password1 != password2:
+            messages.error(request, 'Las contraseñas no coinciden.')
+        elif User.objects.filter(username=username).exists():
+            messages.error(request, 'Ese usuario ya existe.')
+        else:
+            User.objects.create_user(
+                username=username,
+                email=email,
+                password=password1,
+                first_name=first_name,
+                last_name=last_name,
+            )
+            messages.success(request, 'Usuario creado correctamente.')
+            return redirect('listar_usuarios')
+
+    return render(request, 'crear-usuario.html')
+
+
 @login_required(login_url='login')
 def dashboard(request):
     return render(request, 'dashboard/index.html')

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}Editar Empleado | Anthonela Farms{% endblock %}
+{% block content %}
+<div class="page-heading">
+    <div class="page-heading-copy">
+        <span class="page-icon"><i class="bi bi-pencil-square" aria-hidden="true"></i></span>
+        <div>
+            <p class="eyebrow mb-1">Editar empleado</p>
+            <h1 class="h3 mb-1">Actualiza la información del empleado</h1>
+            <p class="text-muted mb-0">Modifica los datos y guarda los cambios.</p>
+        </div>
+    </div>
+</div>
+
+<section class="card mb-4">
+    <div class="card-body">
+        <h6 class="mb-3">Empleado: {{ empleado.nombre }}</h6>
+        <form method="post" class="row g-3">
+            {% csrf_token %}
+            <div class="col-12">
+                <label class="form-label">Nombre</label>
+                <input type="text" name="empleado_nombre" class="form-control" value="{{ empleado.nombre }}" placeholder="Nombre completo" required>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Puesto</label>
+                <input type="text" name="empleado_puesto" class="form-control" value="{{ empleado.puesto }}" placeholder="Ej: Cosechador">
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Correo</label>
+                <input type="email" name="empleado_correo" class="form-control" value="{{ empleado.correo }}" placeholder="correo@dominio.com">
+            </div>
+            <div class="col-12">
+                <label class="form-label">Teléfono</label>
+                <input type="text" name="empleado_telefono" class="form-control" value="{{ empleado.telefono }}" placeholder="Teléfono o contacto">
+            </div>
+            <div class="col-12 d-flex flex-wrap gap-2 align-items-center">
+                <button type="submit" class="btn btn-success">Guardar cambios</button>
+                <a href="{% url 'personal' %}" class="btn btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}

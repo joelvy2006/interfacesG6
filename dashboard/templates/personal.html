@@ -128,7 +128,10 @@
                                     <td>{{ empleado.correo|default:'-' }}</td>
                                     <td>{{ empleado.telefono|default:'-' }}</td>
                                     <td>
-                                        <a href="{% url 'eliminar_empleado' empleado.id %}" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                                        <div class="btn-group" role="group" aria-label="Acciones empleado">
+                                            <a href="{% url 'editar_empleado' empleado.id %}" class="btn btn-sm btn-outline-primary">Editar</a>
+                                            <a href="{% url 'eliminar_empleado' empleado.id %}" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                                        </div>
                                     </td>
                                 </tr>
                             {% empty %}
@@ -160,6 +163,7 @@
                                 <th>Empleado</th>
                                 <th>Turno</th>
                                 <th>Estado</th>
+                                <th>Acciones</th>
                                 <th>Notas</th>
                             </tr>
                         </thead>
@@ -170,19 +174,27 @@
                                     <td>{{ item.empleado }}</td>
                                     <td><span class="badge bg-secondary text-uppercase">{{ item.turno }}</span></td>
                                     <td>
-                                        {% if item.estado == 'presente' %}
-                                            <span class="badge bg-success">Presente</span>
-                                        {% elif item.estado == 'retardo' %}
-                                            <span class="badge bg-warning text-dark">Retardo</span>
-                                        {% else %}
-                                            <span class="badge bg-danger">Faltó</span>
-                                        {% endif %}
+                                        <div class="d-flex flex-column gap-2">
+                                            <div>
+                                                {% if item.estado == 'presente' %}
+                                                    <span class="badge bg-success">Presente</span>
+                                                {% elif item.estado == 'retardo' %}
+                                                    <span class="badge bg-warning text-dark">Retardo</span>
+                                                {% else %}
+                                                    <span class="badge bg-danger">Faltó</span>
+                                                {% endif %}
+                                            </div>
+                                            <div class="btn-group" role="group" aria-label="Acciones asistencia">
+                                                <a href="{% url 'editar_asistencia' item.id %}" class="btn btn-sm btn-outline-primary">Editar</a>
+                                                <a href="{% url 'eliminar_asistencia' item.id %}" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                                            </div>
+                                        </div>
                                     </td>
                                     <td>{{ item.notas|default:'-' }}</td>
                                 </tr>
                             {% empty %}
                                 <tr>
-                                    <td colspan="5" class="text-center text-muted">Aún no hay registros de asistencia.</td>
+                                    <td colspan="6" class="text-center text-muted">Aún no hay registros de asistencia.</td>
                                 </tr>
                             {% endfor %}
                         </tbody>
