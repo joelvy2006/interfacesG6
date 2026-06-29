@@ -6,8 +6,57 @@
     <title>Iniciar Sesión | Anthonela Farms</title>
     <link rel="stylesheet" href="/static/public/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/public/vendors/bootstrap-icons/bootstrap-icons.css">
+    <style>
+        body {
+            background-color: #04170f;
+            color: #f8f9fa;
+        }
+        .login-panel {
+            background-color: #081c13;
+        }
+        .login-card {
+            background-color: #0b2218;
+            border: 1px solid rgba(40, 167, 69, 0.35);
+        }
+        .login-card .form-control {
+            background-color: #0d2e1f;
+            color: #f8f9fa;
+            border-color: #198754;
+        }
+        .login-card .form-control:focus {
+            box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.25);
+        }
+        .login-card .form-control::placeholder {
+            color: rgba(248, 249, 250, 0.6);
+        }
+        .login-card .input-group-text {
+            background-color: #0a2619;
+            color: #198754;
+            border-color: #198754;
+        }
+        .login-card .form-label {
+            color: #d1e7dd;
+        }
+        .login-card .card-body a.btn-outline-secondary {
+            color: #f8f9fa;
+            border-color: rgba(248, 249, 250, 0.4);
+        }
+        .login-card .card-body a.btn-outline-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            color: #f8f9fa;
+            border-color: #f8f9fa;
+        }
+        .login-card .alert-warning {
+            background-color: #3e2d03;
+            color: #fff;
+            border-color: #855e02;
+        }
+        .login-card .text-muted {
+            color: rgba(248, 249, 250, 0.7) !important;
+        }
+    </style>
 </head>
-<body class="bg-light">
+<body class="bg-dark text-light">
 <div class="container-fluid min-vh-100">
     <div class="row min-vh-100">
 
@@ -38,11 +87,11 @@
     </div>
 
     <!-- Formulario -->
-    <div class="col-lg-6 d-flex align-items-center justify-content-center bg-light">
+    <div class="col-lg-6 d-flex align-items-center justify-content-center login-panel">
 
-        <div class="card border-0 shadow-lg" style="width: 100%; max-width: 450px;">
+        <div class="card shadow-lg login-card" style="width: 100%; max-width: 450px;">
 
-            <div class="card-body p-5">
+            <div class="card-body p-5 text-light">
 
                 <div class="text-center mb-4">
 
@@ -73,7 +122,7 @@
 
                     <div class="mb-3">
 
-                        <label class="form-label">
+                            <label class="form-label fw-semibold">
                             Usuario
                         </label>
 
@@ -96,7 +145,7 @@
 
                     <div class="mb-4">
 
-                        <label class="form-label">
+                        <label class="form-label fw-semibold">
                             Contraseña
                         </label>
 
