@@ -4,8 +4,13 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+
 from .forms import CategoriaForm, InsumoForm
 from .models import RegistroCosecha, RegistroProductividad, Asistencia, Empleado, Categoria, Insumo
+
+from django.db.models import Sum
+from .models import RegistroCosecha, RegistroProductividad, Asistencia, Empleado
+
 from datetime import datetime
 from io import BytesIO
 
@@ -711,4 +716,54 @@ def eliminar_insumo(request, pk):
 
 @login_required(login_url='login')
 def dashboard(request):
-    return render(request, 'dashboard/index.html')
+    registros_productividad = RegistroProductividad.objects.all()
+    registros_cosecha = RegistroCosecha.objects.all()
+
+    total_embonches = registros_productividad.aggregate(Sum('embonches'))['embonches__sum'] or 0
+    total_cosecha = registros_cosecha.aggregate(Sum('cantidad'))['cantidad__sum'] or 0
+    total_registros = registros_productividad.count()
+    objetivo_embonches = 1500
+
+    promedio_embonches = round(total_embonches / total_registros, 1) if total_registros else 0
+    rendimiento = min(100, round((total_embonches / objetivo_embonches) * 100)) if objetivo_embonches else 0
+    productividad = min(100, round((total_embonches / max(total_cosecha, 1)) * 100)) if total_cosecha else 0
+
+    calidad_exportacion = registros_cosecha.filter(condicion='exportacion').aggregate(Sum('cantidad'))['cantidad__sum'] or 0
+    calidad_premium = round((calidad_exportacion / total_cosecha) * 100) if total_cosecha else 0
+    calidad_labels = {
+        'exportacion': 'Exportación',
+        'fanci': 'Fanci',
+        'nacional': 'Nacional',
+        'basura': 'Basura',
+    }
+    quality_breakdown = [
+        {
+            'label': calidad_labels.get(item['condicion'], item['condicion']),
+            'total': item['total'],
+        }
+        for item in registros_cosecha.values('condicion').annotate(total=Sum('cantidad')).order_by('-total')
+    ]
+
+    top_responsables = [
+        {
+            'responsable': item['responsable'],
+            'total_embonches': item['total_embonches'],
+        }
+        for item in registros_productividad.values('responsable').annotate(total_embonches=Sum('embonches')).order_by('-total_embonches')[:5]
+    ]
+
+    bloques_activos = registros_productividad.values('bloque').distinct().count()
+
+    context = {
+        'total_embonches': total_embonches,
+        'promedio_embonches': promedio_embonches,
+        'rendimiento': rendimiento,
+        'productividad': productividad,
+        'calidad_premium': calidad_premium,
+        'bloques_activos': bloques_activos,
+        'total_cosecha': total_cosecha,
+        'quality_breakdown': quality_breakdown,
+        'top_responsables': top_responsables,
+    }
+
+    return render(request, 'dashboard/index.html', context)
