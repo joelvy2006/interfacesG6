@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Anthonela Farms - panel de gestión y plantación">
-    <title>Anthonela Farms</title>
+    <title>🌿 Anthonela Farms - Gestión Agrícola</title>
     <link rel="icon" href="{% static 'public/images/favicon/favicon.ico' %}">
     <link rel="stylesheet" href="{% static 'public/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'public/vendors/bootstrap-icons/bootstrap-icons.css' %}">
@@ -22,6 +22,7 @@
             background:
                 radial-gradient(circle at top, rgba(34, 197, 94, 0.10), transparent 20%),
                 linear-gradient(180deg, #07110b 0%, #10231a 45%, #13242b 100%);
+                color: #173224;
         }
 
         .hero-card,
@@ -137,7 +138,7 @@
 <body>
     <header class="sticky-top border-bottom bg-white/90 backdrop-blur">
         <nav class="container navbar navbar-expand-lg py-3">
-            <a class="navbar-brand fw-bold text-success" href="/">Anthonela Farms</a>
+            <a class="navbar-brand fw-bold text-success" href="/">🌱 Anthonela Farms</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Alternar navegación">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -162,8 +163,8 @@
                         <i class="bi bi-moon-stars" data-theme-icon aria-hidden="true"></i>
                         <span class="d-none d-sm-inline">Tema</span>
                     </button>
-                    <a class="btn btn-outline-success" href="{% if request.user.is_authenticated %}{% url 'dashboard' %}{% else %}{% url 'login' %}{% endif %}">
-                        {% if request.user.is_authenticated %}Regresar al panel de control{% else %}Iniciar sesión{% endif %}
+                    <a class="btn btn-success btn-lg" href="...">
+                      {% if request.user.is_authenticated %}Ir al panel{% else %}Acceder al sistema{% endif %}
                     </a>
                 </div>
             </div>
@@ -176,7 +177,7 @@
                 <div class="hero-card p-4 p-lg-5">
                     <p class="text-uppercase small text-success fw-semibold mb-2">🌱 Sembramos eficiencia, cosechamos éxito</p>
                     <h1 class="display-5 fw-bold mb-3">Gestiona tu producción con claridad y eficiencia</h1>
-                    <p class="lead text-muted mb-4"><strong>Organiza tu producción, supervisa tu equipo y toma mejores decisiones desde un solo lugar.</strong></p>
+                    <p class="lead text-muted mb-4"><strong>Centraliza el seguimiento de tus cosechas, monitorea el rendimiento de tu equipo y visualiza métricas clave en tiempo real para optimizar cada etapa de tu producción, mejorar la calidad y tomar decisiones más rápidas y acertadas desde un solo lugar.</strong></p>
                     <div class="d-flex flex-wrap gap-2">
                         <a class="btn btn-success btn-lg" href="{% if request.user.is_authenticated %}{% url 'dashboard' %}{% else %}{% url 'login' %}{% endif %}">
                             {% if request.user.is_authenticated %}Regresar al panel de control{% else %}Iniciar sesión{% endif %}
@@ -189,11 +190,11 @@
                 <div class="hero-card p-4 p-lg-5">
                     <div class="row g-3 text-center">
                         <div class="col-6 metric-pill p-3">
-                            <div class="display-6 fw-bold">1,284</div>
+                            <div class="display-6 fw-bold">1,500</div>
                             <small class="text-muted">EMBONCHES</small>
                         </div>
                         <div class="col-6 metric-pill p-3">
-                            <div class="display-6 fw-bold">95%</div>
+                            <div class="display-6 fw-bold">97%</div>
                             <small class="text-muted">PRODUCTIVIDAD</small>
                         </div>
                         <div class="col-6 metric-pill p-3">
@@ -206,11 +207,11 @@
                         </div>
                         <div class="col-6 metric-pill p-3">
                             <div class="display-6 fw-bold">48h</div>
-                            <small class="text-muted">Horas trabajadas</small>
+                            <small class="text-muted">HORAS TRABAJADAS</small>
                         </div>
                         <div class="col-6 metric-pill p-3">
                             <div class="display-6 fw-bold">7</div>
-                            <small class="text-muted">Tareas pendientes</small>
+                            <small class="text-muted">TAREAS PENDIENTES</small>
                         </div>
                     </div>
                 </div>
@@ -280,16 +281,9 @@
             </article>
             <article class="col-12 col-md-4">
                 <div class="hero-card p-4 h-100">
-                    <i class="bi bi-headset fs-2"></i>
-                    <h2 class="h5 mt-3">Soporte</h2>
-                    <p class="mb-0">Obtén ayuda rápida para tus dudas y problemas de uso.</p>
-                </div>
-            </article>
-            <article class="col-12 col-md-4">
-                <div class="hero-card p-4 h-100">
-                    <i class="bi bi-bullseye fs-2"></i>
-                    <h2 class="h5 mt-3">Objetivos</h2>
-                    <p class="mb-0">Define metas claras y sigue el progreso de tus ciclos de producción.</p>
+                    <i class="bi bi-box-seam fs-2"></i>
+                    <h2 class="h5 mt-3">Inventario</h2>
+                    <p class="mb-0">Supervisa insumos, stock y niveles de reposición para mantener la operación abastecida.</p>
                 </div>
             </article>
             <article class="col-12 col-md-4">
@@ -297,6 +291,13 @@
                     <i class="bi bi-people fs-2"></i>
                     <h2 class="h5 mt-3">Equipo</h2>
                     <p class="mb-0">Gestiona roles, tareas y comunicación del personal en campo.</p>
+                </div>
+            </article>
+            <article class="col-12 col-md-4">
+                <div class="hero-card p-4 h-100">
+                    <i class="bi bi-shield-check fs-2"></i>
+                    <h2 class="h5 mt-3">Calidad</h2>
+                    <p class="mb-0">Evalúa la calidad de los lotes y mantiene estándares de control en cada cosecha.</p>
                 </div>
             </article>
         </section>
