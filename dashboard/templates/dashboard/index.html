@@ -9,7 +9,7 @@
         <div>
             <p class="eyebrow mb-1">Resumen</p>
             <h1 class="h3 mb-1">Panel Principal</h1>
-            <p class="text-muted mb-0">Monitorea rendimiento, embonches, productividad y calidad desde un solo espacio.</p>
+            <p class="text-muted mb-0">Monitorea rendimiento, embonches, productividad y calidad en un solo panel con información actualizada del proceso productivo.</p>
         </div>
     </div>
     <div class="heading-actions">
@@ -24,29 +24,29 @@
     <div class="col-12 col-sm-6 col-xl-3">
         <article class="metric-card metric-primary">
             <div class="metric-top"><span class="metric-label">Embonches</span><span class="metric-icon"><i class="bi bi-calendar-check"></i></span></div>
-            <div class="metric-value">1,284</div>
-            <div class="metric-meta"><span class="text-success">+8.2%</span><span>vs semana previa</span></div>
+            <div class="metric-value">{{ total_embonches }}</div>
+            <div class="metric-meta"><span class="text-success">{{ promedio_embonches }} avg</span><span>por registro</span></div>
         </article>
     </div>
     <div class="col-12 col-sm-6 col-xl-3">
         <article class="metric-card metric-success">
             <div class="metric-top"><span class="metric-label">Productividad</span><span class="metric-icon"><i class="bi bi-graph-up"></i></span></div>
-            <div class="metric-value">95%</div>
-            <div class="metric-meta"><span class="text-success">Meta casi alcanzada</span></div>
+            <div class="metric-value">{{ productividad }}%</div>
+            <div class="metric-meta"><span class="text-success">{{ total_cosecha }} unidades</span><span>en cosecha</span></div>
         </article>
     </div>
     <div class="col-12 col-sm-6 col-xl-3">
         <article class="metric-card metric-warning">
-            <div class="metric-top"><span class="metric-label">Empleados</span><span class="metric-icon"><i class="bi bi-people"></i></span></div>
-            <div class="metric-value">125</div>
-            <div class="metric-meta"><span>Personal activo</span></div>
+            <div class="metric-top"><span class="metric-label">Calidad</span><span class="metric-icon"><i class="bi bi-award"></i></span></div>
+            <div class="metric-value">{{ calidad_premium }}%</div>
+            <div class="metric-meta"><span>Premium exportación</span></div>
         </article>
     </div>
     <div class="col-12 col-sm-6 col-xl-3">
         <article class="metric-card metric-danger">
             <div class="metric-top"><span class="metric-label">Rendimiento</span><span class="metric-icon"><i class="bi bi-speedometer2"></i></span></div>
-            <div class="metric-value">82%</div>
-            <div class="metric-meta"><span class="text-danger">Falta 18%</span><span>para objetivo</span></div>
+            <div class="metric-value">{{ rendimiento }}%</div>
+            <div class="metric-meta"><span class="text-danger">{{ bloques_activos }} bloques</span><span>activos</span></div>
         </article>
     </div>
 </section>
@@ -56,7 +56,7 @@
         <div>
             <p class="eyebrow mb-1">Tienda</p>
             <h2 class="h5 mb-1">Catálogo y ventas</h2>
-            <p class="text-muted mb-0">Revisa el estado de los productos disponibles y accede al carrito de compras.</p>
+            <p class="text-muted mb-0">Consulta el estado de los productos disponibles, controla la demanda y mantén el flujo comercial alineado con la producción.</p>
         </div>
         <a class="btn btn-success btn-sm" href="{% url 'servicios' %}">Abrir tienda</a>
     </div>
@@ -92,7 +92,7 @@
                 <div>
                     <p class="eyebrow mb-1">Desempeño</p>
                     <h2 class="h5 mb-1">Progreso mensual</h2>
-                    <p class="text-muted mb-0">Comparación de embonches y productividad del año en curso.</p>
+                    <p class="text-muted mb-0">Visualiza el progreso semanal y mensual de embonches, rendimiento y productividad para anticipar metas y desviaciones.</p>
                 </div>
                 <a class="btn btn-light btn-sm" href="/reportes/">Ver detalles</a>
             </div>
@@ -116,9 +116,48 @@
                 </div>
             </div>
             <div class="activity-list">
-                <div class="activity-item"><span class="activity-dot bg-primary"></span><div><p class="mb-1 fw-semibold">Nuevo registro cargado</p><p class="text-muted small mb-0">Se actualizaron 18 registros de productividad.</p></div></div>
-                <div class="activity-item"><span class="activity-dot bg-success"></span><div><p class="mb-1 fw-semibold">Meta de calidad alcanzada</p><p class="text-muted small mb-0">La calidad promedio llegó al 95%.</p></div></div>
-                <div class="activity-item"><span class="activity-dot bg-warning"></span><div><p class="mb-1 fw-semibold">Personal activo</p><p class="text-muted small mb-0">Hay 125 empleados registrados y operando.</p></div></div>
+                <div class="activity-item"><span class="activity-dot bg-primary"></span><div><p class="mb-1 fw-semibold">Embonches registrados</p><p class="text-muted small mb-0">{{ total_embonches }} embonches capturados en el sistema.</p></div></div>
+                <div class="activity-item"><span class="activity-dot bg-success"></span><div><p class="mb-1 fw-semibold">Calidad premium</p><p class="text-muted small mb-0">{{ calidad_premium }}% de la cosecha está clasificada como exportación.</p></div></div>
+                <div class="activity-item"><span class="activity-dot bg-warning"></span><div><p class="mb-1 fw-semibold">Bloques activos</p><p class="text-muted small mb-0">Hay {{ bloques_activos }} bloques operando con productividad registrada.</p></div></div>
+            </div>
+        </article>
+    </div>
+</section>
+
+<section class="row g-3 mt-1">
+    <div class="col-12 col-lg-6">
+        <article class="panel h-100">
+            <div class="panel-header">
+                <div>
+                    <p class="eyebrow mb-1">Calidad</p>
+                    <h2 class="h5 mb-1">Distribución por condición</h2>
+                    <p class="text-muted mb-0">Resumen de calidad de la cosecha por categoría.</p>
+                </div>
+            </div>
+            <div class="activity-list">
+                {% for item in quality_breakdown %}
+                <div class="activity-item"><span class="activity-dot bg-secondary"></span><div><p class="mb-1 fw-semibold">{{ item.label }}</p><p class="text-muted small mb-0">{{ item.total }} unidades registradas</p></div></div>
+                {% empty %}
+                <div class="activity-item"><span class="activity-dot bg-light"></span><div><p class="mb-1 fw-semibold">Sin datos</p><p class="text-muted small mb-0">Aún no hay registros de calidad.</p></div></div>
+                {% endfor %}
+            </div>
+        </article>
+    </div>
+    <div class="col-12 col-lg-6">
+        <article class="panel h-100">
+            <div class="panel-header">
+                <div>
+                    <p class="eyebrow mb-1">Equipo</p>
+                    <h2 class="h5 mb-1">Responsables destacados</h2>
+                    <p class="text-muted mb-0">Top personas por embonches registrados.</p>
+                </div>
+            </div>
+            <div class="activity-list">
+                {% for responsable in top_responsables %}
+                <div class="activity-item"><span class="activity-dot bg-primary"></span><div><p class="mb-1 fw-semibold">{{ responsable.responsable }}</p><p class="text-muted small mb-0">{{ responsable.total_embonches }} embonches acumulados</p></div></div>
+                {% empty %}
+                <div class="activity-item"><span class="activity-dot bg-light"></span><div><p class="mb-1 fw-semibold">Sin responsables</p><p class="text-muted small mb-0">No hay registros de productividad recientes.</p></div></div>
+                {% endfor %}
             </div>
         </article>
     </div>
@@ -129,7 +168,7 @@
         <div>
             <p class="eyebrow mb-1">Operación</p>
             <h2 class="h5 mb-1">Resumen de la semana</h2>
-            <p class="text-muted mb-0">Objetivos, embonches y calidad del ciclo actual.</p>
+            <p class="text-muted mb-0">Seguimiento de metas, embonches, calidad del lote y desempeño del equipo en el ciclo actual.</p>
         </div>
         <a class="btn btn-outline-secondary btn-sm" href="/configuracion/">Objetivos</a>
     </div>
