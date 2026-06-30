@@ -2,8 +2,7 @@
 
 def inicio(request):
     return render(request, 'index.html')
-<<<<<<< HEAD
-=======
+HEAD
 
 
 def servicios(request):
@@ -798,4 +797,4 @@ def eliminar_insumo(request, id_insu):
         messages.success(request, 'Insumo eliminado exitosamente')
         return redirect('lista_insumos')
     return render(request, 'insumos/confirmar_eliminar.html', {'objeto': insumo})
->>>>>>> 8246bd0ff1f4e9564d91d9c2ccb28ef2a2e19634
+
