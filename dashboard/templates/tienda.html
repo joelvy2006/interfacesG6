@@ -130,6 +130,72 @@
     </div>
 </section>
 
+<section class="row g-3 mt-4">
+    <div class="col-12">
+        <div class="panel h-100">
+            <div class="panel-header d-flex align-items-center justify-content-between">
+                <div>
+                    <p class="eyebrow mb-1 text-success">PEDIDOS</p>
+                    <h2 class="h5 mb-0">Órdenes recibidas</h2>
+                    <p class="text-muted small mb-0">Sigue el estado de los pedidos que llegan desde la tienda pública.</p>
+                </div>
+                <div>
+                    <a class="btn btn-outline-success btn-sm" href="{% url 'tienda' %}">Ver tienda</a>
+                </div>
+            </div>
+            <div class="table-responsive p-3">
+                <table class="table table-dark table-striped align-middle mb-0">
+                    <thead>
+                        <tr>
+                            <th>COMPRADOR</th>
+                            <th>PRODUCTO</th>
+                            <th>CANTIDAD</th>
+                            <th>TOTAL</th>
+                            <th>ESTADO</th>
+                            <th>FECHA</th>
+                            <th>ACCIONES</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for pedido in pedidos %}
+                            <tr>
+                                <td>{{ pedido.comprador|default:'Anónimo' }}</td>
+                                <td>{{ pedido.producto }}</td>
+                                <td>{{ pedido.cantidad }}</td>
+                                <td>${{ pedido.total|floatformat:2 }}</td>
+                                <td>
+                                    {% if pedido.estado == 'espera' %}
+                                        <span class="badge bg-warning text-dark">{{ pedido.get_estado_display }}</span>
+                                    {% elif pedido.estado == 'enviado' %}
+                                        <span class="badge bg-info text-dark">{{ pedido.get_estado_display }}</span>
+                                    {% else %}
+                                        <span class="badge bg-success">{{ pedido.get_estado_display }}</span>
+                                    {% endif %}
+                                </td>
+                                <td>{{ pedido.fecha_creacion|date:'d/m/Y H:i' }}</td>
+                                <td class="text-nowrap">
+                                    {% if pedido.estado == 'espera' %}
+                                        <a class="btn btn-sm btn-outline-primary me-1" href="{% url 'cambiar_estado_pedido' pedido.id 'enviado' %}">Enviar</a>
+                                        <a class="btn btn-sm btn-outline-success" href="{% url 'cambiar_estado_pedido' pedido.id 'entregado' %}">Entregar</a>
+                                    {% elif pedido.estado == 'enviado' %}
+                                        <a class="btn btn-sm btn-outline-success" href="{% url 'cambiar_estado_pedido' pedido.id 'entregado' %}">Entregar</a>
+                                    {% else %}
+                                        <span class="text-muted small">Completado</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="7" class="text-center text-muted">No hay pedidos recibidos.</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
 <script>
     const cartItems = document.getElementById('cart-items');
     const cartTotal = document.getElementById('cart-total');
