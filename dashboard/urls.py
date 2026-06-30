@@ -9,30 +9,39 @@ urlpatterns = [
     path('login/', views.login_view, name='login'),
     path('register/', views.register_view, name='register'),
     path('logout/', views.logout_view, name='logout'),
+
     path('personal/', views.personal, name='personal'),
     path('personal/exportar/empleados/excel/', views.export_empleados_excel, name='export_empleados_excel'),
     path('personal/exportar/empleados/pdf/', views.export_empleados_pdf, name='export_empleados_pdf'),
+
     path('personal/eliminar-empleado/<int:id>/', views.eliminar_empleado, name='eliminar_empleado'),
     path('personal/editar-empleado/<int:id>/', views.editar_empleado, name='editar_empleado'),
+
     path('personal/eliminar-asistencia/<int:id>/', views.eliminar_asistencia, name='eliminar_asistencia'),
     path('personal/editar-asistencia/<int:id>/', views.editar_asistencia, name='editar_asistencia'),
+
     path('registro-cosecha/', views.registro_cosecha, name='registro_cosecha'),
+    path('registro-cosecha/<int:id>/editar/', views.editar_cosecha, name='editar_cosecha'),
+    path('registro-cosecha/<int:id>/eliminar/', views.eliminar_cosecha, name='eliminar_cosecha'),
+
     path('registro-productividad/', views.registro_productividad, name='registro_productividad'),
     path('registro-productividad/<int:id>/ver/', views.ver_productividad, name='ver_productividad'),
     path('registro-productividad/<int:id>/editar/', views.editar_productividad, name='editar_productividad'),
     path('registro-productividad/<int:id>/eliminar/', views.eliminar_productividad, name='eliminar_productividad'),
-    path('registro-cosecha/<int:id>/editar/', views.editar_cosecha, name='editar_cosecha'),
-    path('registro-cosecha/<int:id>/eliminar/', views.eliminar_cosecha, name='eliminar_cosecha'),
+
     path('clasificacion-calidad/', views.clasificacion_calidad, name='clasificacion_calidad'),
     path('inventario/', views.inventario, name='inventario'),
     path('reportes/', views.reportes, name='reportes'),
     path('configuracion/', views.configuracion, name='configuracion'),
     path('historial/', views.historial, name='historial'),
+
     path('metricas-empleado/', views.metricas_empleado, name='metricas_empleado'),
+
     path('listar-usuarios/', views.listar_usuarios, name='listar_usuarios'),
     path('crear-usuario/', views.crear_usuario, name='crear_usuario'),
     path('editar-usuario/<int:id>/', views.editar_usuario, name='editar_usuario'),
     path('usuario/<int:id>/estado/', views.cambiar_estado_usuario, name='cambiar_estado_usuario'),
     path('usuario/<int:id>/eliminar/', views.eliminar_usuario, name='eliminar_usuario'),
+
     path('dashboard/', views.dashboard, name='dashboard'),
 ]

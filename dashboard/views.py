@@ -1,4 +1,4 @@
-﻿from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, JsonResponse
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -12,8 +12,7 @@ from datetime import datetime
 import json
 from io import BytesIO
 from .forms import CategoriaForm, InsumoForm
-
-import   openpyxl
+import openpyxl
 from reportlab.lib.pagesizes import letter
 from reportlab.lib import colors
 from reportlab.lib.styles import getSampleStyleSheet
@@ -22,7 +21,6 @@ from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph
 
 def inicio(request):
     return render(request, 'index.html')
-
 
 def servicios(request):
     return render(request, 'servicios.html')

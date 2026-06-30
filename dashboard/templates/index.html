@@ -143,9 +143,9 @@
             </button>
             <div class="collapse navbar-collapse" id="mainNav">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-2">
-                    <li class="nav-item"><a class="nav-link" href="#resumen">Resumen</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#informacion">Información</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
+                    <li class="nav-item"><a class="nav-link text-success " href="#resumen">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link text-success" href="#informacion">Servicios</a></li>
+                    <li class="nav-item"><a class="nav-link text-success" href="#contacto">Contáctanos</a></li>
                 </ul>
                 <div class="ms-lg-3 d-flex gap-2 align-items-center">
                     <a class="btn btn-outline-success btn-sm d-flex align-items-center gap-2" href="/servicios/" aria-label="Ir a la tienda" title="Tienda de claveles">
@@ -169,13 +169,13 @@
             <article class="col-12 col-xl-7">
                 <div class="hero-card p-4 p-lg-5">
                     <p class="text-uppercase small text-success fw-semibold mb-2">🌱 Sembramos eficiencia, cosechamos éxito</p>
-                    <h1 class="display-5 fw-bold mb-3">Administra tu cultivo con visión y control</h1>
-                    <p class="lead text-muted mb-4"><strong>Organiza tu producción, controla tu equipo y mejora tu rendimiento desde un solo lugar.</strong></p>
+                    <h1 class="display-5 fw-bold mb-3">Gestiona tu producción con claridad y eficiencia</h1>
+                    <p class="lead text-muted mb-4"><strong>Organiza tu producción, supervisa tu equipo y toma mejores decisiones desde un solo lugar.</strong></p>
                     <div class="d-flex flex-wrap gap-2">
                         <a class="btn btn-success btn-lg" href="{% if request.user.is_authenticated %}{% url 'dashboard' %}{% else %}{% url 'login' %}{% endif %}">
                             {% if request.user.is_authenticated %}Regresar al panel de control{% else %}Iniciar sesión{% endif %}
                         </a>
-                        <a class="btn btn-outline-secondary btn-lg" href="/reportes/">Ver reportes</a>
+                        <a class="btn btn-outline-secondary btn-lg" href="/reportes/">Ver reportes y métricas</a>
                     </div>
                 </div>
             </article>

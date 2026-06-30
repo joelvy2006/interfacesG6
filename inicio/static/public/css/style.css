@@ -116,7 +116,12 @@ a {
 }
 
 .brand-title {
-  font-size: 1.05rem;
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+.navbar-brand {
+  font-size: 1.45rem !important;
   font-weight: 800;
 }
 
