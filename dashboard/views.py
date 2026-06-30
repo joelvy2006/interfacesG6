@@ -27,7 +27,8 @@ def servicios(request):
 
 
 def tienda(request):
-    return render(request, 'tienda.html')
+    pedidos = Pedido.objects.all()
+    return render(request, 'tienda.html', {'pedidos': pedidos})
 
 
 @csrf_exempt
@@ -86,7 +87,7 @@ def cambiar_estado_pedido(request, id, estado):
         pedido.estado = estado
         pedido.save()
         messages.success(request, f'Pedido {pedido.producto} actualizado a {pedido.get_estado_display()}.')
-    return redirect('dashboard')
+    return redirect(request.META.get('HTTP_REFERER', 'dashboard'))
 
 
 def login_view(request):
