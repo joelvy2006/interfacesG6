@@ -14,7 +14,7 @@
     </div>
     <div class="heading-actions">
         <a href="/registro-productividad/" class="btn btn-primary">Registrar embonches</a>
-        <a href="{% url 'servicios' %}" class="btn btn-success">Ir a la tienda</a>
+        <a href="#tienda" class="btn btn-success">Ir a la tienda</a>
         <a href="/reportes/" class="btn btn-light">Ver reportes</a>
         <a href="/configuracion/" class="btn btn-light">Objetivos</a>
     </div>
@@ -51,36 +51,44 @@
     </div>
 </section>
 
-<section class="panel mt-3">
+<section class="panel mt-3" id="tienda">
     <div class="panel-header">
         <div>
             <p class="eyebrow mb-1">Tienda</p>
-            <h2 class="h5 mb-1">Catálogo y ventas</h2>
-            <p class="text-muted mb-0">Consulta el estado de los productos disponibles, controla la demanda y mantén el flujo comercial alineado con la producción.</p>
+            <h2 class="h5 mb-1">Formulario de compras</h2>
+            <p class="text-muted mb-0">Registra rápidamente los productos que deseas comprar desde el panel del dashboard.</p>
         </div>
-        <a class="btn btn-success btn-sm" href="{% url 'servicios' %}">Abrir tienda</a>
+        <a class="btn btn-success btn-sm" href="#tienda">Abrir tienda</a>
     </div>
     <div class="row g-3 mt-1">
-        <div class="col-12 col-md-4">
-            <article class="metric-card metric-info">
-                <div class="metric-top"><span class="metric-label">Productos activos</span><span class="metric-icon"><i class="bi bi-basket3"></i></span></div>
-                <div class="metric-value">24</div>
-                <div class="metric-meta"><span>Variedades disponibles</span></div>
-            </article>
+        <div class="col-12 col-lg-7">
+            <div class="border rounded p-3 h-100">
+                <label class="form-label fw-semibold" for="producto">Producto</label>
+                <select class="form-select mb-3" id="producto">
+                    <option value="clavel-rojo-premium" data-price="180">Clavel rojo premium ($180)</option>
+                    <option value="clavel-blanco-elegante" data-price="240">Clavel blanco elegante ($240)</option>
+                    <option value="clavel-rosa-artesanal" data-price="150">Clavel rosa artesanal ($150)</option>
+                    <option value="clavel-nacional-rojo" data-price="130">Clavel nacional rojo ($130)</option>
+                    <option value="clavel-nacional-amarillo" data-price="110">Clavel nacional amarillo ($110)</option>
+                </select>
+
+                <label class="form-label fw-semibold" for="cantidad">Cantidad</label>
+                <input type="number" class="form-control mb-3" id="cantidad" min="1" value="1">
+
+                <button type="button" class="btn btn-success" id="agregar-compra">Agregar compra</button>
+            </div>
         </div>
-        <div class="col-12 col-md-4">
-            <article class="metric-card metric-secondary">
-                <div class="metric-top"><span class="metric-label">Pedidos</span><span class="metric-icon"><i class="bi bi-cart-check"></i></span></div>
-                <div class="metric-value">18</div>
-                <div class="metric-meta"><span>En proceso esta semana</span></div>
-            </article>
-        </div>
-        <div class="col-12 col-md-4">
-            <article class="metric-card metric-warning">
-                <div class="metric-top"><span class="metric-label">Ingresos</span><span class="metric-icon"><i class="bi bi-cash-stack"></i></span></div>
-                <div class="metric-value">$3,240</div>
-                <div class="metric-meta"><span>Ventas del día</span></div>
-            </article>
+        <div class="col-12 col-lg-5">
+            <div class="border rounded p-3 h-100">
+                <h3 class="h6 fw-semibold mb-3">Resumen de compra</h3>
+                <ul class="list-unstyled mb-3" id="lista-compras">
+                    <li class="text-muted small">No hay productos seleccionados.</li>
+                </ul>
+                <div class="d-flex justify-content-between fw-semibold">
+                    <span>Total</span>
+                    <span id="total-compra">$0</span>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -203,4 +211,46 @@
         </div>
     </div>
 </section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const selectProducto = document.getElementById('producto');
+        const inputCantidad = document.getElementById('cantidad');
+        const botonAgregar = document.getElementById('agregar-compra');
+        const listaCompras = document.getElementById('lista-compras');
+        const totalCompra = document.getElementById('total-compra');
+
+        let compras = [];
+
+        function actualizarResumen() {
+            if (compras.length === 0) {
+                listaCompras.innerHTML = '<li class="text-muted small">No hay productos seleccionados.</li>';
+                totalCompra.textContent = '$0';
+                return;
+            }
+
+            let total = 0;
+            listaCompras.innerHTML = '';
+
+            compras.forEach(function (item) {
+                const subtotal = item.precio * item.cantidad;
+                total += subtotal;
+                listaCompras.innerHTML += '<li class="d-flex justify-content-between align-items-center border-bottom py-2"><span>' + item.nombre + ' x' + item.cantidad + '</span><span>$' + subtotal + '</span></li>';
+            });
+
+            totalCompra.textContent = '$' + total;
+        }
+
+        botonAgregar.addEventListener('click', function () {
+            const opcion = selectProducto.options[selectProducto.selectedIndex];
+            const nombre = opcion.text.split(' ($')[0];
+            const precio = Number(opcion.dataset.price || 0);
+            const cantidad = Math.max(1, parseInt(inputCantidad.value, 10) || 1);
+
+            compras.push({ nombre: nombre, precio: precio, cantidad: cantidad });
+            inputCantidad.value = 1;
+            actualizarResumen();
+        });
+    });
+</script>
 {% endblock %}
