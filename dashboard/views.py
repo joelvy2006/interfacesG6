@@ -457,6 +457,60 @@ def registro_productividad(request):
     return render(request, 'registro-productividad.html', {'registros': registros})
 
 
+@login_required(login_url='login')
+def editar_productividad(request, id):
+    registro = get_object_or_404(RegistroProductividad, id=id)
+
+    if request.method == 'POST':
+        fecha_str = request.POST.get('fecha')
+        bloque = request.POST.get('bloque', '').strip()
+        responsable = request.POST.get('responsable', '').strip()
+        embonches = request.POST.get('embonches', '0').strip()
+        observaciones = request.POST.get('observaciones', '').strip()
+
+        if not fecha_str or not bloque or not responsable or not embonches:
+            messages.error(request, 'Completa fecha, bloque, responsable y cantidad de embonches.')
+            return render(request, 'editar-productividad.html', {'registro': registro})
+
+        try:
+            cantidad_int = int(embonches)
+            if cantidad_int < 0:
+                messages.error(request, 'La cantidad de embonches no puede ser negativa.')
+                return render(request, 'editar-productividad.html', {'registro': registro})
+
+            registro.fecha = datetime.strptime(fecha_str, '%Y-%m-%d').date()
+            registro.bloque = bloque
+            registro.responsable = responsable
+            registro.embonches = cantidad_int
+            registro.observaciones = observaciones
+            registro.save()
+            messages.success(request, 'Registro de productividad actualizado correctamente.')
+            return redirect('registro_productividad')
+        except ValueError:
+            messages.error(request, 'La cantidad de embonches debe ser un número válido.')
+            return render(request, 'editar-productividad.html', {'registro': registro})
+        except Exception as e:
+            messages.error(request, 'No se pudo actualizar el registro de productividad.')
+            print(f"Error al actualizar productividad: {e}")
+            return render(request, 'editar-productividad.html', {'registro': registro})
+
+    return render(request, 'editar-productividad.html', {'registro': registro})
+
+
+@login_required(login_url='login')
+def eliminar_productividad(request, id):
+    registro = get_object_or_404(RegistroProductividad, id=id)
+    registro.delete()
+    messages.success(request, 'Registro de productividad eliminado correctamente.')
+    return redirect('registro_productividad')
+
+
+@login_required(login_url='login')
+def ver_productividad(request, id):
+    registro = get_object_or_404(RegistroProductividad, id=id)
+    return render(request, 'detalle-productividad.html', {'registro': registro})
+
+
 def editar_cosecha(request, id):
     registro = get_object_or_404(RegistroCosecha, id=id)
     
