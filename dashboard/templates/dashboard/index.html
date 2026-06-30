@@ -58,38 +58,10 @@
             <h2 class="h5 mb-1">Formulario de compras</h2>
             <p class="text-muted mb-0">Registra rápidamente los productos que deseas comprar desde el panel del dashboard.</p>
         </div>
-        <a class="btn btn-success btn-sm" href="#tienda">Abrir tienda</a>
+        <a class="btn btn-success btn-sm" href="{% url 'tienda' %}">Abrir tienda</a>
     </div>
-    <div class="row g-3 mt-1">
-        <div class="col-12 col-lg-7">
-            <div class="border rounded p-3 h-100">
-                <label class="form-label fw-semibold" for="producto">Producto</label>
-                <select class="form-select mb-3" id="producto">
-                    <option value="clavel-rojo-premium" data-price="180">Clavel rojo premium ($180)</option>
-                    <option value="clavel-blanco-elegante" data-price="240">Clavel blanco elegante ($240)</option>
-                    <option value="clavel-rosa-artesanal" data-price="150">Clavel rosa artesanal ($150)</option>
-                    <option value="clavel-nacional-rojo" data-price="130">Clavel nacional rojo ($130)</option>
-                    <option value="clavel-nacional-amarillo" data-price="110">Clavel nacional amarillo ($110)</option>
-                </select>
-
-                <label class="form-label fw-semibold" for="cantidad">Cantidad</label>
-                <input type="number" class="form-control mb-3" id="cantidad" min="1" value="1">
-
-                <button type="button" class="btn btn-success" id="agregar-compra">Agregar compra</button>
-            </div>
-        </div>
-        <div class="col-12 col-lg-5">
-            <div class="border rounded p-3 h-100">
-                <h3 class="h6 fw-semibold mb-3">Resumen de compra</h3>
-                <ul class="list-unstyled mb-3" id="lista-compras">
-                    <li class="text-muted small">No hay productos seleccionados.</li>
-                </ul>
-                <div class="d-flex justify-content-between fw-semibold">
-                    <span>Total</span>
-                    <span id="total-compra">$0</span>
-                </div>
-            </div>
-        </div>
+    <div class="border rounded p-3 mt-3">
+        <p class="mb-0 text-muted">La tienda ahora tiene su propio apartado independiente. Usa este botón para abrir el espacio de tienda separado del panel principal.</p>
     </div>
 </section>
 

@@ -26,6 +26,10 @@ def servicios(request):
     return render(request, 'servicios.html')
 
 
+def tienda(request):
+    return render(request, 'tienda.html')
+
+
 @csrf_exempt
 @require_POST
 def crear_pedido(request):
