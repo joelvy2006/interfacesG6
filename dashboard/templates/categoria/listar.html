@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block title %}Categorías | Anthonela Farms{% endblock %}
+{% block content %}
+<div class="page-heading">
+    <div class="page-heading-copy">
+        <div>
+            <p class="eyebrow mb-1">Gestión</p>
+            <h1 class="h3 mb-1">Categorías</h1>
+            <p class="text-muted mb-0">Administra las categorías de insumos del sistema.</p>
+        </div>
+    </div>
+</div>
+<div class="card mb-4">
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="mb-0">Listado de categorías</h5>
+            <a href="{% url 'crear_categoria' %}" class="btn btn-success">Nueva categoría</a>
+        </div>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+        <div class="table-responsive">
+            <table class="table table-striped align-middle">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for categoria in categorias %}
+                    <tr>
+                        <td>{{ categoria.id_cat }}</td>
+                        <td>{{ categoria.nombre_cat }}</td>
+                        <td>{{ categoria.descripcion_cat|default:'-' }}</td>
+                        <td>{{ categoria.estado_cat }}</td>
+                        <td>
+                            <a href="{% url 'editar_categoria' categoria.pk %}" class="btn btn-primary btn-sm">Editar</a>
+                            <a href="{% url 'eliminar_categoria' categoria.pk %}" class="btn btn-danger btn-sm">Eliminar</a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="5" class="text-center text-muted">No hay categorías registradas.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -29,5 +29,13 @@ urlpatterns = [
     path('editar-usuario/<int:id>/', views.editar_usuario, name='editar_usuario'),
     path('usuario/<int:id>/estado/', views.cambiar_estado_usuario, name='cambiar_estado_usuario'),
     path('usuario/<int:id>/eliminar/', views.eliminar_usuario, name='eliminar_usuario'),
+    path('categorias/', views.listar_categorias, name='listar_categorias'),
+    path('categorias/crear/', views.crear_categoria, name='crear_categoria'),
+    path('categorias/<int:pk>/editar/', views.editar_categoria, name='editar_categoria'),
+    path('categorias/<int:pk>/eliminar/', views.eliminar_categoria, name='eliminar_categoria'),
+    path('insumos/', views.listar_insumos, name='listar_insumos'),
+    path('insumos/crear/', views.crear_insumo, name='crear_insumo'),
+    path('insumos/<int:pk>/editar/', views.editar_insumo, name='editar_insumo'),
+    path('insumos/<int:pk>/eliminar/', views.eliminar_insumo, name='eliminar_insumo'),
     path('dashboard/', views.dashboard, name='dashboard'),
 ]

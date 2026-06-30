@@ -134,6 +134,22 @@
         <a class="btn btn-outline-secondary btn-sm" href="/configuracion/">Objetivos</a>
     </div>
     <div class="row g-3 mt-1">
+        <div class="col-12 col-md-6">
+            <article class="metric-card metric-info">
+                <div class="metric-top"><span class="metric-label">Categorías</span><span class="metric-icon"><i class="bi bi-tags"></i></span></div>
+                <div class="metric-value">Gestionar</div>
+                <div class="metric-meta"><span><a href="{% url 'listar_categorias' %}" class="text-decoration-none text-white">Abrir categorías</a></span></div>
+            </article>
+        </div>
+        <div class="col-12 col-md-6">
+            <article class="metric-card metric-secondary">
+                <div class="metric-top"><span class="metric-label">Insumos</span><span class="metric-icon"><i class="bi bi-box-seam"></i></span></div>
+                <div class="metric-value">Gestionar</div>
+                <div class="metric-meta"><span><a href="{% url 'listar_insumos' %}" class="text-decoration-none text-white">Abrir insumos</a></span></div>
+            </article>
+        </div>
+    </div>
+    <div class="row g-3 mt-1">
         <div class="col-12 col-md-6 col-xl-3">
             <article class="metric-card metric-info">
                 <div class="metric-top"><span class="metric-label">Stock</span><span class="metric-icon"><i class="bi bi-box-seam"></i></span></div>
