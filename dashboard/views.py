@@ -5,11 +5,12 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db.models import Sum
-from .models import RegistroCosecha, RegistroProductividad, Asistencia, Empleado
+from .models import RegistroCosecha, RegistroProductividad, Asistencia, Empleado, Categoria, Insumo, Proveedor
 from datetime import datetime
 from io import BytesIO
+from .forms import CategoriaForm, InsumoForm
 
-import openpyxl
+import   openpyxl
 from reportlab.lib.pagesizes import letter
 from reportlab.lib import colors
 from reportlab.lib.styles import getSampleStyleSheet
@@ -676,3 +677,85 @@ def dashboard(request):
     }
 
     return render(request, 'dashboard/index.html', context)
+ 
+# ============= CRUD CATEGORÍA =============
+
+@login_required(login_url='login')
+def lista_categorias(request):
+    categorias = Categoria.objects.all()
+    return render(request, 'categorias/lista.html', {'categorias': categorias})
+
+@login_required(login_url='login')
+def crear_categoria(request):
+    if request.method == 'POST':
+        form = CategoriaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Categoría creada exitosamente')
+            return redirect('lista_categorias')
+    else:
+        form = CategoriaForm()
+    return render(request, 'categorias/form.html', {'form': form, 'titulo': 'Crear Categoría'})
+
+@login_required(login_url='login')
+def editar_categoria(request, id_cat):
+    categoria = get_object_or_404(Categoria, id_cat=id_cat)
+    if request.method == 'POST':
+        form = CategoriaForm(request.POST, instance=categoria)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Categoría actualizada exitosamente')
+            return redirect('lista_categorias')
+    else:
+        form = CategoriaForm(instance=categoria)
+    return render(request, 'categorias/form.html', {'form': form, 'titulo': 'Editar Categoría'})
+
+@login_required(login_url='login')
+def eliminar_categoria(request, id_cat):
+    categoria = get_object_or_404(Categoria, id_cat=id_cat)
+    if request.method == 'POST':
+        categoria.delete()
+        messages.success(request, 'Categoría eliminada exitosamente')
+        return redirect('lista_categorias')
+    return render(request, 'categorias/confirmar_eliminar.html', {'objeto': categoria})
+
+# ============= CRUD INSUMO =============
+
+@login_required(login_url='login')
+def lista_insumos(request):
+    insumos = Insumo.objects.select_related('categoria', 'proveedor').all()
+    return render(request, 'insumos/lista.html', {'insumos': insumos})
+
+@login_required(login_url='login')
+def crear_insumo(request):
+    if request.method == 'POST':
+        form = InsumoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Insumo creado exitosamente')
+            return redirect('lista_insumos')
+    else:
+        form = InsumoForm()
+    return render(request, 'insumos/form.html', {'form': form, 'titulo': 'Crear Insumo'})
+
+@login_required(login_url='login')
+def editar_insumo(request, id_insu):
+    insumo = get_object_or_404(Insumo, id_insu=id_insu)
+    if request.method == 'POST':
+        form = InsumoForm(request.POST, instance=insumo)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Insumo actualizado exitosamente')
+            return redirect('lista_insumos')
+    else:
+        form = InsumoForm(instance=insumo)
+    return render(request, 'insumos/form.html', {'form': form, 'titulo': 'Editar Insumo'})
+
+@login_required(login_url='login')
+def eliminar_insumo(request, id_insu):
+    insumo = get_object_or_404(Insumo, id_insu=id_insu)
+    if request.method == 'POST':
+        insumo.delete()
+        messages.success(request, 'Insumo eliminado exitosamente')
+        return redirect('lista_insumos')
+    return render(request, 'insumos/confirmar_eliminar.html', {'objeto': insumo})
