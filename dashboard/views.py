@@ -26,6 +26,11 @@ def servicios(request):
     return render(request, 'servicios.html')
 
 
+def tienda(request):
+    pedidos = Pedido.objects.all()
+    return render(request, 'tienda.html', {'pedidos': pedidos})
+
+
 @csrf_exempt
 @require_POST
 def crear_pedido(request):
@@ -82,7 +87,7 @@ def cambiar_estado_pedido(request, id, estado):
         pedido.estado = estado
         pedido.save()
         messages.success(request, f'Pedido {pedido.producto} actualizado a {pedido.get_estado_display()}.')
-    return redirect('dashboard')
+    return redirect(request.META.get('HTTP_REFERER', 'dashboard'))
 
 
 def login_view(request):
