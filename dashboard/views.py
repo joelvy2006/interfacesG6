@@ -1,13 +1,90 @@
-﻿from django.shortcuts import render
+﻿from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponse, JsonResponse
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.db.models import Sum
+from django.views.decorators.http import require_POST
+from django.views.decorators.csrf import csrf_exempt
+from .models import RegistroCosecha, RegistroProductividad, Asistencia, Empleado, Categoria, Insumo, Proveedor, Pedido
+from datetime import datetime
+import json
+from io import BytesIO
+from .forms import CategoriaForm, InsumoForm
+
+import   openpyxl
+from reportlab.lib.pagesizes import letter
+from reportlab.lib import colors
+from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph
+
 
 def inicio(request):
     return render(request, 'index.html')
-<<<<<<< HEAD
-=======
 
 
 def servicios(request):
     return render(request, 'servicios.html')
+
+
+@csrf_exempt
+@require_POST
+def crear_pedido(request):
+    try:
+        data = json.loads(request.body.decode('utf-8'))
+    except json.JSONDecodeError:
+        return JsonResponse({'success': False, 'message': 'Datos de pedido inválidos.'}, status=400)
+
+    comprador = data.get('comprador', '').strip()
+    items = data.get('items', {})
+
+    if not items:
+        return JsonResponse({'success': False, 'message': 'No se encontraron productos en el carrito.'}, status=400)
+
+    if isinstance(items, list):
+        items = {item.get('nombre', ''): item for item in items if item.get('nombre')}
+
+    if not isinstance(items, dict):
+        return JsonResponse({'success': False, 'message': 'Formato de carrito inválido.'}, status=400)
+
+    pedidos_creados = []
+    for nombre, detalle in items.items():
+        try:
+            cantidad = int(detalle.get('cantidad', 0))
+            precio = float(detalle.get('precio', 0))
+        except (TypeError, ValueError):
+            return JsonResponse({'success': False, 'message': f'Cantidad o precio inválido para {nombre}.'}, status=400)
+
+        if cantidad <= 0 or precio <= 0:
+            return JsonResponse({'success': False, 'message': f'Cantidad y precio deben ser mayores que cero para {nombre}.'}, status=400)
+
+        total = round(cantidad * precio, 2)
+        pedido = Pedido.objects.create(
+            comprador=comprador,
+            producto=nombre,
+            cantidad=cantidad,
+            precio_unitario=precio,
+            total=total,
+            estado='espera',
+        )
+        pedidos_creados.append(pedido.id)
+
+    return JsonResponse({'success': True, 'message': 'Pedido registrado correctamente.', 'pedidos': pedidos_creados})
+
+
+@login_required(login_url='login')
+def cambiar_estado_pedido(request, id, estado):
+    pedido = get_object_or_404(Pedido, id=id)
+    estado = estado.lower()
+    estados_validos = dict(Pedido.ESTADO_PEDIDO_CHOICES).keys()
+    if estado not in estados_validos:
+        messages.error(request, 'Estado de pedido inválido.')
+    else:
+        pedido.estado = estado
+        pedido.save()
+        messages.success(request, f'Pedido {pedido.producto} actualizado a {pedido.get_estado_display()}.')
+    return redirect('dashboard')
 
 
 def login_view(request):
@@ -667,6 +744,7 @@ def crear_usuario(request):
 def dashboard(request):
     registros_productividad = RegistroProductividad.objects.all()
     registros_cosecha = RegistroCosecha.objects.all()
+    pedidos = Pedido.objects.all()
 
     total_embonches = registros_productividad.aggregate(Sum('embonches'))['embonches__sum'] or 0
     total_cosecha = registros_cosecha.aggregate(Sum('cantidad'))['cantidad__sum'] or 0
@@ -713,6 +791,7 @@ def dashboard(request):
         'total_cosecha': total_cosecha,
         'quality_breakdown': quality_breakdown,
         'top_responsables': top_responsables,
+        'pedidos': pedidos,
     }
 
     return render(request, 'dashboard/index.html', context)
@@ -798,4 +877,3 @@ def eliminar_insumo(request, id_insu):
         messages.success(request, 'Insumo eliminado exitosamente')
         return redirect('lista_insumos')
     return render(request, 'insumos/confirmar_eliminar.html', {'objeto': insumo})
->>>>>>> 8246bd0ff1f4e9564d91d9c2ccb28ef2a2e19634

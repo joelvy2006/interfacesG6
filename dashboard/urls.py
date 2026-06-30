@@ -3,10 +3,9 @@ from . import views
 
 urlpatterns = [
     path('', views.inicio, name='inicio'),
-<<<<<<< HEAD
-    path('login/', views.inicio, name='login'),  # Temporal
-=======
     path('servicios/', views.servicios, name='servicios'),
+    path('crear-pedido/', views.crear_pedido, name='crear_pedido'),
+    path('pedido/<int:id>/estado/<str:estado>/', views.cambiar_estado_pedido, name='cambiar_estado_pedido'),
     path('login/', views.login_view, name='login'),
     path('register/', views.register_view, name='register'),
     path('logout/', views.logout_view, name='logout'),
@@ -36,5 +35,4 @@ urlpatterns = [
     path('usuario/<int:id>/estado/', views.cambiar_estado_usuario, name='cambiar_estado_usuario'),
     path('usuario/<int:id>/eliminar/', views.eliminar_usuario, name='eliminar_usuario'),
     path('dashboard/', views.dashboard, name='dashboard'),
->>>>>>> 8246bd0ff1f4e9564d91d9c2ccb28ef2a2e19634
 ]

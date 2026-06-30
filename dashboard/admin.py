@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import RegistroCosecha, Asistencia, Empleado, Categoria, Insumo, Proveedor
+from .models import RegistroCosecha, Asistencia, Empleado, Categoria, Insumo, Proveedor, Pedido
 
 @admin.register(RegistroCosecha)
 class RegistroCosechaAdmin(admin.ModelAdmin):
@@ -41,3 +41,10 @@ class InsumoAdmin(admin.ModelAdmin):
     list_display = ('nombre_insu', 'cantidad_stock', 'proveedor', 'categoria', 'estado_insu')
     list_filter = ('estado_insu', 'categoria', 'proveedor')
     search_fields = ('nombre_insu',)
+
+
+@admin.register(Pedido)
+class PedidoAdmin(admin.ModelAdmin):
+    list_display = ('producto', 'comprador', 'cantidad', 'total', 'estado', 'fecha_creacion')
+    list_filter = ('estado', 'fecha_creacion')
+    search_fields = ('producto', 'comprador')

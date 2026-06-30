@@ -134,3 +134,25 @@ class Insumo(models.Model):
 
     class Meta:
         db_table = 'consumo'
+
+
+class Pedido(models.Model):
+    ESTADO_PEDIDO_CHOICES = [
+        ('espera', 'Espera'),
+        ('enviado', 'Enviado'),
+        ('entregado', 'Entregado'),
+    ]
+
+    comprador = models.CharField(max_length=120, blank=True)
+    producto = models.CharField(max_length=200)
+    cantidad = models.IntegerField(default=1)
+    precio_unitario = models.DecimalField(max_digits=10, decimal_places=2)
+    total = models.DecimalField(max_digits=12, decimal_places=2)
+    estado = models.CharField(max_length=20, choices=ESTADO_PEDIDO_CHOICES, default='espera')
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-fecha_creacion']
+
+    def __str__(self):
+        return f"{self.producto} x{self.cantidad} - {self.comprador or 'Anónimo'}"
