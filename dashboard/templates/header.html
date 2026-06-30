@@ -67,7 +67,7 @@
         <strong>{% if request.user.is_authenticated %}{{ request.user.get_full_name|default:request.user.username }}{% else %}Anthonela Farms{% endif %}</strong>
         <small>
             {% if request.user.is_authenticated %}
-                Usuario
+                🌟 Administrador
             {% else %}
                 Gestor de finca
             {% endif %}
