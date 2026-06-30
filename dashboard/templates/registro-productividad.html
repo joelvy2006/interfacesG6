@@ -73,6 +73,7 @@
                         <th>Responsable</th>
                         <th>Embonches</th>
                         <th>Observaciones</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -83,10 +84,15 @@
                             <td>{{ item.responsable }}</td>
                             <td>{{ item.embonches }}</td>
                             <td>{{ item.observaciones|default:'—' }}</td>
+                            <td>
+                                <a href="{% url 'ver_productividad' item.id %}" class="btn btn-sm btn-outline-secondary me-1">Ver</a>
+                                <a href="{% url 'editar_productividad' item.id %}" class="btn btn-sm btn-outline-primary me-1">Editar</a>
+                                <a href="{% url 'eliminar_productividad' item.id %}" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                            </td>
                         </tr>
                     {% empty %}
                         <tr>
-                            <td colspan="5" class="text-center text-muted">No hay registros de productividad aún.</td>
+                            <td colspan="6" class="text-center text-muted">No hay registros de productividad aún.</td>
                         </tr>
                     {% endfor %}
                 </tbody>
