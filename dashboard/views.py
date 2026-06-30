@@ -2,8 +2,6 @@
 
 def inicio(request):
     return render(request, 'index.html')
-HEAD
-
 
 def servicios(request):
     return render(request, 'servicios.html')
