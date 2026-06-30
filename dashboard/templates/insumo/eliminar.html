@@ -7,7 +7,7 @@
         <p>¿Seguro que deseas eliminar el insumo <strong>{{ insumo.nombre_insu }}</strong>?</p>
         <form method="post">
             {% csrf_token %}
-            <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+            <button type="submit" class="btn btn-success">Sí, eliminar</button>
             <a href="{% url 'listar_insumos' %}" class="btn btn-secondary">Cancelar</a>
         </form>
     </div>
