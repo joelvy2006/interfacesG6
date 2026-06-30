@@ -12,5 +12,11 @@ db.sqlite3
 # Variables de entorno
 .env
 
+db.sqlite3
+venv/
+__pycache__/
+.env
+.vscode/
+
 # VS Code
 .vscode/
