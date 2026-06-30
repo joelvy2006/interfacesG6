@@ -14,7 +14,7 @@
     </div>
     <div class="heading-actions">
         <a href="/registro-productividad/" class="btn btn-primary">Registrar embonches</a>
-        <a href="#tienda" class="btn btn-success">Ir a la tienda</a>
+        <a href="{% url 'tienda' %}" class="btn btn-success">Ir a la tienda</a>
         <a href="/reportes/" class="btn btn-light">Ver reportes</a>
         <a href="/configuracion/" class="btn btn-light">Objetivos</a>
     </div>
@@ -51,20 +51,6 @@
     </div>
 </section>
 
-<section class="panel mt-3" id="tienda">
-    <div class="panel-header">
-        <div>
-            <p class="eyebrow mb-1">Tienda</p>
-            <h2 class="h5 mb-1">Formulario de compras</h2>
-            <p class="text-muted mb-0">Registra rápidamente los productos que deseas comprar desde el panel del dashboard.</p>
-        </div>
-        <a class="btn btn-success btn-sm" href="{% url 'tienda' %}">Abrir tienda</a>
-    </div>
-    <div class="border rounded p-3 mt-3">
-        <p class="mb-0 text-muted">La tienda ahora tiene su propio apartado independiente. Usa este botón para abrir el espacio de tienda separado del panel principal.</p>
-    </div>
-</section>
-
 <section class="panel mt-3">
     <div class="panel-header">
         <div>
@@ -72,7 +58,7 @@
             <h2 class="h5 mb-1">Órdenes recibidas</h2>
             <p class="text-muted mb-0">Sigue el estado de los pedidos que llegan desde la tienda pública.</p>
         </div>
-        <a class="btn btn-outline-secondary btn-sm" href="#tienda">Ver tienda</a>
+        <a class="btn btn-outline-secondary btn-sm" href="{% url 'tienda' %}">Ver tienda</a>
     </div>
     <div class="table-responsive">
         <table class="table table-hover align-middle mb-0">

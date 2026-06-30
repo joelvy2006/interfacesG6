@@ -94,28 +94,39 @@
         </div>
     </div>
     <div class="col-12 col-xl-4">
-        <div class="panel h-100 p-3">
+        <section class="panel h-100 p-3">
             <div class="panel-header">
                 <div>
                     <p class="eyebrow mb-1">Carrito</p>
-                    <h2 class="h5 mb-1">Resumen de tu pedido</h2>
+                    <h2 class="h5 mb-1">Tu pedido</h2>
+                    <p class="text-muted small mb-0">Confirma la lista de productos antes de enviar el pedido.</p>
                 </div>
             </div>
-            <div class="border rounded p-3 h-100 d-flex flex-column">
-                <div id="cart-items" class="mb-3 flex-grow-1"></div>
-                <div class="mb-3">
+            <div class="d-flex flex-column h-100 gap-3">
+                <div class="border rounded-3 p-3 bg-white shadow-sm">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div>
+                            <h3 class="h6 mb-1">Elementos en el carrito</h3>
+                            <p class="text-muted small mb-0">Agrega productos desde la tienda para verlos aquí.</p>
+                        </div>
+                        <button class="btn btn-outline-secondary btn-sm" type="button" id="clear-cart">Vaciar</button>
+                    </div>
+                    <div id="cart-items" class="cart-panel">
+                        <p class="text-muted small mb-0">Tu carrito está vacío.</p>
+                    </div>
+                </div>
+                <div class="border rounded-3 p-3 bg-white shadow-sm">
                     <label class="form-label">Nombre del comprador</label>
                     <input type="text" id="buyer-name" class="form-control" placeholder="Tu nombre o correo" />
                 </div>
-                <div class="d-flex justify-content-between fw-semibold mb-3">
-                    <span>Total</span>
-                    <span id="cart-total">$0</span>
+                <div class="border rounded-3 p-3 bg-white shadow-sm d-flex justify-content-between align-items-center">
+                    <span class="fw-semibold">Total</span>
+                    <span id="cart-total" class="fw-bold">$0</span>
                 </div>
-                <button class="btn btn-success mb-2" type="button" id="checkout-order">Finalizar compra</button>
-                <button class="btn btn-outline-secondary" type="button" id="clear-cart">Vaciar carrito</button>
-                <div id="order-message" class="small mt-3"></div>
+                <button class="btn btn-success btn-lg" type="button" id="checkout-order">Finalizar compra</button>
+                <div id="order-message" class="small text-danger"></div>
             </div>
-        </div>
+        </section>
     </div>
 </section>
 
