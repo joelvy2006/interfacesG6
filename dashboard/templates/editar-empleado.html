@@ -33,6 +33,10 @@
                 <label class="form-label">Teléfono</label>
                 <input type="text" name="empleado_telefono" class="form-control" value="{{ empleado.telefono }}" placeholder="Teléfono o contacto">
             </div>
+            <div class="col-12">
+                <label class="form-label">Direccion</label>
+                <input type="text" name="empleado_direccion" class="form-control" value="{{ empleado.direccion }}" placeholder="Dirección completa">
+            </div>
             <div class="col-12 d-flex flex-wrap gap-2 align-items-center">
                 <button type="submit" class="btn btn-success">Guardar cambios</button>
                 <a href="{% url 'personal' %}" class="btn btn-secondary">Cancelar</a>

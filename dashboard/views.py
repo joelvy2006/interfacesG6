@@ -251,12 +251,14 @@ def editar_empleado(request, id):
         puesto = request.POST.get('empleado_puesto')
         correo = request.POST.get('empleado_correo')
         telefono = request.POST.get('empleado_telefono')
+        direccion = request.POST.get('empleado_direccion')
 
         if nombre:
             empleado.nombre = nombre
             empleado.puesto = puesto or ''
             empleado.correo = correo or ''
             empleado.telefono = telefono or ''
+            empleado.direccion = direccion or ''
             empleado.save()
             return redirect('personal')
 

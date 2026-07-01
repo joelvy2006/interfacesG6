@@ -54,6 +54,7 @@ class Empleado(models.Model):
     puesto = models.CharField(max_length=80, blank=True)
     correo = models.EmailField(blank=True)
     telefono = models.CharField(max_length=20, blank=True)
+    direccion = models.CharField(max_length=200, blank=True)
     activo = models.BooleanField(default=True)
     fecha_registro = models.DateTimeField(auto_now_add=True)
 

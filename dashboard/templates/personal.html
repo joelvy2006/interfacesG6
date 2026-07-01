@@ -36,6 +36,10 @@
                         <label class="form-label">Teléfono</label>
                         <input type="text" name="empleado_telefono" class="form-control" placeholder="Teléfono o contacto">
                     </div>
+                    <div class="col-12">
+                        <label class="form-label">Dirección</label>
+                        <input type="text" name="empleado_direccion" class="form-control" placeholder="Dirección completa">
+                    </div>
                     <div class="col-12 d-flex flex-wrap gap-2 align-items-center">
                         <button type="submit" class="btn btn-success">Agregar empleado</button>
                         <a href="{% url 'export_empleados_excel' %}" class="btn btn-outline-success">Exportar Excel</a>
