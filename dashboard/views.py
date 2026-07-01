@@ -95,7 +95,12 @@ def eliminar_pedido(request, id):
     pedido = get_object_or_404(Pedido, id=id)
     pedido.delete()
     messages.success(request, f'Pedido {pedido.producto} eliminado correctamente.')
-    return redirect(request.META.get('HTTP_REFERER', 'dashboard'))
+    referer = request.META.get('HTTP_REFERER', '')
+    if referer:
+        if '#' in referer:
+            referer = referer.split('#')[0]
+        return redirect(f'{referer}#pedidos')
+    return redirect('dashboard')
 
 
 def login_view(request):
