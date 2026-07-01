@@ -90,6 +90,14 @@ def cambiar_estado_pedido(request, id, estado):
     return redirect(request.META.get('HTTP_REFERER', 'dashboard'))
 
 
+@login_required(login_url='login')
+def eliminar_pedido(request, id):
+    pedido = get_object_or_404(Pedido, id=id)
+    pedido.delete()
+    messages.success(request, f'Pedido {pedido.producto} eliminado correctamente.')
+    return redirect(request.META.get('HTTP_REFERER', 'dashboard'))
+
+
 def login_view(request):
     mensaje = ''
     if request.user.is_authenticated:

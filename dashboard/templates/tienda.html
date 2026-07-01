@@ -176,9 +176,11 @@
                                 <td class="text-nowrap">
                                     {% if pedido.estado == 'espera' %}
                                         <a class="btn btn-sm btn-outline-primary me-1" href="{% url 'cambiar_estado_pedido' pedido.id 'enviado' %}">Enviar</a>
-                                        <a class="btn btn-sm btn-outline-success" href="{% url 'cambiar_estado_pedido' pedido.id 'entregado' %}">Entregar</a>
+                                        <a class="btn btn-sm btn-outline-success me-1" href="{% url 'cambiar_estado_pedido' pedido.id 'entregado' %}">Entregar</a>
+                                        <a class="btn btn-sm btn-outline-danger" href="{% url 'eliminar_pedido' pedido.id %}">Eliminar</a>
                                     {% elif pedido.estado == 'enviado' %}
-                                        <a class="btn btn-sm btn-outline-success" href="{% url 'cambiar_estado_pedido' pedido.id 'entregado' %}">Entregar</a>
+                                        <a class="btn btn-sm btn-outline-success me-1" href="{% url 'cambiar_estado_pedido' pedido.id 'entregado' %}">Entregar</a>
+                                        <a class="btn btn-sm btn-outline-danger" href="{% url 'eliminar_pedido' pedido.id %}">Eliminar</a>
                                     {% else %}
                                         <span class="text-muted small">Completado</span>
                                     {% endif %}
