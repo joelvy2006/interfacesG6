@@ -158,3 +158,19 @@ class Pedido(models.Model):
 
     def __str__(self):
         return f"{self.producto} x{self.cantidad} - {self.comprador or 'Anónimo'}"
+
+
+class Cliente(models.Model):
+    id_cliente = models.AutoField(primary_key=True)
+    nombre = models.CharField(max_length=100)
+    apellido = models.CharField(max_length=100)
+    email = models.EmailField(unique=True)
+    telefono = models.CharField(max_length=20, blank=True, null=True)
+    direccion = models.CharField(max_length=200, blank=True, null=True)
+    estado = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f"{self.nombre} {self.apellido}"
+
+    class Meta:
+        db_table = 'cliente'

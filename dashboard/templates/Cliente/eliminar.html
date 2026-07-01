@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Eliminar cliente | Anthonela Farms{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <h4 class="mb-3">Eliminar cliente</h4>
+        <p>¿Seguro que deseas eliminar al cliente <strong>{{ cliente.nombre }} {{ cliente.apellido }}</strong>?</p>
+
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-success">Sí, eliminar</button>
+            <a href="{% url 'listar_clientes' %}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

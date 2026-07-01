@@ -9,8 +9,8 @@ from django.db.models import Sum
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 
-from .forms import CategoriaForm, InsumoForm
-from .models import RegistroCosecha, RegistroProductividad, Asistencia, Empleado, Categoria, Insumo, Proveedor, Pedido
+from .forms import CategoriaForm, InsumoForm, ClienteForm
+from .models import RegistroCosecha, RegistroProductividad, Asistencia, Empleado, Categoria, Insumo, Proveedor, Pedido, Cliente
 
 from datetime import datetime
 import json
@@ -910,3 +910,58 @@ def eliminar_insumo(request, pk):
         messages.success(request, 'Insumo eliminado exitosamente')
         return redirect('listar_insumos')
     return render(request, 'insumo/eliminar.html', {'insumo': insumo})
+
+# ============= CRUD CLIENTE =============
+@login_required(login_url='login')
+def listar_clientes(request):
+    clientes = Cliente.objects.all()
+    return render(request, 'cliente/listar.html', {'clientes': clientes})
+
+@login_required(login_url='login')
+def crear_cliente(request):
+    if request.method == 'POST':
+        form = ClienteForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Cliente creado exitosamente')
+            return redirect('listar_clientes')
+    else:
+        form = ClienteForm()
+
+    return render(request, 'cliente/crear.html', {
+        'form': form,
+        'titulo': 'Crear Cliente'
+    })
+
+@login_required(login_url='login')
+def editar_cliente(request, pk):
+    cliente = get_object_or_404(Cliente, id_cliente=pk)
+
+    if request.method == 'POST':
+        form = ClienteForm(request.POST, instance=cliente)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Cliente actualizado exitosamente')
+            return redirect('listar_clientes')
+    else:
+        form = ClienteForm(instance=cliente)
+
+    return render(request, 'cliente/editar.html', {
+        'form': form,
+        'cliente': cliente,
+        'titulo': 'Editar Cliente'
+    })
+
+@login_required(login_url='login')
+def eliminar_cliente(request, pk):
+    cliente = get_object_or_404(Cliente, id_cliente=pk)
+
+    if request.method == 'POST':
+        cliente.delete()
+        messages.success(request, 'Cliente eliminado exitosamente')
+        return redirect('listar_clientes')
+
+    return render(request, 'cliente/eliminar.html', {
+        'cliente': cliente
+    })
+

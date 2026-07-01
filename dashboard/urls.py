@@ -53,4 +53,9 @@ urlpatterns = [
     path('insumos/<int:pk>/eliminar/', views.eliminar_insumo, name='eliminar_insumo'),
     path('dashboard/', views.dashboard, name='dashboard'),
     path('tienda/', views.tienda, name='tienda'),
+
+    path('clientes/', views.listar_clientes, name='listar_clientes'),
+path('clientes/nuevo/', views.crear_cliente, name='crear_cliente'),
+path('clientes/editar/<int:pk>/', views.editar_cliente, name='editar_cliente'),
+path('clientes/eliminar/<int:pk>/', views.eliminar_cliente, name='eliminar_cliente'),
 ]

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Categoria, Insumo, Proveedor
+from .models import Categoria, Insumo, Proveedor, Cliente
 
 
 class CategoriaForm(forms.ModelForm):
@@ -24,4 +24,18 @@ class InsumoForm(forms.ModelForm):
             'proveedor': forms.Select(attrs={'class': 'form-control'}),
             'categoria': forms.Select(attrs={'class': 'form-control'}),
             'estado_insu': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+        }
+
+class ClienteForm(forms.ModelForm):
+    class Meta:
+        model = Cliente
+        fields = ['nombre', 'apellido', 'email', 'telefono', 'direccion', 'estado']
+
+        widgets = {
+            'nombre': forms.TextInput(attrs={'class': 'form-control'}),
+            'apellido': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+            'telefono': forms.TextInput(attrs={'class': 'form-control'}),
+            'direccion': forms.TextInput(attrs={'class': 'form-control'}),
+            'estado': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
         }
