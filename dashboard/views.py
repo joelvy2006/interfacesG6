@@ -5,21 +5,16 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
-from .forms import CategoriaForm, InsumoForm
-from .models import RegistroCosecha, RegistroProductividad, Asistencia, Empleado, Categoria, Insumo
-
 from django.db.models import Sum
-
-from .models import RegistroCosecha, RegistroProductividad, Asistencia, Empleado
-
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
+
+from .forms import CategoriaForm, InsumoForm
 from .models import RegistroCosecha, RegistroProductividad, Asistencia, Empleado, Categoria, Insumo, Proveedor, Pedido
 
 from datetime import datetime
 import json
 from io import BytesIO
-from .forms import CategoriaForm, InsumoForm
 import openpyxl
 from reportlab.lib.pagesizes import letter
 from reportlab.lib import colors
@@ -777,92 +772,6 @@ def crear_usuario(request):
 
 
 @login_required(login_url='login')
-def listar_categorias(request):
-    categorias = Categoria.objects.all().order_by('nombre_cat')
-    return render(request, 'categoria/listar.html', {'categorias': categorias})
-
-
-@login_required(login_url='login')
-def crear_categoria(request):
-    if request.method == 'POST':
-        form = CategoriaForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Categoría creada correctamente.')
-            return redirect('listar_categorias')
-    else:
-        form = CategoriaForm()
-    return render(request, 'categoria/crear.html', {'form': form})
-
-
-@login_required(login_url='login')
-def editar_categoria(request, pk):
-    categoria = get_object_or_404(Categoria, pk=pk)
-    if request.method == 'POST':
-        form = CategoriaForm(request.POST, instance=categoria)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Categoría actualizada correctamente.')
-            return redirect('listar_categorias')
-    else:
-        form = CategoriaForm(instance=categoria)
-    return render(request, 'categoria/editar.html', {'form': form, 'categoria': categoria})
-
-
-@login_required(login_url='login')
-def eliminar_categoria(request, pk):
-    categoria = get_object_or_404(Categoria, pk=pk)
-    if request.method == 'POST':
-        categoria.delete()
-        messages.success(request, 'Categoría eliminada correctamente.')
-        return redirect('listar_categorias')
-    return render(request, 'categoria/eliminar.html', {'categoria': categoria})
-
-
-@login_required(login_url='login')
-def listar_insumos(request):
-    insumos = Insumo.objects.select_related('categoria').all().order_by('nombre_insu')
-    return render(request, 'insumo/listar.html', {'insumos': insumos})
-
-
-@login_required(login_url='login')
-def crear_insumo(request):
-    if request.method == 'POST':
-        form = InsumoForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Insumo creado correctamente.')
-            return redirect('listar_insumos')
-    else:
-        form = InsumoForm()
-    return render(request, 'insumo/crear.html', {'form': form})
-
-
-@login_required(login_url='login')
-def editar_insumo(request, pk):
-    insumo = get_object_or_404(Insumo, pk=pk)
-    if request.method == 'POST':
-        form = InsumoForm(request.POST, instance=insumo)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Insumo actualizado correctamente.')
-            return redirect('listar_insumos')
-    else:
-        form = InsumoForm(instance=insumo)
-    return render(request, 'insumo/editar.html', {'form': form, 'insumo': insumo})
-
-
-@login_required(login_url='login')
-def eliminar_insumo(request, pk):
-    insumo = get_object_or_404(Insumo, pk=pk)
-    if request.method == 'POST':
-        insumo.delete()
-        messages.success(request, 'Insumo eliminado correctamente.')
-        return redirect('listar_insumos')
-    return render(request, 'insumo/eliminar.html', {'insumo': insumo})
-
-
-@login_required(login_url='login')
 def dashboard(request):
     registros_productividad = RegistroProductividad.objects.all()
     registros_cosecha = RegistroCosecha.objects.all()
@@ -921,9 +830,9 @@ def dashboard(request):
 # ============= CRUD CATEGORÍA =============
 
 @login_required(login_url='login')
-def lista_categorias(request):
+def listar_categorias(request):
     categorias = Categoria.objects.all()
-    return render(request, 'categorias/lista.html', {'categorias': categorias})
+    return render(request, 'categoria/listar.html', {'categorias': categorias})
 
 @login_required(login_url='login')
 def crear_categoria(request):
@@ -932,39 +841,39 @@ def crear_categoria(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Categoría creada exitosamente')
-            return redirect('lista_categorias')
+            return redirect('listar_categorias')
     else:
         form = CategoriaForm()
-    return render(request, 'categorias/form.html', {'form': form, 'titulo': 'Crear Categoría'})
+    return render(request, 'categoria/crear.html', {'form': form, 'titulo': 'Crear Categoría'})
 
 @login_required(login_url='login')
-def editar_categoria(request, id_cat):
-    categoria = get_object_or_404(Categoria, id_cat=id_cat)
+def editar_categoria(request, pk):
+    categoria = get_object_or_404(Categoria, id_cat=pk)
     if request.method == 'POST':
         form = CategoriaForm(request.POST, instance=categoria)
         if form.is_valid():
             form.save()
             messages.success(request, 'Categoría actualizada exitosamente')
-            return redirect('lista_categorias')
+            return redirect('listar_categorias')
     else:
         form = CategoriaForm(instance=categoria)
-    return render(request, 'categorias/form.html', {'form': form, 'titulo': 'Editar Categoría'})
+    return render(request, 'categoria/editar.html', {'form': form, 'categoria': categoria, 'titulo': 'Editar Categoría'})
 
 @login_required(login_url='login')
-def eliminar_categoria(request, id_cat):
-    categoria = get_object_or_404(Categoria, id_cat=id_cat)
+def eliminar_categoria(request, pk):
+    categoria = get_object_or_404(Categoria, id_cat=pk)
     if request.method == 'POST':
         categoria.delete()
         messages.success(request, 'Categoría eliminada exitosamente')
-        return redirect('lista_categorias')
-    return render(request, 'categorias/confirmar_eliminar.html', {'objeto': categoria})
+        return redirect('listar_categorias')
+    return render(request, 'categoria/eliminar.html', {'categoria': categoria})
 
 # ============= CRUD INSUMO =============
 
 @login_required(login_url='login')
-def lista_insumos(request):
+def listar_insumos(request):
     insumos = Insumo.objects.select_related('categoria', 'proveedor').all()
-    return render(request, 'insumos/lista.html', {'insumos': insumos})
+    return render(request, 'insumo/listar.html', {'insumos': insumos})
 
 @login_required(login_url='login')
 def crear_insumo(request):
@@ -973,29 +882,29 @@ def crear_insumo(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Insumo creado exitosamente')
-            return redirect('lista_insumos')
+            return redirect('listar_insumos')
     else:
         form = InsumoForm()
-    return render(request, 'insumos/form.html', {'form': form, 'titulo': 'Crear Insumo'})
+    return render(request, 'insumo/crear.html', {'form': form, 'titulo': 'Crear Insumo'})
 
 @login_required(login_url='login')
-def editar_insumo(request, id_insu):
-    insumo = get_object_or_404(Insumo, id_insu=id_insu)
+def editar_insumo(request, pk):
+    insumo = get_object_or_404(Insumo, id_insu=pk)
     if request.method == 'POST':
         form = InsumoForm(request.POST, instance=insumo)
         if form.is_valid():
             form.save()
             messages.success(request, 'Insumo actualizado exitosamente')
-            return redirect('lista_insumos')
+            return redirect('listar_insumos')
     else:
         form = InsumoForm(instance=insumo)
-    return render(request, 'insumos/form.html', {'form': form, 'titulo': 'Editar Insumo'})
+    return render(request, 'insumo/editar.html', {'form': form, 'insumo': insumo, 'titulo': 'Editar Insumo'})
 
 @login_required(login_url='login')
-def eliminar_insumo(request, id_insu):
-    insumo = get_object_or_404(Insumo, id_insu=id_insu)
+def eliminar_insumo(request, pk):
+    insumo = get_object_or_404(Insumo, id_insu=pk)
     if request.method == 'POST':
         insumo.delete()
         messages.success(request, 'Insumo eliminado exitosamente')
-        return redirect('lista_insumos')
-    return render(request, 'insumos/confirmar_eliminar.html', {'objeto': insumo})
+        return redirect('listar_insumos')
+    return render(request, 'insumo/eliminar.html', {'insumo': insumo})
