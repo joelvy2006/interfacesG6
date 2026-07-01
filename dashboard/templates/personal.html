@@ -130,7 +130,7 @@
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Acciones empleado">
                                             <a href="{% url 'editar_empleado' empleado.id %}" class="btn btn-sm btn-outline-primary">Editar</a>
-                                            <a href="{% url 'eliminar_empleado' empleado.id %}" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                                            <a href="{% url 'eliminar_empleado' empleado.id %}" class="btn btn-sm btn-outline-danger btn-delete-ajax">Eliminar</a>
                                         </div>
                                     </td>
                                 </tr>
@@ -186,7 +186,7 @@
                                             </div>
                                             <div class="btn-group" role="group" aria-label="Acciones asistencia">
                                                 <a href="{% url 'editar_asistencia' item.id %}" class="btn btn-sm btn-outline-primary">Editar</a>
-                                                <a href="{% url 'eliminar_asistencia' item.id %}" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                                                <a href="{% url 'eliminar_asistencia' item.id %}" class="btn btn-sm btn-outline-danger btn-delete-ajax">Eliminar</a>
                                             </div>
                                         </div>
                                     </td>

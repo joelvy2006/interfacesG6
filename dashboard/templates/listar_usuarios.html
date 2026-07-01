@@ -70,7 +70,7 @@
                                         {% if usuario.is_active %}Desactivar{% else %}Activar{% endif %}
                                     </button>
                                 </form>
-                                <form method="post" action="{% url 'eliminar_usuario' usuario.id %}" class="d-inline" onsubmit="return confirm('¿Seguro que deseas eliminar este usuario?');">
+                                <form method="post" action="{% url 'eliminar_usuario' usuario.id %}" class="ajax-delete-form d-inline" onsubmit="return confirm('¿Seguro que deseas eliminar este usuario?');">
                                     {% csrf_token %}
                                     <button type="submit" class="btn btn-sm btn-outline-danger">Eliminar</button>
                                 </form>

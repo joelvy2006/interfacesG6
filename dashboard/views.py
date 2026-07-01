@@ -236,6 +236,8 @@ def personal(request):
 def eliminar_empleado(request, id):
     empleado = get_object_or_404(Empleado, id=id)
     empleado.delete()
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        return JsonResponse({'success': True})
     return redirect('personal')
 
 @login_required(login_url='login')
@@ -261,6 +263,8 @@ def editar_empleado(request, id):
 def eliminar_asistencia(request, id):
     asistencia = get_object_or_404(Asistencia, id=id)
     asistencia.delete()
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        return JsonResponse({'success': True})
     return redirect('personal')
 
 @login_required(login_url='login')
@@ -581,6 +585,8 @@ def editar_productividad(request, id):
 def eliminar_productividad(request, id):
     registro = get_object_or_404(RegistroProductividad, id=id)
     registro.delete()
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        return JsonResponse({'success': True})
     messages.success(request, 'Registro de productividad eliminado correctamente.')
     return redirect('registro_productividad')
 
@@ -638,6 +644,8 @@ def editar_cosecha(request, id):
 def eliminar_cosecha(request, id):
     registro = get_object_or_404(RegistroCosecha, id=id)
     registro.delete()
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        return JsonResponse({'success': True})
     return redirect('registro_cosecha')
 
 
@@ -723,6 +731,8 @@ def eliminar_usuario(request, id):
     if request.method == 'POST':
         nombre = usuario.get_full_name() or usuario.username
         usuario.delete()
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            return JsonResponse({'success': True})
         messages.success(request, f'Usuario "{nombre}" eliminado correctamente.')
 
     return redirect('listar_usuarios')

@@ -87,7 +87,7 @@
                             <td>
                                 <a href="{% url 'ver_productividad' item.id %}" class="btn btn-sm btn-outline-secondary me-1">Ver</a>
                                 <a href="{% url 'editar_productividad' item.id %}" class="btn btn-sm btn-outline-primary me-1">Editar</a>
-                                <a href="{% url 'eliminar_productividad' item.id %}" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                                <a href="{% url 'eliminar_productividad' item.id %}" class="btn btn-sm btn-outline-danger btn-delete-ajax">Eliminar</a>
                             </td>
                         </tr>
                     {% empty %}
