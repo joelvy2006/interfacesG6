@@ -4,44 +4,46 @@
         <a class="brand-mark" href="{% url 'dashboard' %}" aria-label="Anthonela Farms dashboard">
             <span class="brand-icon"><i class="bi bi-flower1" aria-hidden="true"></i></span>
             <span class="brand-copy">
-                <span class="brand-title">Anthonela Farms</span>
-                <span class="brand-subtitle">Administración de Granjas</span>
+                <span class="brand-title">ANTHONELA FARMS</span>
+                <span class="brand-subtitle">🌱 Gestión Agrícola Integral</span>
             </span>
         </a>
     </div>
+
     <nav class="sidebar-nav">
-        <a class="nav-link active" href="{% url 'dashboard' %}" aria-current="page">
-            <span class="nav-icon"><i class="bi bi-speedometer2" aria-hidden="true"></i></span>
-            <span class="nav-text">Panel Principal</span>
+        {% with current_url=request.resolver_match.url_name %}
+        <a class="nav-link {% if current_url == 'dashboard' %}active{% endif %}" href="{% url 'dashboard' %}" {% if current_url == 'dashboard' %}aria-current="page"{% endif %}>
+            <span class="nav-icon text-success"><i class="bi bi-speedometer2" aria-hidden="true"></i></span>
+            <span class="nav-text">Inicio</span>
         </a>
-        <a class="nav-link" href="/personal/">
+        <a class="nav-link {% if current_url == 'personal' %}active{% endif %}" href="{% url 'personal' %}">
             <span class="nav-icon"><i class="bi bi-people" aria-hidden="true"></i></span>
             <span class="nav-text">Personal</span>
         </a>
-        <a class="nav-link" href="/listar-usuarios/">
+        <a class="nav-link {% if current_url == 'listar_usuarios' or current_url == 'crear_usuario' or current_url == 'editar_usuario' or current_url == 'cambiar_estado_usuario' or current_url == 'eliminar_usuario' %}active{% endif %}" href="{% url 'listar_usuarios' %}">
             <span class="nav-icon"><i class="bi bi-person-lines-fill" aria-hidden="true"></i></span>
             <span class="nav-text">Usuarios</span>
         </a>
-        <a class="nav-link" href="/registro-cosecha/">
+        <a class="nav-link {% if current_url == 'registro_cosecha' or current_url == 'editar_cosecha' %}active{% endif %}" href="{% url 'registro_cosecha' %}">
             <span class="nav-icon"><i class="bi bi-bar-chart-line" aria-hidden="true"></i></span>
             <span class="nav-text">Registro de Cosecha</span>
         </a>
-        <a class="nav-link" href="/registro-productividad/">
+        <a class="nav-link {% if current_url == 'registro_productividad' or current_url == 'editar_productividad' or current_url == 'ver_productividad' %}active{% endif %}" href="{% url 'registro_productividad' %}">
             <span class="nav-icon"><i class="bi bi-graph-up"></i></span>
             <span class="nav-text">Registro de Productividad</span>
         </a>
-        <a class="nav-link" href="{% url 'dashboard' %}#tienda">
+        <a class="nav-link {% if current_url == 'tienda' %}active{% endif %}" href="{% url 'tienda' %}">
             <span class="nav-icon"><i class="bi bi-basket3" aria-hidden="true"></i></span>
             <span class="nav-text">Tienda</span>
         </a>
-        <a class="nav-link" href="/clasificacion-calidad/">
+        <a class="nav-link {% if current_url == 'clasificacion_calidad' %}active{% endif %}" href="{% url 'clasificacion_calidad' %}">
             <span class="nav-icon"><i class="bi bi-award" aria-hidden="true"></i></span>
             <span class="nav-text">Clasificación de Calidad</span>
         </a>
-        <a class="nav-link" href="/inventario/">
+        <a class="nav-link {% if current_url == 'inventario' %}active{% endif %}" href="{% url 'inventario' %}">
             <span class="nav-icon"><i class="bi bi-box-seam" aria-hidden="true"></i></span>
             <span class="nav-text">Inventario</span>
-        </a>
+
         <a class="nav-link" href="{% url 'listar_categorias' %}">
             <span class="nav-icon"><i class="bi bi-tags" aria-hidden="true"></i></span>
             <span class="nav-text">Categorías</span>
@@ -51,30 +53,32 @@
             <span class="nav-text">Insumos</span>
         </a>
         <a class="nav-link" href="/reportes/">
+        <a class="nav-link {% if current_url == 'reportes' %}active{% endif %}" href="{% url 'reportes' %}">
             <span class="nav-icon"><i class="bi bi-file-earmark-text" aria-hidden="true"></i></span>
             <span class="nav-text">Reportes</span>
         </a>
-        <a class="nav-link" href="/configuracion/">
+        <a class="nav-link {% if current_url == 'configuracion' %}active{% endif %}" href="{% url 'configuracion' %}">
             <span class="nav-icon"><i class="bi bi-gear" aria-hidden="true"></i></span>
             <span class="nav-text">Configuración</span>
         </a>
-        <a class="nav-link" href="/historial/">
+        <a class="nav-link {% if current_url == 'historial' %}active{% endif %}" href="{% url 'historial' %}">
             <span class="nav-icon"><i class="bi bi-clock-history" aria-hidden="true"></i></span>
             <span class="nav-text">Historial de Movimientos</span>
         </a>
-        <a class="nav-link" href="/metricas-empleado/">
+        <a class="nav-link {% if current_url == 'metricas_empleado' %}active{% endif %}" href="{% url 'metricas_empleado' %}">
             <span class="nav-icon"><i class="bi bi-graph-up" aria-hidden="true"></i></span>
             <span class="nav-text">Métricas por Empleado</span>
         </a>
+        {% endwith %}
     </nav>
     <div class="sidebar-user">
         <img class="avatar-img avatar-md sidebar-user-avatar" src="{% static 'public/images/avatar/avatar-1.jpg' %}" width="56" height="56" alt="Anthonela Farms">
         <strong>{% if request.user.is_authenticated %}{{ request.user.get_full_name|default:request.user.username }}{% else %}Anthonela Farms{% endif %}</strong>
         <small>
             {% if request.user.is_authenticated %}
-                Usuario
+                🌟 Administrador
             {% else %}
-                Farms Manager
+                🌾 Gestor de Campo
             {% endif %}
         </small>
     </div>

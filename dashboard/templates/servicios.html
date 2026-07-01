@@ -56,9 +56,17 @@
             </div>
             <p class="text-muted small mb-3">Aquí puedes ver lo que llevas para comprar.</p>
             <div id="cart-items" class="mb-3"></div>
+            <div class="mb-3">
+                <label class="form-label">Nombre del comprador</label>
+                <input type="text" id="buyer-name" class="form-control" placeholder="Tu nombre o correo" />
+            </div>
             <div class="d-flex justify-content-between fw-semibold mb-3">
                 <span>Total</span>
                 <span id="cart-total">$0</span>
+            </div>
+            <div class="d-flex flex-column gap-2">
+                <button class="btn btn-success" type="button" id="checkout-order">Finalizar compra</button>
+                <div id="order-message" class="small"></div>
             </div>
         </section>
 
@@ -231,6 +239,64 @@
         document.getElementById('clear-cart').addEventListener('click', function () {
             Object.keys(cart).forEach(function (key) { delete cart[key]; });
             renderCart();
+            showMessage('Carrito vaciado.', 'text-success');
+        });
+
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+            return '';
+        }
+
+        function showMessage(message, className) {
+            const messageBox = document.getElementById('order-message');
+            messageBox.textContent = message;
+            messageBox.className = className;
+        }
+
+        document.getElementById('checkout-order').addEventListener('click', function () {
+            const items = {};
+            let empty = true;
+
+            Object.keys(cart).forEach(function (itemName) {
+                const price = Number(document.querySelector('[data-name="' + itemName + '"]').getAttribute('data-price'));
+                items[itemName] = {
+                    cantidad: cart[itemName],
+                    precio: price,
+                };
+                empty = false;
+            });
+
+            if (empty) {
+                showMessage('Agrega un producto al carrito antes de finalizar la compra.', 'text-danger');
+                return;
+            }
+
+            const comprador = document.getElementById('buyer-name').value.trim();
+            const payload = { comprador: comprador, items: items };
+
+            fetch("{% url 'crear_pedido' %}", {
+                method: 'POST',
+                credentials: 'same-origin',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken'),
+                },
+                body: JSON.stringify(payload),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        Object.keys(cart).forEach(function (key) { delete cart[key]; });
+                        renderCart();
+                        document.getElementById('buyer-name').value = '';
+                        showMessage('Pedido enviado correctamente. Gracias por comprar.', 'text-success');
+                    } else {
+                        showMessage(data.message || 'Error al enviar el pedido.', 'text-danger');
+                    }
+                })
+                .catch(() => showMessage('No se pudo conectar al servidor. Intenta de nuevo.', 'text-danger'));
         });
     </script>
 </body>

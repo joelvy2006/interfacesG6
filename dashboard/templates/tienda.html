@@ -1,0 +1,289 @@
+{% extends 'base.html' %}
+
+{% block title %}Tienda | Anthonela Farms{% endblock %}
+
+{% block content %}
+<div class="page-heading">
+    <div class="page-heading-copy">
+        <span class="page-icon"><i class="bi bi-basket3" aria-hidden="true"></i></span>
+        <div>
+            <p class="eyebrow mb-1">Tienda</p>
+            <h1 class="h3 mb-1">Compra tus claveles</h1>
+            <p class="text-muted mb-0">Selecciona productos, revisa tu carrito y envía tu pedido directamente desde el panel de tienda.</p>
+        </div>
+    </div>
+</div>
+
+<section class="row g-3">
+    <div class="col-12 col-xl-8">
+        <div class="panel h-100">
+            <div class="panel-header">
+                <div>
+                    <p class="eyebrow mb-1">Productos</p>
+                    <h2 class="h5 mb-0">Catálogo de claveles</h2>
+                </div>
+            </div>
+            <div class="row g-3 p-3">
+                <div class="col-12 col-md-6 col-xl-4">
+                    <article class="product-card p-3 h-100 rounded-3 border">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <span class="badge bg-success-subtle text-success">Premium</span>
+                            <span class="price-tag text-success fw-bold">$180</span>
+                        </div>
+                        <h3 class="h6">Clavel rojo premium</h3>
+                        <p class="text-muted small">Caja de claveles rojos ideal para eventos y arreglos de exportación.</p>
+                        <button type="button" class="btn btn-success btn-sm mt-auto add-to-cart" data-name="Clavel rojo premium" data-price="180">Agregar al carrito</button>
+                    </article>
+                </div>
+                <div class="col-12 col-md-6 col-xl-4">
+                    <article class="product-card p-3 h-100 rounded-3 border">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <span class="badge bg-info-subtle text-info">Exclusivo</span>
+                            <span class="price-tag text-success fw-bold">$240</span>
+                        </div>
+                        <h3 class="h6">Clavel blanco elegante</h3>
+                        <p class="text-muted small">Variedad elegante para bodas y arreglos premium.</p>
+                        <button type="button" class="btn btn-success btn-sm mt-auto add-to-cart" data-name="Clavel blanco elegante" data-price="240">Agregar al carrito</button>
+                    </article>
+                </div>
+                <div class="col-12 col-md-6 col-xl-4">
+                    <article class="product-card p-3 h-100 rounded-3 border">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <span class="badge bg-warning-subtle text-warning">Popular</span>
+                            <span class="price-tag text-success fw-bold">$150</span>
+                        </div>
+                        <h3 class="h6">Clavel rosa artesanal</h3>
+                        <p class="text-muted small">Tonos suaves perfectos para decoraciones delicadas.</p>
+                        <button type="button" class="btn btn-success btn-sm mt-auto add-to-cart" data-name="Clavel rosa artesanal" data-price="150">Agregar al carrito</button>
+                    </article>
+                </div>
+                <div class="col-12 col-md-6 col-xl-4">
+                    <article class="product-card p-3 h-100 rounded-3 border">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <span class="badge bg-primary-subtle text-primary">Local</span>
+                            <span class="price-tag text-success fw-bold">$130</span>
+                        </div>
+                        <h3 class="h6">Clavel nacional rojo</h3>
+                        <p class="text-muted small">Producción nacional con gran color y frescura.</p>
+                        <button type="button" class="btn btn-success btn-sm mt-auto add-to-cart" data-name="Clavel nacional rojo" data-price="130">Agregar al carrito</button>
+                    </article>
+                </div>
+                <div class="col-12 col-md-6 col-xl-4">
+                    <article class="product-card p-3 h-100 rounded-3 border">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <span class="badge bg-secondary-subtle text-secondary">Natural</span>
+                            <span class="price-tag text-success fw-bold">$110</span>
+                        </div>
+                        <h3 class="h6">Clavel nacional amarillo</h3>
+                        <p class="text-muted small">Flores brillantes para ventas directas y ferias.</p>
+                        <button type="button" class="btn btn-success btn-sm mt-auto add-to-cart" data-name="Clavel nacional amarillo" data-price="110">Agregar al carrito</button>
+                    </article>
+                </div>
+                <div class="col-12 col-md-6 col-xl-4">
+                    <article class="product-card p-3 h-100 rounded-3 border">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <span class="badge bg-success-subtle text-success">Recomendado</span>
+                            <span class="price-tag text-success fw-bold">$95</span>
+                        </div>
+                        <h3 class="h6">Clavel nacional mixto</h3>
+                        <p class="text-muted small">Mezcla de colores para pedidos por volumen.</p>
+                        <button type="button" class="btn btn-success btn-sm mt-auto add-to-cart" data-name="Clavel nacional mixto" data-price="95">Agregar al carrito</button>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-xl-4">
+        <section class="panel h-100 p-3">
+            <div class="panel-header">
+                <div>
+                    <p class="eyebrow mb-1">Carrito</p>
+                    <h2 class="h5 mb-1">Tu pedido</h2>
+                    <p class="text-muted small mb-0">Confirma la lista de productos antes de enviar el pedido.</p>
+                </div>
+            </div>
+            <div class="d-flex flex-column h-100 gap-3">
+                <div class="border rounded-3 p-3 bg-white shadow-sm">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div>
+                            <h3 class="h6 mb-1">Elementos en el carrito</h3>
+                            <p class="text-muted small mb-0">Agrega productos desde la tienda para verlos aquí.</p>
+                        </div>
+                        <button class="btn btn-outline-secondary btn-sm" type="button" id="clear-cart">Vaciar</button>
+                    </div>
+                    <div id="cart-items" class="cart-panel">
+                        <p class="text-muted small mb-0">Tu carrito está vacío.</p>
+                    </div>
+                </div>
+                <div class="border rounded-3 p-3 bg-white shadow-sm">
+                    <label class="form-label">Nombre del comprador</label>
+                    <input type="text" id="buyer-name" class="form-control" placeholder="Tu nombre o correo" />
+                </div>
+                <div class="border rounded-3 p-3 bg-white shadow-sm d-flex justify-content-between align-items-center">
+                    <span class="fw-semibold">Total</span>
+                    <span id="cart-total" class="fw-bold">$0</span>
+                </div>
+                <button class="btn btn-success btn-lg" type="button" id="checkout-order">Finalizar compra</button>
+                <div id="order-message" class="small text-danger"></div>
+            </div>
+        </section>
+    </div>
+</section>
+
+<section class="row g-3 mt-4">
+    <div class="col-12">
+        <div class="panel h-100">
+            <div class="panel-header d-flex align-items-center justify-content-between">
+                <div>
+                    <p class="eyebrow mb-1 text-success">PEDIDOS</p>
+                    <h2 class="h5 mb-0">Órdenes recibidas</h2>
+                    <p class="text-muted small mb-0">Sigue el estado de los pedidos que llegan desde la tienda pública.</p>
+                </div>
+                <div>
+                    <a class="btn btn-outline-success btn-sm" href="{% url 'tienda' %}">Ver tienda</a>
+                </div>
+            </div>
+            <div class="table-responsive p-3">
+                <table class="table table-dark table-striped align-middle mb-0">
+                    <thead>
+                        <tr>
+                            <th>COMPRADOR</th>
+                            <th>PRODUCTO</th>
+                            <th>CANTIDAD</th>
+                            <th>TOTAL</th>
+                            <th>ESTADO</th>
+                            <th>FECHA</th>
+                            <th>ACCIONES</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for pedido in pedidos %}
+                            <tr>
+                                <td>{{ pedido.comprador|default:'Anónimo' }}</td>
+                                <td>{{ pedido.producto }}</td>
+                                <td>{{ pedido.cantidad }}</td>
+                                <td>${{ pedido.total|floatformat:2 }}</td>
+                                <td>
+                                    {% if pedido.estado == 'espera' %}
+                                        <span class="badge bg-warning text-dark">{{ pedido.get_estado_display }}</span>
+                                    {% elif pedido.estado == 'enviado' %}
+                                        <span class="badge bg-info text-dark">{{ pedido.get_estado_display }}</span>
+                                    {% else %}
+                                        <span class="badge bg-success">{{ pedido.get_estado_display }}</span>
+                                    {% endif %}
+                                </td>
+                                <td>{{ pedido.fecha_creacion|date:'d/m/Y H:i' }}</td>
+                                <td class="text-nowrap">
+                                    {% if pedido.estado == 'espera' %}
+                                        <a class="btn btn-sm btn-outline-primary me-1" href="{% url 'cambiar_estado_pedido' pedido.id 'enviado' %}">Enviar</a>
+                                        <a class="btn btn-sm btn-outline-success" href="{% url 'cambiar_estado_pedido' pedido.id 'entregado' %}">Entregar</a>
+                                    {% elif pedido.estado == 'enviado' %}
+                                        <a class="btn btn-sm btn-outline-success" href="{% url 'cambiar_estado_pedido' pedido.id 'entregado' %}">Entregar</a>
+                                    {% else %}
+                                        <span class="text-muted small">Completado</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="7" class="text-center text-muted">No hay pedidos recibidos.</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    const cartItems = document.getElementById('cart-items');
+    const cartTotal = document.getElementById('cart-total');
+    const cart = {};
+
+    function renderCart() {
+        let items = '';
+        let total = 0;
+
+        Object.keys(cart).forEach(function (itemName) {
+            const price = Number(document.querySelector('[data-name="' + itemName + '"]').getAttribute('data-price'));
+            const qty = cart[itemName];
+            total += qty * price;
+            items += '<div class="d-flex justify-content-between align-items-center mb-2"><div><strong>' + itemName + '</strong><div class="text-muted small">Cantidad: ' + qty + '</div></div><span>$' + (qty * price) + '</span></div>';
+        });
+
+        cartItems.innerHTML = items || '<p class="text-muted small mb-0">Tu carrito está vacío.</p>';
+        cartTotal.textContent = '$' + total;
+    }
+
+    document.querySelectorAll('.add-to-cart').forEach(function (button) {
+        button.addEventListener('click', function () {
+            const name = button.getAttribute('data-name');
+            cart[name] = (cart[name] || 0) + 1;
+            renderCart();
+        });
+    });
+
+    document.getElementById('clear-cart').addEventListener('click', function () {
+        Object.keys(cart).forEach(function (key) { delete cart[key]; });
+        renderCart();
+        showMessage('Carrito vaciado.', 'text-success');
+    });
+
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+        return '';
+    }
+
+    function showMessage(message, className) {
+        const messageBox = document.getElementById('order-message');
+        messageBox.textContent = message;
+        messageBox.className = className;
+    }
+
+    document.getElementById('checkout-order').addEventListener('click', function () {
+        const items = {};
+        let empty = true;
+
+        Object.keys(cart).forEach(function (itemName) {
+            const price = Number(document.querySelector('[data-name="' + itemName + '"]').getAttribute('data-price'));
+            items[itemName] = { cantidad: cart[itemName], precio: price };
+            empty = false;
+        });
+
+        if (empty) {
+            showMessage('Agrega un producto al carrito antes de finalizar la compra.', 'text-danger');
+            return;
+        }
+
+        const comprador = document.getElementById('buyer-name').value.trim();
+        const payload = { comprador: comprador, items: items };
+
+        fetch('{% url "crear_pedido" %}', {
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken'),
+            },
+            body: JSON.stringify(payload),
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    Object.keys(cart).forEach(function (key) { delete cart[key]; });
+                    renderCart();
+                    document.getElementById('buyer-name').value = '';
+                    showMessage('Pedido enviado correctamente. Gracias por comprar.', 'text-success');
+                } else {
+                    showMessage(data.message || 'Error al enviar el pedido.', 'text-danger');
+                }
+            })
+            .catch(() => showMessage('No se pudo conectar al servidor. Intenta de nuevo.', 'text-danger'));
+    });
+
+    renderCart();
+</script>
+{% endblock %}

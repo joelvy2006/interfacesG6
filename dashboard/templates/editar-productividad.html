@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}Editar Productividad | Anthonela Farms{% endblock %}
+{% block content %}
+<div class="page-heading">
+    <div class="page-heading-copy">
+        <span class="page-icon"><i class="bi bi-pencil-square" aria-hidden="true"></i></span>
+        <div>
+            <p class="eyebrow mb-1">Editar Productividad</p>
+            <h1 class="h3 mb-1">Actualizar registro</h1>
+            <p class="text-muted mb-0">Modifica los datos del registro de productividad.</p>
+        </div>
+    </div>
+</div>
+
+<section class="card mb-4">
+    <div class="card-body">
+        <h6 class="mb-3">Editar Registro de Productividad {{ registro.id }}</h6>
+        <form method="post" class="mt-4">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="fecha" class="form-label">Fecha</label>
+                    <input type="date" class="form-control" id="fecha" name="fecha" value="{{ registro.fecha }}" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="bloque" class="form-label">Bloque</label>
+                    <input type="text" class="form-control" id="bloque" name="bloque" value="{{ registro.bloque }}" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="responsable" class="form-label">Responsable</label>
+                    <input type="text" class="form-control" id="responsable" name="responsable" value="{{ registro.responsable }}" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="embonches" class="form-label">Embonches</label>
+                    <input type="number" class="form-control" id="embonches" name="embonches" value="{{ registro.embonches }}" min="0" step="1" required>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="observaciones" class="form-label">Observaciones</label>
+                <textarea class="form-control" id="observaciones" name="observaciones" rows="3">{{ registro.observaciones }}</textarea>
+            </div>
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-success"><i class="bi bi-check-circle me-2"></i>Guardar Cambios</button>
+                <a href="{% url 'registro_productividad' %}" class="btn btn-secondary"><i class="bi bi-x-circle me-2"></i>Cancelar</a>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}

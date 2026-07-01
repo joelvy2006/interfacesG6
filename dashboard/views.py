@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -9,11 +9,17 @@ from .forms import CategoriaForm, InsumoForm
 from .models import RegistroCosecha, RegistroProductividad, Asistencia, Empleado, Categoria, Insumo
 
 from django.db.models import Sum
+
 from .models import RegistroCosecha, RegistroProductividad, Asistencia, Empleado
 
-from datetime import datetime
-from io import BytesIO
+from django.views.decorators.http import require_POST
+from django.views.decorators.csrf import csrf_exempt
+from .models import RegistroCosecha, RegistroProductividad, Asistencia, Empleado, Categoria, Insumo, Proveedor, Pedido
 
+from datetime import datetime
+import json
+from io import BytesIO
+from .forms import CategoriaForm, InsumoForm
 import openpyxl
 from reportlab.lib.pagesizes import letter
 from reportlab.lib import colors
@@ -24,9 +30,72 @@ from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph
 def inicio(request):
     return render(request, 'index.html')
 
-
 def servicios(request):
     return render(request, 'servicios.html')
+
+
+def tienda(request):
+    pedidos = Pedido.objects.all()
+    return render(request, 'tienda.html', {'pedidos': pedidos})
+
+
+@csrf_exempt
+@require_POST
+def crear_pedido(request):
+    try:
+        data = json.loads(request.body.decode('utf-8'))
+    except json.JSONDecodeError:
+        return JsonResponse({'success': False, 'message': 'Datos de pedido inválidos.'}, status=400)
+
+    comprador = data.get('comprador', '').strip()
+    items = data.get('items', {})
+
+    if not items:
+        return JsonResponse({'success': False, 'message': 'No se encontraron productos en el carrito.'}, status=400)
+
+    if isinstance(items, list):
+        items = {item.get('nombre', ''): item for item in items if item.get('nombre')}
+
+    if not isinstance(items, dict):
+        return JsonResponse({'success': False, 'message': 'Formato de carrito inválido.'}, status=400)
+
+    pedidos_creados = []
+    for nombre, detalle in items.items():
+        try:
+            cantidad = int(detalle.get('cantidad', 0))
+            precio = float(detalle.get('precio', 0))
+        except (TypeError, ValueError):
+            return JsonResponse({'success': False, 'message': f'Cantidad o precio inválido para {nombre}.'}, status=400)
+
+        if cantidad <= 0 or precio <= 0:
+            return JsonResponse({'success': False, 'message': f'Cantidad y precio deben ser mayores que cero para {nombre}.'}, status=400)
+
+        total = round(cantidad * precio, 2)
+        pedido = Pedido.objects.create(
+            comprador=comprador,
+            producto=nombre,
+            cantidad=cantidad,
+            precio_unitario=precio,
+            total=total,
+            estado='espera',
+        )
+        pedidos_creados.append(pedido.id)
+
+    return JsonResponse({'success': True, 'message': 'Pedido registrado correctamente.', 'pedidos': pedidos_creados})
+
+
+@login_required(login_url='login')
+def cambiar_estado_pedido(request, id, estado):
+    pedido = get_object_or_404(Pedido, id=id)
+    estado = estado.lower()
+    estados_validos = dict(Pedido.ESTADO_PEDIDO_CHOICES).keys()
+    if estado not in estados_validos:
+        messages.error(request, 'Estado de pedido inválido.')
+    else:
+        pedido.estado = estado
+        pedido.save()
+        messages.success(request, f'Pedido {pedido.producto} actualizado a {pedido.get_estado_display()}.')
+    return redirect(request.META.get('HTTP_REFERER', 'dashboard'))
 
 
 def login_view(request):
@@ -461,6 +530,60 @@ def registro_productividad(request):
     return render(request, 'registro-productividad.html', {'registros': registros})
 
 
+@login_required(login_url='login')
+def editar_productividad(request, id):
+    registro = get_object_or_404(RegistroProductividad, id=id)
+
+    if request.method == 'POST':
+        fecha_str = request.POST.get('fecha')
+        bloque = request.POST.get('bloque', '').strip()
+        responsable = request.POST.get('responsable', '').strip()
+        embonches = request.POST.get('embonches', '0').strip()
+        observaciones = request.POST.get('observaciones', '').strip()
+
+        if not fecha_str or not bloque or not responsable or not embonches:
+            messages.error(request, 'Completa fecha, bloque, responsable y cantidad de embonches.')
+            return render(request, 'editar-productividad.html', {'registro': registro})
+
+        try:
+            cantidad_int = int(embonches)
+            if cantidad_int < 0:
+                messages.error(request, 'La cantidad de embonches no puede ser negativa.')
+                return render(request, 'editar-productividad.html', {'registro': registro})
+
+            registro.fecha = datetime.strptime(fecha_str, '%Y-%m-%d').date()
+            registro.bloque = bloque
+            registro.responsable = responsable
+            registro.embonches = cantidad_int
+            registro.observaciones = observaciones
+            registro.save()
+            messages.success(request, 'Registro de productividad actualizado correctamente.')
+            return redirect('registro_productividad')
+        except ValueError:
+            messages.error(request, 'La cantidad de embonches debe ser un número válido.')
+            return render(request, 'editar-productividad.html', {'registro': registro})
+        except Exception as e:
+            messages.error(request, 'No se pudo actualizar el registro de productividad.')
+            print(f"Error al actualizar productividad: {e}")
+            return render(request, 'editar-productividad.html', {'registro': registro})
+
+    return render(request, 'editar-productividad.html', {'registro': registro})
+
+
+@login_required(login_url='login')
+def eliminar_productividad(request, id):
+    registro = get_object_or_404(RegistroProductividad, id=id)
+    registro.delete()
+    messages.success(request, 'Registro de productividad eliminado correctamente.')
+    return redirect('registro_productividad')
+
+
+@login_required(login_url='login')
+def ver_productividad(request, id):
+    registro = get_object_or_404(RegistroProductividad, id=id)
+    return render(request, 'detalle-productividad.html', {'registro': registro})
+
+
 def editar_cosecha(request, id):
     registro = get_object_or_404(RegistroCosecha, id=id)
     
@@ -718,6 +841,7 @@ def eliminar_insumo(request, pk):
 def dashboard(request):
     registros_productividad = RegistroProductividad.objects.all()
     registros_cosecha = RegistroCosecha.objects.all()
+    pedidos = Pedido.objects.all()
 
     total_embonches = registros_productividad.aggregate(Sum('embonches'))['embonches__sum'] or 0
     total_cosecha = registros_cosecha.aggregate(Sum('cantidad'))['cantidad__sum'] or 0
@@ -764,6 +888,89 @@ def dashboard(request):
         'total_cosecha': total_cosecha,
         'quality_breakdown': quality_breakdown,
         'top_responsables': top_responsables,
+        'pedidos': pedidos,
     }
 
     return render(request, 'dashboard/index.html', context)
+ 
+# ============= CRUD CATEGORÍA =============
+
+@login_required(login_url='login')
+def lista_categorias(request):
+    categorias = Categoria.objects.all()
+    return render(request, 'categorias/lista.html', {'categorias': categorias})
+
+@login_required(login_url='login')
+def crear_categoria(request):
+    if request.method == 'POST':
+        form = CategoriaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Categoría creada exitosamente')
+            return redirect('lista_categorias')
+    else:
+        form = CategoriaForm()
+    return render(request, 'categorias/form.html', {'form': form, 'titulo': 'Crear Categoría'})
+
+@login_required(login_url='login')
+def editar_categoria(request, id_cat):
+    categoria = get_object_or_404(Categoria, id_cat=id_cat)
+    if request.method == 'POST':
+        form = CategoriaForm(request.POST, instance=categoria)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Categoría actualizada exitosamente')
+            return redirect('lista_categorias')
+    else:
+        form = CategoriaForm(instance=categoria)
+    return render(request, 'categorias/form.html', {'form': form, 'titulo': 'Editar Categoría'})
+
+@login_required(login_url='login')
+def eliminar_categoria(request, id_cat):
+    categoria = get_object_or_404(Categoria, id_cat=id_cat)
+    if request.method == 'POST':
+        categoria.delete()
+        messages.success(request, 'Categoría eliminada exitosamente')
+        return redirect('lista_categorias')
+    return render(request, 'categorias/confirmar_eliminar.html', {'objeto': categoria})
+
+# ============= CRUD INSUMO =============
+
+@login_required(login_url='login')
+def lista_insumos(request):
+    insumos = Insumo.objects.select_related('categoria', 'proveedor').all()
+    return render(request, 'insumos/lista.html', {'insumos': insumos})
+
+@login_required(login_url='login')
+def crear_insumo(request):
+    if request.method == 'POST':
+        form = InsumoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Insumo creado exitosamente')
+            return redirect('lista_insumos')
+    else:
+        form = InsumoForm()
+    return render(request, 'insumos/form.html', {'form': form, 'titulo': 'Crear Insumo'})
+
+@login_required(login_url='login')
+def editar_insumo(request, id_insu):
+    insumo = get_object_or_404(Insumo, id_insu=id_insu)
+    if request.method == 'POST':
+        form = InsumoForm(request.POST, instance=insumo)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Insumo actualizado exitosamente')
+            return redirect('lista_insumos')
+    else:
+        form = InsumoForm(instance=insumo)
+    return render(request, 'insumos/form.html', {'form': form, 'titulo': 'Editar Insumo'})
+
+@login_required(login_url='login')
+def eliminar_insumo(request, id_insu):
+    insumo = get_object_or_404(Insumo, id_insu=id_insu)
+    if request.method == 'POST':
+        insumo.delete()
+        messages.success(request, 'Insumo eliminado exitosamente')
+        return redirect('lista_insumos')
+    return render(request, 'insumos/confirmar_eliminar.html', {'objeto': insumo})
