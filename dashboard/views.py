@@ -94,6 +94,8 @@ def cambiar_estado_pedido(request, id, estado):
 def eliminar_pedido(request, id):
     pedido = get_object_or_404(Pedido, id=id)
     pedido.delete()
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        return JsonResponse({'success': True})
     messages.success(request, f'Pedido {pedido.producto} eliminado correctamente.')
     referer = request.META.get('HTTP_REFERER', '')
     if referer:

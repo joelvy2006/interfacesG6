@@ -177,10 +177,10 @@
                                     {% if pedido.estado == 'espera' %}
                                         <a class="btn btn-sm btn-outline-primary me-1" href="{% url 'cambiar_estado_pedido' pedido.id 'enviado' %}">Enviar</a>
                                         <a class="btn btn-sm btn-outline-success me-1" href="{% url 'cambiar_estado_pedido' pedido.id 'entregado' %}">Entregar</a>
-                                        <a class="btn btn-sm btn-outline-danger" href="{% url 'eliminar_pedido' pedido.id %}">Eliminar</a>
+                                        <a class="btn btn-sm btn-outline-danger btn-delete-pedido" href="{% url 'eliminar_pedido' pedido.id %}" data-url="{% url 'eliminar_pedido' pedido.id %}">Eliminar</a>
                                     {% elif pedido.estado == 'enviado' %}
                                         <a class="btn btn-sm btn-outline-success me-1" href="{% url 'cambiar_estado_pedido' pedido.id 'entregado' %}">Entregar</a>
-                                        <a class="btn btn-sm btn-outline-danger" href="{% url 'eliminar_pedido' pedido.id %}">Eliminar</a>
+                                        <a class="btn btn-sm btn-outline-danger btn-delete-pedido" href="{% url 'eliminar_pedido' pedido.id %}" data-url="{% url 'eliminar_pedido' pedido.id %}">Eliminar</a>
                                     {% else %}
                                         <span class="text-muted small">Completado</span>
                                     {% endif %}
@@ -287,5 +287,41 @@
     });
 
     renderCart();
+
+    function attachDeletePedidoHandlers() {
+        document.querySelectorAll('.btn-delete-pedido').forEach(function (button) {
+            button.addEventListener('click', function (event) {
+                event.preventDefault();
+                if (!confirm('¿Eliminar este pedido?')) {
+                    return;
+                }
+                const url = this.dataset.url;
+                const row = this.closest('tr');
+
+                fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                })
+                    .then(function (response) {
+                        if (!response.ok) {
+                            throw new Error('Error al eliminar el pedido');
+                        }
+                        return response.json();
+                    })
+                    .then(function (data) {
+                        if (data.success && row) {
+                            row.remove();
+                        }
+                    })
+                    .catch(function (error) {
+                        console.error(error);
+                    });
+            });
+        });
+    }
+
+    attachDeletePedidoHandlers();
 </script>
 {% endblock %}
