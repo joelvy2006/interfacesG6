@@ -181,7 +181,7 @@
                 {% for item in quality_breakdown %}
                 <div class="activity-item"><span class="activity-dot bg-secondary"></span><div><p class="mb-1 fw-semibold">{{ item.label }}</p><p class="text-muted small mb-0">{{ item.total }} unidades registradas</p></div></div>
                 {% empty %}
-                <div class="activity-item"><span class="activity-dot bg-light"></span><div><p class="mb-1 fw-semibold">Sin datos</p><p class="text-muted small mb-0">Aún no hay registros de calidad.</p></div></div>
+                <div class="activity-item"><span class="activity-dot bg-secondary"></span><div><p class="mb-1 fw-semibold">Sin datos</p><p class="text-muted small mb-0">Aún no hay registros de calidad.</p></div></div>
                 {% endfor %}
             </div>
         </article>
@@ -199,7 +199,7 @@
                 {% for responsable in top_responsables %}
                 <div class="activity-item"><span class="activity-dot bg-primary"></span><div><p class="mb-1 fw-semibold">{{ responsable.responsable }}</p><p class="text-muted small mb-0">{{ responsable.total_embonches }} embonches acumulados</p></div></div>
                 {% empty %}
-                <div class="activity-item"><span class="activity-dot bg-light"></span><div><p class="mb-1 fw-semibold">Sin responsables</p><p class="text-muted small mb-0">No hay registros de productividad recientes.</p></div></div>
+                <div class="activity-item"><span class="activity-dot bg-secondary"></span><div><p class="mb-1 fw-semibold">Sin responsables</p><p class="text-muted small mb-0">No hay registros de productividad recientes.</p></div></div>
                 {% endfor %}
             </div>
         </article>

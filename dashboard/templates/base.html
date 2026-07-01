@@ -35,5 +35,18 @@
     </div>
     <script src="{% static 'public/js/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'public/js/main.js' %}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(function () {
+                document.querySelectorAll('.alert').forEach(function (alert) {
+                    if (typeof bootstrap !== 'undefined' && bootstrap.Alert) {
+                        new bootstrap.Alert(alert).close();
+                    } else if (alert.parentNode) {
+                        alert.parentNode.removeChild(alert);
+                    }
+                });
+            }, 4000);
+        });
+    </script>
 </body>
 </html>
