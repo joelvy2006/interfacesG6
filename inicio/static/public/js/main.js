@@ -104,6 +104,92 @@
       });
     }
 
+    function getCookie(name) {
+      var value = "; " + document.cookie;
+      var parts = value.split("; " + name + "=");
+      if (parts.length === 2) return parts.pop().split(';').shift();
+      return '';
+    }
+
+    function handleAjaxDeleteLinks() {
+      var deleteButtons = document.querySelectorAll('.btn-delete-ajax');
+
+      Array.prototype.forEach.call(deleteButtons, function (button) {
+        button.addEventListener('click', function (event) {
+          event.preventDefault();
+          if (!confirm('¿Eliminar este registro?')) {
+            return;
+          }
+
+          var url = this.getAttribute('href');
+          var row = this.closest('tr');
+
+          fetch(url, {
+            method: 'GET',
+            headers: {
+              'X-Requested-With': 'XMLHttpRequest'
+            }
+          })
+            .then(function (response) {
+              if (!response.ok) {
+                throw new Error('Error al eliminar el registro');
+              }
+              return response.json();
+            })
+            .then(function (data) {
+              if (data.success && row) {
+                row.remove();
+              }
+            })
+            .catch(function (error) {
+              console.error(error);
+            });
+        });
+      });
+    }
+
+    function handleAjaxDeleteForms() {
+      var deleteForms = document.querySelectorAll('.ajax-delete-form');
+
+      Array.prototype.forEach.call(deleteForms, function (form) {
+        form.addEventListener('submit', function (event) {
+          event.preventDefault();
+          if (!confirm('¿Eliminar este registro?')) {
+            return;
+          }
+
+          var row = this.closest('tr');
+          var formData = new FormData(this);
+          var action = this.getAttribute('action');
+          var method = this.getAttribute('method') || 'POST';
+
+          fetch(action, {
+            method: method.toUpperCase(),
+            credentials: 'same-origin',
+            headers: {
+              'X-Requested-With': 'XMLHttpRequest',
+              'X-CSRFToken': getCookie('csrftoken')
+            },
+            body: formData
+          })
+            .then(function (response) {
+              if (!response.ok) {
+                throw new Error('Error al eliminar el registro');
+              }
+              return response.json();
+            })
+            .then(function (data) {
+              if (data.success && row) {
+                row.remove();
+              }
+            })
+            .catch(function (error) {
+              console.error(error);
+            });
+        });
+      });
+    }
+
     function updateThemeControls(theme) {
       var nextTheme = theme === "dark" ? "light" : "dark";
       var label = "Switch to " + nextTheme + " mode";
@@ -143,6 +229,8 @@
 
     initValidation();
     initTableSearch();
+    handleAjaxDeleteLinks();
+    handleAjaxDeleteForms();
     initThemeToggle();
 
     // Initialize user profile values in UI. Provide a window.adminHMDUser object to override defaults.

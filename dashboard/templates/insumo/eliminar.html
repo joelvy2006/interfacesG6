@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Eliminar insumo | Anthonela Farms{% endblock %}
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <h4 class="mb-3">Eliminar insumo</h4>
+        <p>¿Seguro que deseas eliminar el insumo <strong>{{ insumo.nombre_insu }}</strong>?</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-success">Sí, eliminar</button>
+            <a href="{% url 'listar_insumos' %}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

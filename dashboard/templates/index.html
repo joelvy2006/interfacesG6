@@ -1,4 +1,4 @@
-{% load static %}
+﻿{% load static %}
 <!doctype html>
 <html lang="es">
 <head>
@@ -136,26 +136,26 @@
     </style>
 </head>
 <body>
-    <header class="sticky-top border-bottom bg-white/90 backdrop-blur">
+    <header class="sticky-top border-bottom bg-dark backdrop-blur">
         <nav class="container navbar navbar-expand-lg py-3">
             <a class="navbar-brand fw-bold text-success" href="/">🌱 Anthonela Farms</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Alternar navegación">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="mainNav">
-                <ul class="navbar-nav d-flex flex-row gap-3">
-                    <li class="nav-item">
-                        <a class="nav-link text-success " href="#resumen">Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-success" href="#informacion">Servicios</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-success" href="#contacto">Contáctanos</a>
-                    </li>
-                </ul>
-                <div class="ms-lg-3 d-flex gap-2 align-items-center">
-                    <a class="btn btn-outline-success btn-sm d-flex align-items-center gap-2" href="/servicios/" aria-label="Ir a la tienda" title="Tienda de claveles">
+                <div class="d-flex align-items-center ms-auto gap-2">
+                    <ul class="navbar-nav d-flex flex-row gap-3 mb-0">
+                        <li class="nav-item">
+                            <a class="nav-link text-success" href="#resumen">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-success" href="#informacion">Servicios</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-success" href="#contacto">Contáctanos</a>
+                        </li>
+                    </ul>
+                    <a class="btn btn-outline-success btn-sm d-flex align-items-center gap-2" href="/tienda/" aria-label="Ir a la tienda" title="Tienda de claveles">
                         <i class="bi bi-basket3" aria-hidden="true"></i>
                         <span class="d-none d-sm-inline">Tienda</span>
                     </a>
@@ -163,7 +163,7 @@
                         <i class="bi bi-moon-stars" data-theme-icon aria-hidden="true"></i>
                         <span class="d-none d-sm-inline">Tema</span>
                     </button>
-                    <a class="btn btn-success btn-lg" href="...">
+                    <a class="btn btn-success btn-lg" href="{% if request.user.is_authenticated %}{% url 'dashboard' %}{% else %}{% url 'login' %}{% endif %}">
                       {% if request.user.is_authenticated %}Ir al panel{% else %}Acceder al sistema{% endif %}
                     </a>
                 </div>
@@ -177,7 +177,7 @@
                 <div class="hero-card p-4 p-lg-5">
                     <p class="text-uppercase small text-success fw-semibold mb-2">🌱 Sembramos eficiencia, cosechamos éxito</p>
                     <h1 class="display-5 fw-bold mb-3">Gestiona tu producción con claridad y eficiencia</h1>
-                    <p class="lead text-muted mb-4"><strong>Centraliza el seguimiento de tus cosechas, monitorea el rendimiento de tu equipo y visualiza métricas clave en tiempo real para optimizar cada etapa de tu producción, mejorar la calidad y tomar decisiones más rápidas y acertadas desde un solo lugar.</strong></p>
+                    <p class="lead text-muted mb-4"><strong>Centraliza tus cosechas, controla el rendimiento del equipo y accede a métricas clave en tiempo real para mejorar cada etapa de la producción.</strong></p>
                     <div class="d-flex flex-wrap gap-2">
                         <a class="btn btn-success btn-lg" href="{% if request.user.is_authenticated %}{% url 'dashboard' %}{% else %}{% url 'login' %}{% endif %}">
                             {% if request.user.is_authenticated %}Regresar al panel de control{% else %}Iniciar sesión{% endif %}
@@ -238,19 +238,19 @@
                         </article>
                         <article class="col-6 col-md-3">
                             <div class="metric-pill p-3 h-100">
-                                <div class="display-6 fw-bold text-primary">95%</div>
+                                <div class="display-6 fw-bold text-success">95%</div>
                                 <small class="text-muted">Productividad</small>
                             </div>
                         </article>
                         <article class="col-6 col-md-3">
                             <div class="metric-pill p-3 h-100">
-                                <div class="display-6 fw-bold text-warning">82%</div>
+                                <div class="display-6 fw-bold text-success">82%</div>
                                 <small class="text-muted">Calidad</small>
                             </div>
                         </article>
                         <article class="col-6 col-md-3">
                             <div class="metric-pill p-3 h-100">
-                                <div class="display-6 fw-bold text-info">48h</div>
+                                <div class="display-6 fw-bold text-success">48h</div>
                                 <small class="text-muted">Horas trabajadas</small>
                             </div>
                         </article>
@@ -372,7 +372,7 @@
         </section>
     </main>
 
-    <footer class="border-top bg-white py-4 mt-5">
+    <footer class="border-top bg-dark text-light py-4 mt-5">
         <div class="container text-center text-muted small">© 2026 Anthonela Farms. Todos los derechos reservados.</div>
     </footer>
 

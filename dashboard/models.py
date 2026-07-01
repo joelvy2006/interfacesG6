@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class RegistroCosecha(models.Model):
     VARIEDAD_CHOICES = [
         ('clavel-rojo', 'Clavel Rojo'),
@@ -124,7 +125,7 @@ class Insumo(models.Model):
     id_insu = models.AutoField(primary_key=True)
     nombre_insu = models.CharField(max_length=100)
     cantidad_stock = models.IntegerField(default=0)
-    fecha_ingreso = models.DateField(auto_now_add=True)
+    fecha_ingreso = models.DateField()
     estado_insu = models.BooleanField(default=True)
     proveedor = models.ForeignKey(Proveedor, on_delete=models.SET_NULL, null=True, blank=True, db_column='Proveedor_id_prov')
     categoria = models.ForeignKey(Categoria, on_delete=models.SET_NULL, null=True, blank=True, db_column='categoria_id_cat')

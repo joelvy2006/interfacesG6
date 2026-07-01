@@ -43,7 +43,16 @@
         <a class="nav-link {% if current_url == 'inventario' %}active{% endif %}" href="{% url 'inventario' %}">
             <span class="nav-icon"><i class="bi bi-box-seam" aria-hidden="true"></i></span>
             <span class="nav-text">Inventario</span>
+
+        <a class="nav-link" href="{% url 'listar_categorias' %}">
+            <span class="nav-icon"><i class="bi bi-tags" aria-hidden="true"></i></span>
+            <span class="nav-text">Categorías</span>
         </a>
+        <a class="nav-link" href="{% url 'listar_insumos' %}">
+            <span class="nav-icon"><i class="bi bi-box2-heart" aria-hidden="true"></i></span>
+            <span class="nav-text">Insumos</span>
+        </a>
+        <a class="nav-link" href="/reportes/">
         <a class="nav-link {% if current_url == 'reportes' %}active{% endif %}" href="{% url 'reportes' %}">
             <span class="nav-icon"><i class="bi bi-file-earmark-text" aria-hidden="true"></i></span>
             <span class="nav-text">Reportes</span>
@@ -78,7 +87,7 @@
         <span class="sidebar-footer-text">Sistema funcionando correctamente</span>
     </div>
 </aside>
-<nav class="navbar admin-navbar navbar-expand bg-white border-bottom sticky-top">
+<nav class="navbar admin-navbar navbar-expand bg-dark border-bottom sticky-top">
 
     <div class="container-fluid px-3 px-lg-4">
 
@@ -99,8 +108,8 @@
 
             <div class="input-group search-box">
 
-                <span class="input-group-text bg-white border-end-0">
-                    <i class="bi bi-search text-muted"></i>
+                <span class="input-group-text bg-dark border-end-0 text-light">
+                    <i class="bi bi-search text-light"></i>
                 </span>
 
                 <input class="form-control border-start-0 search-input"

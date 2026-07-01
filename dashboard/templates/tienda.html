@@ -38,7 +38,7 @@
                 <div class="col-12 col-md-6 col-xl-4">
                     <article class="product-card p-3 h-100 rounded-3 border">
                         <div class="d-flex align-items-center justify-content-between mb-3">
-                            <span class="badge bg-info-subtle text-info">Exclusivo</span>
+                            <span class="badge bg-success-subtle text-success">Exclusivo</span>
                             <span class="price-tag text-success fw-bold">$240</span>
                         </div>
                         <h3 class="h6">Clavel blanco elegante</h3>
@@ -49,7 +49,7 @@
                 <div class="col-12 col-md-6 col-xl-4">
                     <article class="product-card p-3 h-100 rounded-3 border">
                         <div class="d-flex align-items-center justify-content-between mb-3">
-                            <span class="badge bg-warning-subtle text-warning">Popular</span>
+                            <span class="badge bg-success-subtle text-success">Popular</span>
                             <span class="price-tag text-success fw-bold">$150</span>
                         </div>
                         <h3 class="h6">Clavel rosa artesanal</h3>
@@ -60,7 +60,7 @@
                 <div class="col-12 col-md-6 col-xl-4">
                     <article class="product-card p-3 h-100 rounded-3 border">
                         <div class="d-flex align-items-center justify-content-between mb-3">
-                            <span class="badge bg-primary-subtle text-primary">Local</span>
+                            <span class="badge bg-success-subtle text-success">Local</span>
                             <span class="price-tag text-success fw-bold">$130</span>
                         </div>
                         <h3 class="h6">Clavel nacional rojo</h3>
@@ -103,7 +103,7 @@
                 </div>
             </div>
             <div class="d-flex flex-column h-100 gap-3">
-                <div class="border rounded-3 p-3 bg-white shadow-sm">
+                <div class="border rounded-3 p-3 bg-dark text-white shadow-sm">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <div>
                             <h3 class="h6 mb-1">Elementos en el carrito</h3>
@@ -115,11 +115,11 @@
                         <p class="text-muted small mb-0">Tu carrito está vacío.</p>
                     </div>
                 </div>
-                <div class="border rounded-3 p-3 bg-white shadow-sm">
+                <div class="border rounded-3 p-3 bg-dark text-white shadow-sm">
                     <label class="form-label">Nombre del comprador</label>
                     <input type="text" id="buyer-name" class="form-control" placeholder="Tu nombre o correo" />
                 </div>
-                <div class="border rounded-3 p-3 bg-white shadow-sm d-flex justify-content-between align-items-center">
+                <div class="border rounded-3 p-3 bg-dark text-white shadow-sm d-flex justify-content-between align-items-center">
                     <span class="fw-semibold">Total</span>
                     <span id="cart-total" class="fw-bold">$0</span>
                 </div>
@@ -285,5 +285,41 @@
     });
 
     renderCart();
+
+    function attachDeletePedidoHandlers() {
+        document.querySelectorAll('.btn-delete-pedido').forEach(function (button) {
+            button.addEventListener('click', function (event) {
+                event.preventDefault();
+                if (!confirm('¿Eliminar este pedido?')) {
+                    return;
+                }
+                const url = this.dataset.url;
+                const row = this.closest('tr');
+
+                fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                })
+                    .then(function (response) {
+                        if (!response.ok) {
+                            throw new Error('Error al eliminar el pedido');
+                        }
+                        return response.json();
+                    })
+                    .then(function (data) {
+                        if (data.success && row) {
+                            row.remove();
+                        }
+                    })
+                    .catch(function (error) {
+                        console.error(error);
+                    });
+            });
+        });
+    }
+
+    attachDeletePedidoHandlers();
 </script>
 {% endblock %}

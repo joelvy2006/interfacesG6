@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Editar categoría | Anthonela Farms{% endblock %}
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <h4 class="mb-4">Editar categoría</h4>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            <div class="mb-3">
+                <label class="form-label">Nombre</label>
+                {{ form.nombre_cat }}
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Descripción</label>
+                {{ form.descripcion_cat }}
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Estado</label>
+                {{ form.estado_cat }}
+            </div>
+            <button type="submit" class="btn btn-primary">Actualizar</button>
+            <a href="{% url 'listar_categorias' %}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -13,6 +13,11 @@
     <style>
         body { background: #eef9ef; }
         .admin-shell { min-height: 100vh; }
+        .dashboard-content h1,
+        .dashboard-content .page-title h1 {
+            font-size: 2rem !important;
+            line-height: 1.2;
+        }
     </style>
 </head>
 <body>
@@ -30,5 +35,18 @@
     </div>
     <script src="{% static 'public/js/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'public/js/main.js' %}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(function () {
+                document.querySelectorAll('.alert').forEach(function (alert) {
+                    if (typeof bootstrap !== 'undefined' && bootstrap.Alert) {
+                        new bootstrap.Alert(alert).close();
+                    } else if (alert.parentNode) {
+                        alert.parentNode.removeChild(alert);
+                    }
+                });
+            }, 4000);
+        });
+    </script>
 </body>
 </html>
