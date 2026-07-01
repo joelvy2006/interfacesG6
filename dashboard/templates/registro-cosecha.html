@@ -11,6 +11,14 @@
         </div>
     </div>
 </div>
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show auto-dismiss" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+    </div>
+  {% endfor %}
+{% endif %}
 <section class="card mb-4">
     <div class="card-body">
         <h6 class="mb-3">Registro de cosecha</h6>
@@ -160,4 +168,18 @@
         </div>
     </div>
 </section>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.alert.auto-dismiss').forEach(function (alert) {
+      setTimeout(function () {
+        if (typeof bootstrap !== 'undefined' && bootstrap.Alert) {
+          new bootstrap.Alert(alert).close();
+        } else {
+          alert.classList.remove('show');
+          alert.style.display = 'none';
+        }
+      }, 4000);
+    });
+  });
+</script>
 {% endblock %}
