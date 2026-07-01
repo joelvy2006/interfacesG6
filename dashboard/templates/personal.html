@@ -38,7 +38,7 @@
                     </div>
                     <div class="col-12 d-flex flex-wrap gap-2 align-items-center">
                         <button type="submit" class="btn btn-success">Agregar empleado</button>
-                        <a href="{% url 'export_empleados_excel' %}" class="btn btn-outline-primary">Exportar Excel</a>
+                        <a href="{% url 'export_empleados_excel' %}" class="btn btn-outline-success">Exportar Excel</a>
                         <a href="{% url 'export_empleados_pdf' %}" class="btn btn-outline-secondary">Exportar PDF</a>
                     </div>
                 </form>
@@ -91,7 +91,7 @@
                         <textarea name="notas" rows="3" class="form-control" placeholder="Observaciones, incidencia o detalle del turno."></textarea>
                     </div>
                     <div class="col-12">
-                        <button type="submit" class="btn btn-primary">Guardar asistencia</button>
+                        <button type="submit" class="btn btn-success">Guardar asistencia</button>
                     </div>
                 </form>
             </div>
@@ -129,7 +129,7 @@
                                     <td>{{ empleado.telefono|default:'-' }}</td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Acciones empleado">
-                                            <a href="{% url 'editar_empleado' empleado.id %}" class="btn btn-sm btn-outline-primary">Editar</a>
+                                            <a href="{% url 'editar_empleado' empleado.id %}" class="btn btn-sm btn-outline-success">Editar</a>
                                             <a href="{% url 'eliminar_empleado' empleado.id %}" class="btn btn-sm btn-outline-danger btn-delete-ajax">Eliminar</a>
                                         </div>
                                     </td>
@@ -179,13 +179,13 @@
                                                 {% if item.estado == 'presente' %}
                                                     <span class="badge bg-success">Presente</span>
                                                 {% elif item.estado == 'retardo' %}
-                                                    <span class="badge bg-warning text-dark">Retardo</span>
+                                                    <span class="badge bg-secondary text-dark">Retardo</span>
                                                 {% else %}
-                                                    <span class="badge bg-danger">Faltó</span>
+                                                    <span class="badge bg-secondary text-dark">Faltó</span>
                                                 {% endif %}
                                             </div>
                                             <div class="btn-group" role="group" aria-label="Acciones asistencia">
-                                                <a href="{% url 'editar_asistencia' item.id %}" class="btn btn-sm btn-outline-primary">Editar</a>
+                                                <a href="{% url 'editar_asistencia' item.id %}" class="btn btn-sm btn-outline-success">Editar</a>
                                                 <a href="{% url 'eliminar_asistencia' item.id %}" class="btn btn-sm btn-outline-danger btn-delete-ajax">Eliminar</a>
                                             </div>
                                         </div>

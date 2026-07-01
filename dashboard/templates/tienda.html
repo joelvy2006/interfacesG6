@@ -38,7 +38,7 @@
                 <div class="col-12 col-md-6 col-xl-4">
                     <article class="product-card p-3 h-100 rounded-3 border">
                         <div class="d-flex align-items-center justify-content-between mb-3">
-                            <span class="badge bg-info-subtle text-info">Exclusivo</span>
+                            <span class="badge bg-success-subtle text-success">Exclusivo</span>
                             <span class="price-tag text-success fw-bold">$240</span>
                         </div>
                         <h3 class="h6">Clavel blanco elegante</h3>
@@ -49,7 +49,7 @@
                 <div class="col-12 col-md-6 col-xl-4">
                     <article class="product-card p-3 h-100 rounded-3 border">
                         <div class="d-flex align-items-center justify-content-between mb-3">
-                            <span class="badge bg-warning-subtle text-warning">Popular</span>
+                            <span class="badge bg-success-subtle text-success">Popular</span>
                             <span class="price-tag text-success fw-bold">$150</span>
                         </div>
                         <h3 class="h6">Clavel rosa artesanal</h3>
@@ -60,7 +60,7 @@
                 <div class="col-12 col-md-6 col-xl-4">
                     <article class="product-card p-3 h-100 rounded-3 border">
                         <div class="d-flex align-items-center justify-content-between mb-3">
-                            <span class="badge bg-primary-subtle text-primary">Local</span>
+                            <span class="badge bg-success-subtle text-success">Local</span>
                             <span class="price-tag text-success fw-bold">$130</span>
                         </div>
                         <h3 class="h6">Clavel nacional rojo</h3>
@@ -165,9 +165,9 @@
                                 <td>${{ pedido.total|floatformat:2 }}</td>
                                 <td>
                                     {% if pedido.estado == 'espera' %}
-                                        <span class="badge bg-warning text-dark">{{ pedido.get_estado_display }}</span>
+                                        <span class="badge bg-secondary text-dark">{{ pedido.get_estado_display }}</span>
                                     {% elif pedido.estado == 'enviado' %}
-                                        <span class="badge bg-info text-dark">{{ pedido.get_estado_display }}</span>
+                                        <span class="badge bg-success text-dark">{{ pedido.get_estado_display }}</span>
                                     {% else %}
                                         <span class="badge bg-success">{{ pedido.get_estado_display }}</span>
                                     {% endif %}
@@ -175,7 +175,7 @@
                                 <td>{{ pedido.fecha_creacion|date:'d/m/Y H:i' }}</td>
                                 <td class="text-nowrap">
                                     {% if pedido.estado == 'espera' %}
-                                        <a class="btn btn-sm btn-outline-primary me-1" href="{% url 'cambiar_estado_pedido' pedido.id 'enviado' %}">Enviar</a>
+                                        <a class="btn btn-sm btn-outline-success me-1" href="{% url 'cambiar_estado_pedido' pedido.id 'enviado' %}">Enviar</a>
                                         <a class="btn btn-sm btn-outline-success me-1" href="{% url 'cambiar_estado_pedido' pedido.id 'entregado' %}">Entregar</a>
                                         <a class="btn btn-sm btn-outline-danger btn-delete-pedido" href="{% url 'eliminar_pedido' pedido.id %}" data-url="{% url 'eliminar_pedido' pedido.id %}">Eliminar</a>
                                     {% elif pedido.estado == 'enviado' %}

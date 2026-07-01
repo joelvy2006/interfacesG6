@@ -62,7 +62,7 @@
                 <h6 class="mb-1">Registros recientes</h6>
                 <p class="text-muted mb-0">Últimos embonches registrados en el sistema.</p>
             </div>
-            <span class="badge bg-primary">{{ registros|length }} registros</span>
+            <span class="badge bg-success">{{ registros|length }} registros</span>
         </div>
         <div class="table-responsive">
             <table class="table table-hover align-middle">
@@ -86,7 +86,7 @@
                             <td>{{ item.observaciones|default:'—' }}</td>
                             <td>
                                 <a href="{% url 'ver_productividad' item.id %}" class="btn btn-sm btn-outline-secondary me-1">Ver</a>
-                                <a href="{% url 'editar_productividad' item.id %}" class="btn btn-sm btn-outline-primary me-1">Editar</a>
+                                <a href="{% url 'editar_productividad' item.id %}" class="btn btn-sm btn-outline-success me-1">Editar</a>
                                 <a href="{% url 'eliminar_productividad' item.id %}" class="btn btn-sm btn-outline-danger btn-delete-ajax">Eliminar</a>
                             </td>
                         </tr>

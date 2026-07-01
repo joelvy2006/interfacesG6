@@ -5,13 +5,13 @@
 {% block content %}
 <div class="page-heading mb-4">
     <div class="page-heading-copy d-flex align-items-center gap-3">
-        <span class="page-icon"><i class="bi bi-people-fill fs-2 text-primary"></i></span>
+        <span class="page-icon"><i class="bi bi-people-fill fs-2 text-success"></i></span>
         <div>
             <p class="eyebrow text-uppercase text-muted mb-1">Usuarios</p>
             <h1 class="h3 mb-1">Listado de usuarios</h1>
             <p class="text-muted mb-0">Consulta los usuarios registrados en el sistema.</p>
         </div>
-        <a href="{% url 'crear_usuario' %}" class="btn btn-primary rounded-pill ms-auto"><i class="bi bi-plus-lg me-1"></i> Agregar usuario</a>
+        <a href="{% url 'crear_usuario' %}" class="btn btn-success rounded-pill ms-auto"><i class="bi bi-plus-lg me-1"></i> Agregar usuario</a>
         {% if messages %}
         {% for message in messages %}
         <div class="alert alert-success">
@@ -63,10 +63,10 @@
                         </td>
                         <td>
                             <div class="d-flex flex-wrap gap-1">
-                                <a href="{% url 'editar_usuario' usuario.id %}" class="btn btn-sm btn-outline-primary">Editar</a>
+                                <a href="{% url 'editar_usuario' usuario.id %}" class="btn btn-sm btn-outline-success">Editar</a>
                                 <form method="post" action="{% url 'cambiar_estado_usuario' usuario.id %}" class="d-inline" onsubmit="return confirm('¿Seguro que deseas cambiar el estado de este usuario?');">
                                     {% csrf_token %}
-                                    <button type="submit" class="btn btn-sm {% if usuario.is_active %}btn-outline-warning{% else %}btn-outline-success{% endif %}">
+                                    <button type="submit" class="btn btn-sm {% if usuario.is_active %}btn-outline-secondary{% else %}btn-outline-success{% endif %}">
                                         {% if usuario.is_active %}Desactivar{% else %}Activar{% endif %}
                                     </button>
                                 </form>
